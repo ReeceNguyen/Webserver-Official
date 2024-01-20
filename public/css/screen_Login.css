@@ -16,7 +16,7 @@
 /* Set a style for all buttons */
 #bttlogin1,
 #bttcancle {
-  background-color: #04aa6d;
+  background-color: #49ba6f;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -63,12 +63,13 @@ button:hover {
 }
 /* Modal Content/Box */
 #modal-content1 {
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
   background-color: #fefefe;
   margin: 5% auto 15% auto;
   border: 1px solid #888;
   width: 20%; 
-  height: 572px; 
+  /* height: 572px;  */
+  height: 502px; 
 }
 
 /* The Close Button (x) */
