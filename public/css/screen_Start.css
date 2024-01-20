@@ -1,0 +1,12 @@
+#Scr_Start{
+    border-radius: 10px;
+    border: inset 5px #0000ff;
+    background-color: #ffffff;
+    position: absolute; 
+    left: 208px; top: 100px; 
+    width: 1234px; height: 766px;
+    user-select: none;
+    font-family: Montserrat;
+    font-weight: bold;
+    text-align: center;
+}

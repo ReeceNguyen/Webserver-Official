@@ -1,0 +1,54 @@
+/*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
+#Alarm_Table {
+    position: absolute;
+    left: 14px; top: 60px;
+    width: 1200px; height: 262px;
+    overflow-y: scroll;
+    border: #fff 4px solid;
+    text-align: center;
+}
+/*Table*/
+#table_Alarm {
+    position: absolute;
+    width:100%;
+    background-color:#f50a0a;
+}
+#table_Alarm tr{
+    cursor: pointer;
+}
+#table_Alarm tr:hover{background-color: #eff30e;}
+#table_Alarm   { overflow: auto; }
+#table_Alarm thead th { position: sticky; top: 0;}
+/* Just common table stuff. Really. */
+#table_Alarm { border-collapse: separate; width: 100%;}
+#table_Alarm th, td { padding: 8px 10px; }
+#table_Alarm th     { background:#0000ff; }
+/*//////////////Hiển thị dữ liệu bảng 1 - end/////////////////*/
+
+/*//////////////Hiển thị dữ liệu bảng 2 - Start/////////////////*/
+#Alarm_Table_s2 {
+    position: absolute;
+    left: 14px; top: 440px;
+    width: 1200px; height: 262px;
+    overflow-y: scroll;
+    border: #fff 4px solid;
+    text-align: center;
+}
+/*Table*/
+#table_Alarm_s2  {
+    position: absolute;
+    width:100%;
+    background-color:#f50a0a;
+}
+#table_Alarm_s2  tr{
+    cursor: pointer;
+}
+#table_Alarm_s2  tr:hover{background-color: #eff30e;}
+#table_Alarm_s2    { overflow: auto; }
+#table_Alarm_s2  thead th { position: sticky; top: 0;}
+/* Just common table stuff. Really. */
+#table_Alarm_s2  { border-collapse: separate; width: 100%;}
+#table_Alarm_s2  th, td { padding: 8px 10px; }
+#table_Alarm_s2  th     { background:#0000ff; }
+
+/*//////////////Hiển thị dữ liệu bảng 2 - end/////////////////*/

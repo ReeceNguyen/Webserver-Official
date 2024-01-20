@@ -1,0 +1,52 @@
+/*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
+#SQL_Table {
+    position: absolute;
+    left: 14px; top: 60px;
+    width: 1200px; height: 300px;
+    overflow-y: scroll;
+    border: #fff 4px solid;
+    text-align: center;
+}
+/*Table*/
+#table_data {
+    position: absolute;
+    width:100%;
+}
+#table_data tr{
+    cursor: pointer;
+}
+#table_data tr:hover{background-color: #ec16a5;}
+#table_data   { overflow: auto; }
+#table_data thead th { position: sticky; top: 0;}
+/* Just common table stuff. Really. */
+#table_data { border-collapse: separate; width: 100%;}
+#table_data th, td { padding: 8px 10px; }
+#table_data th     { background:#0000ff; }
+/*//////////////Hiển thị dữ liệu bảng 1 - end/////////////////*/
+
+/*//////////////Hiển thị dữ liệu bảng 2 - Start/////////////////*/
+#SQL_Table_s2 {
+    position: absolute;
+    left: 14px; top: 440px;
+    width: 1200px; height: 300px;
+    overflow-y: scroll;
+    border: #fff 4px solid;
+    text-align: center;
+}
+/*Table*/
+#table_data_s2  {
+    position: absolute;
+    width:100%;
+}
+#table_data_s2  tr{
+    cursor: pointer;
+}
+#table_data_s2  tr:hover{background-color: #ec16a5;}
+#table_data_s2    { overflow: auto; }
+#table_data_s2  thead th { position: sticky; top: 0;}
+/* Just common table stuff. Really. */
+#table_data_s2  { border-collapse: separate; width: 100%;}
+#table_data_s2  th, td { padding: 8px 10px; }
+#table_data_s2  th     { background:#0000ff; }
+
+/*//////////////Hiển thị dữ liệu bảng 2 - end/////////////////*/

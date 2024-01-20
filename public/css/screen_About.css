@@ -1,0 +1,11 @@
+#Scr_About{
+    border-radius: 10px;
+    border: inset 5px #0000ff;
+    position: absolute; 
+    left: 208px; top: 100px; 
+    width: 1234px; height: 766px;
+    background-color: #1488D8;
+    user-select: none;
+    font-family: Montserrat;
+    font-weight: bold;
+}
