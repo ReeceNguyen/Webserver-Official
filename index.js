@@ -335,9 +335,8 @@ var io = require("socket.io")(server);
 server.listen(3000);
 // Home calling
 app.get("/", function (req, res) {
-  res.render("home");
+  res.render("home.ejs");
 });
-
 // ///////////LẬP BẢNG TAG ĐỂ GỬI QUA CLIENT (TRÌNH DUYỆT)///////////
 function fn_tag() {
   //Station 1

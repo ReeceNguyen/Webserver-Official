@@ -113,7 +113,8 @@ function login() {
     });
     document.getElementById("btt_Screen_Start").disabled = false;
     document.getElementById("btt_Screen_About").disabled = false;
-  } else {
+  } 
+  else {
     window.location.href = "";
     window.location.reload();
   }
