@@ -6,11 +6,11 @@
 3.  npm install express –-save	
 4.  npm i –g npm	
 5.  npm i –-save lodash	
-6.  npm install ejs	
-7.  npm install jquery	
-8.  npm install nodes7	
-9.  npm install mysql
-10. npm install exceljs
+6.  npm install ejs		
+7.  npm install nodes7	
+8.  npm install mysql
+9. npm install exceljs
+10. npm install dotenv
 11. npm install -D tailwindcss
 ### Thư viện CSS
 1.  npx tailwindcss init
