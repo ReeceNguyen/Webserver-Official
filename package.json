@@ -10,10 +10,12 @@
   "author": "Nguyễn Minh Thái - ID:1910526 , tel:0342400518, mail: thai.nguyenminhthai@hcmut.edu.vn",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "16.3.2",
     "ejs": "^3.1.9",
     "exceljs": "^4.4.0",
     "express": "^4.18.2",
     "lodash": "^4.17.21",
+    "moment-timezone": "^0.5.44",
     "mysql": "^2.18.1",
     "nodes7": "^0.3.18",
     "socket.io": "^4.7.2"

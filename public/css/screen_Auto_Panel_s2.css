@@ -89,7 +89,7 @@
 }
 #box-2-auto-device-name_s2{
     position: absolute;
-    width: 70px; height: 170px;
+    width: auto; height: 170px;
     left: 5px; top: 55px;
     line-height: 2.1;
     color: #0000ff;

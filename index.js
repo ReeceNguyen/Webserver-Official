@@ -1,15 +1,26 @@
 // /////////////////////////KẾT NỐI WEBSERVER VỚI PLC/////////////////////////
 // KHỞI TẠO KẾT NỐI PLC
+require("dotenv").config();
 var nodes7 = require("nodes7");
 var conn_plc = new nodes7(); //PLC1
 var conn_plc_s2 = new nodes7(); //PLC2
 // Tạo địa chỉ kết nối
 conn_plc.initiateConnection(
-  { port: 102, host: "100.107.140.31", rack: 0, slot: 1 },
+  {
+    port: process.env.CPU_PORT,
+    host: process.env.CPU_HOST_1,
+    rack: process.env.CPU_RACK,
+    slot: process.env.CPU_SLOT,
+  },
   PLC_connected
 );
 conn_plc_s2.initiateConnection(
-  { port: 102, host: "192.168.1.104", rack: 0, slot: 1 },
+  {
+    port: process.env.CPU_PORT,
+    host: process.env.CPU_HOST_2,
+    rack: process.env.CPU_RACK,
+    slot: process.env.CPU_SLOT,
+  },
   PLC_connected_s2
 );
 // triger ghi dữ liệu vào SQL
@@ -49,17 +60,17 @@ var Alarm_ID5_old_s2 = false;
 // Khởi tạo SQL
 var mysql = require("mysql");
 var sqlcon = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "3_sql",
+  host: process.env.SQL_HOST,
+  user: process.env.SQL_USER,
+  password: process.env.SQL_KEY,
+  database: process.env.SQL_STATION_1,
   dateStrings: true,
 });
 var sqlcon_s2 = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123456",
-  database: "3_sql_s2",
+  host: process.env.SQL_HOST,
+  user: process.env.SQL_USER,
+  password: process.env.SQL_KEY,
+  database: process.env.SQL_STATION_2,
   dateStrings: true,
 });
 // Mảng xuất dữ liệu Excel
@@ -332,10 +343,11 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(3000);
+server.listen(process.env.PORT);
 // Home calling
 app.get("/", function (req, res) {
-  res.render("home.ejs");
+  var ipAddress = "http://" + process.env.SERVER_IP + ":" + process.env.PORT;
+  res.render("home.ejs", { ipAddress });
 });
 // ///////////LẬP BẢNG TAG ĐỂ GỬI QUA CLIENT (TRÌNH DUYỆT)///////////
 function fn_tag() {
@@ -639,7 +651,7 @@ io.on("connection", function (socket) {
 // ///////////TẠO HÀM GHI DỮ LIỆU XUỐNG SQL/////////
 function fn_sql_insert() {
   insert_trigger = arr_tag_value[29]; // Read trigger from PLC
-  var sqltable_Name = "sql_data";
+  var sqltable_Name = process.env.TABLE_DATA_1;
   // Lấy thời gian hiện tại
   var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
   var temp_datenow = new Date();
@@ -690,7 +702,7 @@ function fn_sql_insert() {
 }
 function fn_sql_insert_s2() {
   insert_trigger_s2 = arr_tag_value_s2[29]; // Read trigger from PLC
-  var sqltable_Name_s2 = "sql_data_s2";
+  var sqltable_Name_s2 = process.env.TABLE_DATA_2;
   // Lấy thời gian hiện tại
   var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
   var temp_datenow = new Date();
@@ -742,7 +754,7 @@ function fn_sql_insert_s2() {
 // ///////////TẠO HÀM XÓA DỮ LIỆU BẢNG SQL////////////////
 function fn_sql_delete() {
   delete_trigger = arr_tag_value[33];
-  var sqltable_Name = "sql_data";
+  var sqltable_Name = process.env.TABLE_DATA_1;
   // Ghi dữ liệu vào SQL
   if (
     delete_trigger &&
@@ -763,7 +775,7 @@ function fn_sql_delete() {
 
 function fn_sql_delete_s2() {
   delete_trigger_s2 = arr_tag_value_s2[33];
-  var sqltable_Name_s2 = "sql_data_s2";
+  var sqltable_Name_s2 = process.env.TABLE_DATA_2;
   // Ghi dữ liệu vào SQL
   if (
     delete_trigger_s2 &&
@@ -785,7 +797,7 @@ function fn_sql_delete_s2() {
 function fn_SQLSearch() {
   io.on("connection", function (socket) {
     socket.on("msg_SQL_Show", function (data) {
-      var sqltable_Name = "sql_data";
+      var sqltable_Name = process.env.TABLE_DATA_1;
       var queryy1 = "SELECT * FROM " + sqltable_Name + ";";
       sqlcon.query(queryy1, function (err, results, fields) {
         if (err) {
@@ -804,7 +816,7 @@ function fn_SQLSearch() {
 function fn_SQLSearch_s2() {
   io.on("connection", function (socket) {
     socket.on("msg_SQL_Show_s2", function (data) {
-      var sqltable_Name_s2 = "sql_data_s2";
+      var sqltable_Name_s2 = process.env.TABLE_DATA_2;
       var queryy1 = "SELECT * FROM " + sqltable_Name_s2 + ";";
       sqlcon_s2.query(queryy1, function (err, results, fields) {
         if (err) {
@@ -844,7 +856,7 @@ function fn_SQLSearch_ByTime() {
         "'";
       var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
 
-      var sqltable_Name = "sql_data"; // Tên bảng
+      var sqltable_Name = process.env.TABLE_DATA_1; // Tên bảng
       var dt_col_Name = "Date"; // Tên cột thời gian
 
       var Query1 =
@@ -893,7 +905,7 @@ function fn_SQLSearch_ByTime_s2() {
         "'";
       var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
 
-      var sqltable_Name_s2 = "sql_data_s2"; // Tên bảng
+      var sqltable_Name_s2 = process.env.TABLE_DATA_2; // Tên bảng
       var dt_col_Name_s2 = "Date"; // Tên cột thời gian
 
       var Query1 =
@@ -1756,7 +1768,7 @@ function fn_Require_ExcelExport_s2() {
 }
 // =====================TẠO HÀM GHI ALARM XUỐNG SQL============================
 function fn_sql_alarm_insert(ID, AlarmName) {
-  var sqltable_Name = "sql_alarm";
+  var sqltable_Name = process.env.TABLE_ALARM_1;
   // Lấy thời gian hiện tại
   var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
   var temp_datenow = new Date();
@@ -1787,7 +1799,7 @@ function fn_sql_alarm_insert(ID, AlarmName) {
 }
 
 function fn_sql_alarm_insert_s2(ID, AlarmName) {
-  var sqltable_Name_s2 = "sql_alarm_s2";
+  var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
   // Lấy thời gian hiện tại
   var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
   var temp_datenow = new Date();
@@ -1818,7 +1830,7 @@ function fn_sql_alarm_insert_s2(ID, AlarmName) {
 }
 // Hàm tự động xác nhận cảnh báo
 function fn_sql_alarm_ack(ID) {
-  var sqltable_Name = "sql_alarm";
+  var sqltable_Name = process.env.TABLE_ALARM_1;
 
   // Dữ liệu trạng thái cảnh báo
   var data_1 = " Status = 'IO'";
@@ -1837,7 +1849,7 @@ function fn_sql_alarm_ack(ID) {
 }
 
 function fn_sql_alarm_ack_s2(ID) {
-  var sqltable_Name_s2 = "sql_alarm_s2";
+  var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
 
   // Dữ liệu trạng thái cảnh báo
   var data_1 = " Status = 'IO'";
@@ -1953,7 +1965,7 @@ function fn_Alarm_Manage_s2() {
 // Hàm xóa Alarm
 function fn_Alarm_Delete() {
   delete_trigger = arr_tag_value[33];
-  var sqltable_Name = "sql_alarm";
+  var sqltable_Name = process.env.TABLE_ALARM_1;
   // Ghi dữ liệu vào SQL
   if (
     delete_trigger &&
@@ -1974,7 +1986,7 @@ function fn_Alarm_Delete() {
 
 function fn_Alarm_Delete_s2() {
   delete_trigger_s2 = arr_tag_value_s2[33];
-  var sqltable_Name_s2 = "sql_alarm_s2";
+  var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
   // Ghi dữ liệu vào SQL
   if (
     delete_trigger_s2 &&
@@ -1996,7 +2008,7 @@ function fn_Alarm_Delete_s2() {
 function fn_AlarmSearch() {
   io.on("connection", function (socket) {
     socket.on("msg_Alarm_Show", function (data) {
-      var sqltable_Name = "sql_alarm";
+      var sqltable_Name = process.env.TABLE_ALARM_1;
       var query = "SELECT * FROM " + sqltable_Name + " WHERE Status = 'I';";
       sqlcon.query(query, function (err, results, fields) {
         if (err) {
@@ -2013,7 +2025,7 @@ function fn_AlarmSearch() {
 function fn_AlarmSearch_s2() {
   io.on("connection", function (socket) {
     socket.on("msg_Alarm_Show_s2", function (data) {
-      var sqltable_Name_s2 = "sql_alarm_s2";
+      var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
       var query = "SELECT * FROM " + sqltable_Name_s2 + " WHERE Status = 'I';";
       sqlcon_s2.query(query, function (err, results, fields) {
         if (err) {
@@ -2053,7 +2065,7 @@ function fn_Alarm_Search_ByTime() {
         "'";
       var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
 
-      var sqltable_Name = "sql_alarm"; // Tên bảng
+      var sqltable_Name = process.env.TABLE_ALARM_1; // Tên bảng
       var dt_col_Name = "Date"; // Tên cột thời gian
 
       var Query1 =
@@ -2101,7 +2113,7 @@ function fn_Alarm_Search_ByTime_s2() {
         "'";
       var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
 
-      var sqltable_Name_s2 = "sql_alarm_s2"; // Tên bảng
+      var sqltable_Name_s2 = process.env.TABLE_ALARM_2; // Tên bảng
       var dt_col_Name = "Date"; // Tên cột thời gian
 
       var Query1 =
