@@ -44,7 +44,8 @@ npm init
   npm install dotenv
   ``` 
 ## CSS  Framework
-Doc for [TailwindCSS](https://tailwindcss.com/docs/installation)
+Download [TailwindCSS](https://tailwindcss.com/docs/installation) module available through the
+[npm registry](https://www.npmjs.com/).
 1. Install ***TailwindCSS*** module in Project:
     ```console
     npm install -D tailwindcss
