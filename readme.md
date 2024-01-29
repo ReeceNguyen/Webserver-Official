@@ -6,7 +6,7 @@ Download [Node.js](https://nodejs.org/en/) module available through the
 ```console
 npm init
 ```
-2. Add modules package for Webserver:
+2. Add ***Module packages*** for Webserver:
 * [Socket.io](https://socket.io/docs/v4/tutorial/introduction)
   ```console
   npm install socket.io
@@ -79,7 +79,11 @@ Configure ***package.json*** :
 },
 ```
 ## Running Test
+* Run ***Tailwind*** :
 ```console
 npm run lvtn:css 
+```
+* Run ***Server***:
+```console
 npm run lvtn  
 ```
