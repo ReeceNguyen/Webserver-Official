@@ -8,6 +8,7 @@ var users = [
 function login() {
   var a = document.getElementById("inputuser").value;
   var b = document.getElementById("inputpass").value;
+  var selectuser = document.getElementById("userselect").value;
   // ////////////////// ADMIN /////////////////////
 
   if (a == users[0].name && b == users[0].password) {
@@ -28,6 +29,7 @@ function login() {
     );
     document.getElementById("login_hall").style.display = "none";
     document.getElementById('pag_2').style.visibility = "hidden";
+    document.getElementById("userselect").value='ad';
   }
   // ////////////////// USER1 /////////////////////
 
@@ -54,6 +56,7 @@ function login() {
     document.getElementById("alarm_picker_s2").style.display = "none";
     document.getElementById("Alarm_Table_s2").style.display = "none";
     document.getElementById("pag_2").style.visibility = "hidden";
+    document.getElementById("userselect").value='us1';
     var checkBox = document.getElementById("myCheckbox");
     checkBox.disabled = true;
   }
@@ -82,6 +85,7 @@ function login() {
     document.getElementById("alarm_picker").style.display = "none";
     document.getElementById("Alarm_Table").style.display = "none";
     document.getElementById("pag").style.visibility = "hidden";
+    document.getElementById("userselect").value='us2';
     var checkBox = document.getElementById("myCheckbox");
     checkBox.checked = true;
     checkBox.disabled = true;

@@ -101,7 +101,7 @@ var layout = {
   xaxis: {
     title: "Time",
     tickangle: 90,
-    type: "date"
+    type: "date",
   },
   font: {
     family: "Montserrat",
@@ -116,7 +116,7 @@ var layout_s2 = {
   xaxis: {
     title: "Time",
     tickangle: 90,
-    type: "date"
+    type: "date",
   },
   font: {
     family: "Montserrat",
@@ -133,33 +133,33 @@ Plotly.newPlot("dia-weight1", [trace1], layout, {
   displayModeBar: false,
   staticPlot: true,
 });
-function updateGraph_1(){
+function updateGraph_1() {
   const now = new Date();
-  Plotly.extendTraces("dia-weight1", {x:[[now]],y:[[data_w1]]},[0])
+  Plotly.extendTraces("dia-weight1", { x: [[now]], y: [[data_w1]] }, [0]);
 }
-setInterval(updateGraph_1,1000)
+setInterval(updateGraph_1, 1000);
 
 Plotly.newPlot("dia-weight2", [trace2], layout, {
   responsive: true,
   displayModeBar: false,
   staticPlot: true,
 });
-function updateGraph_2(){
+function updateGraph_2() {
   const now = new Date();
-  Plotly.extendTraces("dia-weight2", {x:[[now]],y:[[data_w2]]},[0])
+  Plotly.extendTraces("dia-weight2", { x: [[now]], y: [[data_w2]] }, [0]);
 }
-setInterval(updateGraph_2,1000)
+setInterval(updateGraph_2, 1000);
 
 Plotly.newPlot("dia-weight3", [trace3], layout, {
   responsive: true,
   displayModeBar: false,
   staticPlot: true,
 });
-function updateGraph_3(){
+function updateGraph_3() {
   const now = new Date();
-  Plotly.extendTraces("dia-weight3", {x:[[now]],y:[[data_w3]]},[0])
+  Plotly.extendTraces("dia-weight3", { x: [[now]], y: [[data_w3]] }, [0]);
 }
-setInterval(updateGraph_3,1000)
+setInterval(updateGraph_3, 1000);
 
 // STATION 2
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
@@ -167,30 +167,80 @@ Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   displayModeBar: false,
   staticPlot: true,
 });
-function updateGraph_1_s2(){
+function updateGraph_1_s2() {
   const now = new Date();
-  Plotly.extendTraces("dia-weight1_s2", {x:[[now]],y:[[data_w1_s2]]},[0])
+  Plotly.extendTraces("dia-weight1_s2", { x: [[now]], y: [[data_w1_s2]] }, [0]);
 }
-setInterval(updateGraph_1_s2,1000)
+setInterval(updateGraph_1_s2, 1000);
 
 Plotly.newPlot("dia-weight2_s2", [trace2_s2], layout_s2, {
   responsive: true,
   displayModeBar: false,
   staticPlot: true,
 });
-function updateGraph_2_s2(){
+function updateGraph_2_s2() {
   const now = new Date();
-  Plotly.extendTraces("dia-weight2_s2", {x:[[now]],y:[[data_w2_s2]]},[0])
+  Plotly.extendTraces("dia-weight2_s2", { x: [[now]], y: [[data_w2_s2]] }, [0]);
 }
-setInterval(updateGraph_2_s2,1000)
+setInterval(updateGraph_2_s2, 1000);
 
 Plotly.newPlot("dia-weight3_s2", [trace3_s2], layout_s2, {
   responsive: true,
   displayModeBar: false,
   staticPlot: true,
 });
-function updateGraph_3_s2(){
+function updateGraph_3_s2() {
   const now = new Date();
-  Plotly.extendTraces("dia-weight3_s2", {x:[[now]],y:[[data_w3_s2]]},[0])
+  Plotly.extendTraces("dia-weight3_s2", { x: [[now]], y: [[data_w3_s2]] }, [0]);
 }
-setInterval(updateGraph_3_s2,1000)
+setInterval(updateGraph_3_s2, 1000);
+
+// tải hình ảnh về
+function DownloadGraph1() {
+  Plotly.downloadImage("dia-weight1", {
+    format: "png",
+    height: 800,
+    width: 1300,
+    filename: "st1_weight_1",
+  });
+}
+function DownloadGraph2() {
+  Plotly.downloadImage("dia-weight2", {
+    format: "png",
+    height: 800,
+    width: 1300,
+    filename: "st1_weight_2",
+  });
+}
+function DownloadGraph3() {
+  Plotly.downloadImage("dia-weight3", {
+    format: "png",
+    height: 800,
+    width: 1300,
+    filename: "st1_weight_3",
+  });
+}
+function DownloadGraph1_s2() {
+  Plotly.downloadImage("dia-weight1", {
+    format: "png",
+    height: 800,
+    width: 1300,
+    filename: "st2_weight_1",
+  });
+}
+function DownloadGraph2_s2() {
+  Plotly.downloadImage("dia-weight2", {
+    format: "png",
+    height: 800,
+    width: 1300,
+    filename: "st2_weight_2",
+  });
+}
+function DownloadGraph3_s2() {
+  Plotly.downloadImage("dia-weight3", {
+    format: "png",
+    height: 800,
+    width: 1300,
+    filename: "st2_weight_3",
+  });
+}

@@ -137,15 +137,22 @@
     </div>
     <!--////////////// Code cho Login /////////////-->
     <div id="loginbar"
-        class="rounded-[10px] absolute left-[5px] top-[718px] w-[198px] h-[148px] bg-[#030391] text-[#ffffff] text-[14px] font-bold font-['Times_New_Roman',_Times,_serif] cursor-pointer select-none">
+        class="rounded-[10px] absolute left-[5px] top-[726px] w-[198px] h-[140px] bg-[#030391] text-[#ffffff] text-[14px] font-bold font-['Times_New_Roman',_Times,_serif] cursor-pointer select-none text-center text-xl">
+        <br>
+        <label for="userselect">User:</label>
+        <select name="userselect" id="userselect" class="w-32 h-5 text-[#000000] text-sm text-center" disabled>
+            <option value="ad">ADMIN</option>
+            <option value="us1">USER1</option>
+            <option value="us2">USER2</option>
+        </select>
         <!--Nút đăng nhập-->
         <button id="btt_Login"
-            class="border-[outset] border-[3px] border-[#5ae766] rounded-[999px] bg-[#129c35] text-center inline-block absolute w-[150px] h-[40px] left-[22px] bottom-[80px] select-none"
-            onclick="login();window.location.reload();">Login</button>
+            class="border-[outset] border-[3px] border-[#5ae766] rounded-[999px] bg-[#129c35] text-center inline-block absolute w-[76px] h-[40px] left-[15px] bottom-[20px] select-none"
+            onclick="login();window.location.reload();"><img src="/images/login.png" class="max-w-[30px] max-h-[30px] m-auto"></button>
         <!--Nút đăng xuất-->
         <button id="btt_Logout"
-            class="border-[outset] border-[3px] border-[#c75858] rounded-[999px] bg-[#c42c2c] text-center inline-block absolute w-[150px] h-[40px] left-[22px] bottom-[20px] select-none"
-            onclick="logout();">Logout</button>
+            class="border-[outset] border-[3px] border-[#c75858] rounded-[999px] bg-[#c42c2c] text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
+            onclick="logout();"><img src="/images/logout.png" class="max-w-[30px] max-h-[30px] m-auto"></button>
     </div>
     <!--////////////// ABOUT /////////////-->
     <div id="Scr_About"
@@ -681,9 +688,15 @@
             <span class="labels" data-on="STA 2" data-off="STA 1"></span>
         </label>
         <!--//Màn hình tram 1//-->
-        <div id="dia-weight1" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]"></div>
-        <div id="dia-weight2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]"></div>
-        <div id="dia-weight3" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]"></div>
+        <div id="dia-weight1" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1();DownloadGraph2();DownloadGraph3()"><img src="/images/download.png"></button>
+        </div>
+        <div id="dia-weight2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1();DownloadGraph2();DownloadGraph3()"><img src="/images/download.png"></button>
+        </div>
+        <div id="dia-weight3" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1();DownloadGraph2();DownloadGraph3()"><img src="/images/download.png"></button>
+        </div>
         <div id="pag" class="pagination">
             <a
                 onclick="fn_ScreenChangeMain('dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">1</a>
@@ -693,9 +706,15 @@
                 onclick="fn_ScreenChangeMain('dia-weight3','dia-weight2','dia-weight1','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">3</a>
         </div>
         <!--//Màn hình tram 2//-->
-        <div id="dia-weight1_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]"></div>
-        <div id="dia-weight2_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]"></div>
-        <div id="dia-weight3_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]"></div>
+        <div id="dia-weight1_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1_s2();DownloadGraph2_s2();DownloadGraph3_s2()"><img src="/images/download.png"></button>
+        </div>
+        <div id="dia-weight2_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1_s2();DownloadGraph2_s2();DownloadGraph3_s2()"><img src="/images/download.png"></button>
+        </div>
+        <div id="dia-weight3_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1_s2();DownloadGraph2_s2();DownloadGraph3_s2()"><img src="/images/download.png"></button>
+        </div>
         <div id="pag_2" class="pagination">
             <a
                 onclick="fn_ScreenChangeMain('dia-weight1_s2','dia-weight2_s2','dia-weight3_s2','dia-weight1','dia-weight2','dia-weight3')">1</a>
