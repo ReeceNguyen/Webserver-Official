@@ -100,6 +100,3 @@ function logout() {
   alert("Logout Successfully!");
   window.location.reload();
 }
-function welcome(){
-  window.location.assign("welcome")
-}
