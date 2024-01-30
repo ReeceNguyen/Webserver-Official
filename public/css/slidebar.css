@@ -13,40 +13,47 @@
     user-select: none;
 }
 /*Nút Màn chính*/
-#btt_Screen_Start{
+#btt_Screen_Start,#btt_Screen_Main,#btt_Screen_Main_s2,#btt_Screen_SQL,#btt_Screen_Diagram,#btt_Screen_Alarm,#btt_Screen_About{
     border: outset 3px #b4b8e3;
     border-radius: 999px;
     background-color: #808080;  
     text-align: center; 
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute; 
+    user-select: none;
+}
+#btt_Screen_Start{
     width: 150px; height: 40px; 
     left: 22px; top: 20px;
-    user-select: none;
-}
-#btt_Screen_Start:active{
-    background-color: #ffb600; 
 }
 #btt_Screen_Main{
-    border: outset 3px #b4b8e3;
-    border-radius: 999px;
-    background-color: #808080;  
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
     width: 150px; height: 40px; 
     left: 22px; top: 80px;
-    user-select: none;
 }
-#btt_Screen_Main:active{
-    background-color: #ffb600;
+#btt_Screen_Main_s2{
+    width: 150px; height: 40px; 
+    left: 22px; top: 220px;
 }
-#Auto_LED{
+#btt_Screen_SQL{
+    width: 150px; height: 40px; 
+    left: 22px; bottom:200px;
+}
+#btt_Screen_Diagram{
+    width: 150px; height: 40px; 
+    left: 22px; bottom:140px;
+}
+#btt_Screen_Alarm{ 
+    width: 150px; height: 40px; 
+    left: 22px; bottom:80px;
+}
+#btt_Screen_About{
+    width: 150px; height: 40px; 
+    left: 22px; bottom: 20px;
+}
+#Auto_LED,#Manual_LED,#Auto_LED_s2,#Manual_LED_s2{
     width: 50px; height: 50px; 
-}
-#Manual_LED{
-    width: 50px; height: 50px; 
-
 }
 figure:nth-of-type(1){
     position: absolute;
@@ -60,26 +67,6 @@ figure:nth-of-type(2){
     right: 30px; top: 140px;
     text-align: center;
 }
-#btt_Screen_Main_s2{
-    border: outset 3px #b4b8e3;
-    border-radius: 999px;
-    background-color: #808080;  
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 150px; height: 40px; 
-    left: 22px; top: 220px;
-    user-select: none;
-}
-#btt_Screen_Main_s2:active{
-    background-color: #ffb600;
-}
-#Auto_LED_s2{
-    width: 50px; height: 50px; 
-}
-#Manual_LED_s2{
-    width: 50px; height: 50px; 
-}
 figure:nth-of-type(3){
     position: absolute;
     box-sizing: border-box;
@@ -92,59 +79,14 @@ figure:nth-of-type(4){
     right: 30px; top: 280px;
     text-align: center;
 }
-#btt_Screen_SQL{
-    border: outset 3px #b4b8e3;
-    border-radius: 999px;
-    background-color: #808080;  
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 150px; height: 40px; 
-    left: 22px; bottom:200px;
-    user-select: none;
+#btt_Screen_Start:active,#btt_Screen_Main:active,#btt_Screen_Main_s2:active,#btt_Screen_SQL:active,#btt_Screen_Diagram:active,#btt_Screen_Alarm:active,#btt_Screen_About:active{
+    background-color: #ffb600; 
 }
-#btt_Screen_SQL:active{
-    background-color: #ffb600;
+.logo_btn img{
+    margin-right: 24px;
+    margin-left: -40px;
 }
-#btt_Screen_Diagram{
-    border: outset 3px #b4b8e3;
-    border-radius: 999px;
-    background-color: #808080;  
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 150px; height: 40px; 
-    left: 22px; bottom:140px;
-    user-select: none;
-}
-#btt_Screen_Diagram:active{
-    background-color: #ffb600;
-}
-#btt_Screen_Alarm{
-    border: outset 3px #b4b8e3;
-    border-radius: 999px;
-    background-color: #808080;  
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 150px; height: 40px; 
-    left: 22px; bottom:80px;
-    user-select: none;
-}
-#btt_Screen_Alarm:active{
-    background-color: #ffb600;
-}
-#btt_Screen_About{
-    border: outset 3px #b4b8e3;
-    border-radius: 999px;
-    background-color: #808080;  
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 150px; height: 40px; 
-    left: 22px; bottom: 20px;
-    user-select: none;
-}
-#btt_Screen_About:active{
-    background-color: #ffb600;
+.logo_btn_2 img{
+    margin-right: 15px;
+    margin-left: -30px;
 }
