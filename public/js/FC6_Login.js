@@ -8,7 +8,6 @@ var users = [
 function login() {
   var a = document.getElementById("inputuser").value;
   var b = document.getElementById("inputpass").value;
-  var selectuser = document.getElementById("userselect").value;
   // ////////////////// ADMIN /////////////////////
 
   if (a == users[0].name && b == users[0].password) {
