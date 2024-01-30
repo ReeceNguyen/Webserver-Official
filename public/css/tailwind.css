@@ -620,6 +620,10 @@ video {
   margin: auto;
 }
 
+.ml-8 {
+  margin-left: 2rem;
+}
+
 .ml-\[5px\] {
   margin-left: 5px;
 }
@@ -900,6 +904,11 @@ video {
 }
 
 .text-\[\#ffffff\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
