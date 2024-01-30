@@ -45,11 +45,9 @@
     <link rel="stylesheet" href="/css/screen_Auto_s2.css">
     <link rel="stylesheet" href="/css/screen_Manu.css">
     <link rel="stylesheet" href="/css/screen_Manu_s2.css">
-    <!-- <link rel="stylesheet" href="/css/screen_Start.css"> -->
     <link rel="stylesheet" href="/css/screen_SQL.css">
     <link rel="stylesheet" href="/css/screen_Diagram.css">
     <link rel="stylesheet" href="/css/screen_Alarm.css">
-    <!-- <link rel="stylesheet" href="/css/screen_About.css"> -->
     <title>Webserver for Automation System</title>
 
     <!-- //////////////////////// LOGIN FORM //////////////////////////-->
@@ -61,17 +59,19 @@
                 <form class="animate">
                     <div class="row">
                         <i class="fas fa-user"></i>
-                        <input id="inputuser" type="text" placeholder="Enter Username"required>
+                        <input id="inputuser" type="text" placeholder="Enter Username" required>
                     </div>
                     <div class="row">
                         <i class="fas fa-lock"></i>
-                        <input id="inputpass" type="password" placeholder="Password"required>
+                        <input id="inputpass" type="password" placeholder="Password" required>
                     </div>
                     <div class="pass"><a href="#">Forgot password?</a></div>
                     <div class="row button">
                         <input type="button" value="LOGIN" onclick="login()">
                     </div>
-                    <div class="signup-link"><a href="mailto:minhthai160501@outlook.com.vn">Contact me</a> <button class="w-[100px] h-[30px] bg-[#c42c2c] rounded-[10px] ml-8 text-white" onclick="cancel()">Cancel</button></div>
+                    <div class="signup-link"><a href="mailto:minhthai160501@outlook.com.vn">Contact me</a> <button
+                            class="w-[100px] h-[30px] bg-[#c42c2c] rounded-[10px] ml-8 text-white"
+                            onclick="cancel()">Cancel</button></div>
                 </form>
             </div>
         </div>
@@ -162,8 +162,22 @@
     </div>
     <!--////////////// ABOUT /////////////-->
     <div id="Scr_About"
-        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-[Montserrat] font-bold">
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-[Montserrat] font-bold flex">
+        <div class="w-[500px] h-[300px] border-[inset] border-2 border-[#000000] pl-0 ml-3 mt-3 text-left text-xl">
+            <div class="w-[496px] h-[80px] bg-gray-300 pt-1 pl-1 border-b-4 border-blue-700">
+                <img src="/images/Logo/bk_name_en.png" class="max-w-[400px] max-h-[60px]">
+            </div>
+            <h2 class="text-white font-bold ml-1"> Topic : </h2>
+            <p class="text-xl ml-1">Buiding Webserver Application for Automation System</p>
+            <p class="text-white font-bold ml-1"> Instructor:</p>
+            <p class="ml-5 text-[#030391] text-lg">PhD,Nguyen Trong Tai</p>
+            <p class="text-white font-bold ml-1"> Student:</p>
+            <p class="ml-5 text-[#030391] text-lg">Nguyen Minh Thai - 1910526</p>
+        </div>
+        <div class="w-[650px] h-[300px] border-[inset] border-2 border-[#000000] pl-0 ml-10 mt-3 text-xl text-center">
+            <h2 class="text-white">ABOUT ME</h2>
 
+        </div>
     </div>
     <!--////////////// STATION CONTROL 1 /////////////-->
     <div id="Scr_Main"
