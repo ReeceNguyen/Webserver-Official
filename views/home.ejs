@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
-    <!-- <script src='/js/moment.js'></script> -->
     <script src="/js/moment.js"></script>
     <script src="/js/plotly.js"></script>
     <script src="/js/jquery.js"></script>
@@ -34,6 +33,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Montserrat+Alternates:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
     <link rel="stylesheet" href="/css/screen_Login.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/slidebar.css">
@@ -55,29 +55,26 @@
     <!-- //////////////////////// LOGIN FORM //////////////////////////-->
     <div id="login_hall"
         class="fixed z-[5] w-full h-full overflow-auto bg-[rgba(0,0,0,0.85)] text-base font-bold pt-[60px] left-0 top-0 font-serif">
-
-        <form id="modal-content" class="animate">
-            <div id="img_container" class="imgcontainer">
-                <div id="img_avatar">
-                    <img src="images/Logo/apple-touch-icon.png" alt="Avatar">
-                </div>
+        <div class="modal-content">
+            <div class="wrapper">
+                <div class="title"><img src="images/Logo/apple-touch-icon.png" class="max-w-[80px] max-h-[80px]"></div>
+                <form class="animate">
+                    <div class="row">
+                        <i class="fas fa-user"></i>
+                        <input id="inputuser" type="text" placeholder="Enter Username"required>
+                    </div>
+                    <div class="row">
+                        <i class="fas fa-lock"></i>
+                        <input id="inputpass" type="password" placeholder="Password"required>
+                    </div>
+                    <div class="pass"><a href="#">Forgot password?</a></div>
+                    <div class="row button">
+                        <input type="submit" value="LOGIN" onclick="login()">
+                    </div>
+                    <div class="signup-link"><a href="mailto:minhthai160501@outlook.com.vn">Contact me</a> <button class="w-[100px] h-[30px] bg-[#c42c2c] rounded-[10px]" onclick="cancel()">Cancel</button></div>
+                </form>
             </div>
-            <div id="log_container" class="container">
-                <label for="username"><b>Username</b></label>
-                <input id="inputuser" type="text" placeholder="Enter Username" name="username" required>
-
-                <label for="password"><b>Password</b></label>
-                <input id="inputpass" type="password" placeholder="Enter Password" name="password" required>
-
-                <button id="bttlogin" type="button"
-                    class="bg-[#129c35] text-[#ffffff] px-[20px] py-[14px] mt-[10px] border-[outset] border-[3px] border-[#5ae766] rounded-[999px] cursor-pointer w-[46%] hover:opacity-80"
-                    onclick="login();">Login</button>
-                <button id="bttcancle" type="button"
-                    class="bg-[#c42c2c] text-[#ffffff] px-[20px] py-[14px] mt-[10px] ml-[5%] border-[outset] border-[3px] border-[#c75858] rounded-[999px] cursor-pointer w-[46%] hover:opacity-80"
-                    onclick="document.getElementById('login_hall').style.display='none'; window.close();"
-                    class="cancelbtn">Cancel</button>
-            </div>
-        </form>
+        </div>
     </div>
     <!-- //////////////////////// END LOGIN FORM //////////////////////-->
 </head>

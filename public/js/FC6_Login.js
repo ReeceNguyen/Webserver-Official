@@ -99,3 +99,13 @@ function logout() {
   alert("Logout Successfully!");
   window.location.reload();
 }
+function cancel(){
+  document.getElementById('login_hall').style.display='none';
+  var scr_disable = document.getElementById("slidebar");
+  var element_in_scr = scr_disable.querySelectorAll("*");
+  element_in_scr.forEach((element) => {
+    element.disabled = true;
+  });
+  document.getElementById("btt_Screen_Start").disabled = false;
+  document.getElementById("btt_Screen_About").disabled = false;
+}
