@@ -724,6 +724,10 @@ video {
   max-height: 80px;
 }
 
+.max-h-\[15px\] {
+  max-height: 15px;
+}
+
 .w-32 {
   width: 8rem;
 }
@@ -800,6 +804,10 @@ video {
   max-width: 80px;
 }
 
+.max-w-\[15px\] {
+  max-width: 15px;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -810,12 +818,21 @@ video {
           user-select: none;
 }
 
+.columns-md {
+  -moz-columns: 28rem;
+       columns: 28rem;
+}
+
 .items-center {
   align-items: center;
 }
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-items-start {
+  justify-items: start;
 }
 
 .overflow-auto {
@@ -1020,11 +1037,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 .font-bold {
