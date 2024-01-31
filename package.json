@@ -1,6 +1,6 @@
 {
   "name": "webserver_lvtn",
-  "version": "1.0.116",
+  "version": "1.0.260",
   "description": "SCADA webserver for Automation Controlling System",
   "main": "index.js",
   "scripts": {
