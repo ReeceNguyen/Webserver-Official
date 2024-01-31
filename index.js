@@ -338,9 +338,12 @@ setInterval(() => fn_read_data_scan(), 500);
 // /////////////////////////++THIẾT LẬP KẾT NỐI WEB (WEB BORROW)++/////////////////////////
 var express = require("express");
 var app = express();
-app.use(express.static("public"));
+var path = require("path");
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname,"public")));
 app.set("view engine", "ejs");
-app.set("views", "./views");
+// app.set("views", "./views");
+app.set("views", path.join(__dirname,"views"));
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(process.env.PORT);
