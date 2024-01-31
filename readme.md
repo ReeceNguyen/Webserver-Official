@@ -1,4 +1,4 @@
-# Tasks to do 
+# Environment Settings 
 ## Installation
 Download [Node.js](https://nodejs.org/en/) module available through the
 [npm registry](https://www.npmjs.com/).
@@ -7,19 +7,19 @@ Download [Node.js](https://nodejs.org/en/) module available through the
 npm init
 ```
 2. Add ***Module packages*** for Webserver:
-* [Socket.io](https://socket.io/docs/v4/tutorial/introduction)
+* [Socket.io](https://socket.io/docs/v4/tutorial/introduction) : server-client communicating
   ```console
   npm install socket.io
   ``` 
-* [Express](https://expressjs.com/)
+* [Express](https://expressjs.com/) : server-side
   ```console
   npm install express –-save
   ``` 
-* [Ejs](https://www.npmjs.com/package/ejs)
+* [Ejs](https://www.npmjs.com/package/ejs) : view engine
   ```console
   npm install ejs
   ```
-* [Lodash](https://lodash.com/)
+* [Lodash](https://lodash.com/) :  handle Array, Object, Function, Collection 
   ```console
   npm i –g npm
   ```
@@ -27,19 +27,19 @@ npm init
   npm i –-save lodash	
   ```
 
-* [Nodes7](https://www.npmjs.com/package/nodes7)
+* [Nodes7](https://www.npmjs.com/package/nodes7) : communication to S7-300/400/1200/1500 PLCs
   ```console
   npm install nodes7
   ```
-* [mySQL](https://www.npmjs.com/package/mysql)
+* [mySQL](https://www.npmjs.com/package/mysql) : Database
   ```console
   npm install mysql
   ```
-* [Exceljs](https://www.npmjs.com/package/exceljs#fills)
+* [Exceljs](https://www.npmjs.com/package/exceljs#fills) : Report
   ```console
   npm install exceljs
   ```
-* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Dotenv](https://www.npmjs.com/package/dotenv) : Environment Configuration
   ```console
   npm install dotenv
   ``` 
