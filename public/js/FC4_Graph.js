@@ -1,7 +1,6 @@
 //Ctrinh đổi trạm
 function doalert(e) {
   if (e.checked) {
-    alert("station 2");
     fn_ScreenHidden(
       "dia-weight1",
       "dia-weight2",
@@ -12,7 +11,6 @@ function doalert(e) {
     );
     fn_ScreenChange1("pag_2", "pag");
   } else {
-    alert("station 1");
     fn_ScreenHidden(
       "dia-weight1",
       "dia-weight2",
