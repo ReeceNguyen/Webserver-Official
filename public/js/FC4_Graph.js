@@ -128,7 +128,6 @@ var layout_s2 = {
 // STATION 1
 Plotly.newPlot("dia-weight1", [trace1], layout, {
   responsive: true,
-  displayModeBar: false,
   staticPlot: true,
 });
 function updateGraph_1() {
@@ -139,7 +138,6 @@ setInterval(updateGraph_1, 1000);
 
 Plotly.newPlot("dia-weight2", [trace2], layout, {
   responsive: true,
-  displayModeBar: false,
   staticPlot: true,
 });
 function updateGraph_2() {
@@ -150,7 +148,6 @@ setInterval(updateGraph_2, 1000);
 
 Plotly.newPlot("dia-weight3", [trace3], layout, {
   responsive: true,
-  displayModeBar: false,
   staticPlot: true,
 });
 function updateGraph_3() {
@@ -162,7 +159,6 @@ setInterval(updateGraph_3, 1000);
 // STATION 2
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   responsive: true,
-  displayModeBar: false,
   staticPlot: true,
 });
 function updateGraph_1_s2() {
@@ -173,7 +169,6 @@ setInterval(updateGraph_1_s2, 1000);
 
 Plotly.newPlot("dia-weight2_s2", [trace2_s2], layout_s2, {
   responsive: true,
-  displayModeBar: false,
   staticPlot: true,
 });
 function updateGraph_2_s2() {
@@ -184,7 +179,6 @@ setInterval(updateGraph_2_s2, 1000);
 
 Plotly.newPlot("dia-weight3_s2", [trace3_s2], layout_s2, {
   responsive: true,
-  displayModeBar: false,
   staticPlot: true,
 });
 function updateGraph_3_s2() {
