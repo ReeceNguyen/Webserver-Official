@@ -1068,16 +1068,16 @@ video {
   font-family: 'Times New Roman', Times, serif;
 }
 
-.font-\[Monsterrat\] {
-  font-family: Monsterrat;
-}
-
 .font-\[Montserrat\] {
   font-family: Montserrat;
 }
 
 .font-serif {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.font-\[Monsterrat\] {
+  font-family: Monsterrat;
 }
 
 .text-\[14px\] {
