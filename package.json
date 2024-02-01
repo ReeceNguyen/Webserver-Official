@@ -4,8 +4,8 @@
   "description": "SCADA webserver for Automation Controlling System",
   "main": "index.js",
   "scripts": {
-    "lvtn": "node index.js",
-    "lvtn:css": "npx tailwindcss build -o ./public/css/tailwind.css --watch"
+    "lvtn": "node ./src/index.js",
+    "lvtn:css": "npx tailwindcss build -o ./src/public/css/tailwind.css --watch"
   },
   "author": "Nguyễn Minh Thái - ID:1910526 , tel:0342400518, mail: thai.nguyenminhthai@hcmut.edu.vn",
   "license": "ISC",

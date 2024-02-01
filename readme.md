@@ -55,14 +55,14 @@ Download [TailwindCSS](https://tailwindcss.com/docs/installation) module availab
   npx tailwindcss init
   ```
 * ```console
-  npx tailwindcss build -o ./public/css/tailwind.css --watch
+  npx tailwindcss build -o ./src/public/css/tailwind.css --watch
   ```  
 
 3. Configure ***tailwind.config.js***:
 ```js
    /** @type {import('tailwindcss').Config} */
    module.exports = {
-        content: ["./views/*.ejs"],
+        content: ["./src/views/*.ejs"],
         theme: {
                 extend: {},
         },
@@ -74,8 +74,8 @@ Configure ***package.json*** :
 
 ```json
 "scripts": {
-        "lvtn": "node index.js",
-        "lvtn:css": "npx tailwindcss build -o ./public/css/tailwind.css --watch"
+        "lvtn": "node ./src/index.js",
+        "lvtn:css": "npx tailwindcss build -o ./src/public/css/tailwind.css --watch"
 },
 ```
 ## Running Test

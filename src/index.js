@@ -981,12 +981,12 @@ function fn_excelExport() {
   };
   // =====================THẾT KẾ HEADER=====================
   const imageId1 = workbook.addImage({
-    filename: "public/images/Logo/bk_name_en.png",
+    filename: "src/public/images/Logo/bk_name_en.png",
     extension: "png",
   });
   worksheet.addImage(imageId1, "A2:D5");
   const imageId2 = workbook.addImage({
-    filename: "public/images/Logo/OIP.jpg",
+    filename: "src/public/images/Logo/OIP.jpg",
     extension: "jpg",
   });
   worksheet.addImage(imageId2, "L1:L6");
@@ -1333,7 +1333,7 @@ function fn_excelExport() {
     "s";
   var saveasDirect = "reports/product/Report_" + currentTime + ".xlsx";
   SaveAslink = saveasDirect; // Send to client
-  var booknameLink = "public/" + saveasDirect;
+  var booknameLink = "src/public/" + saveasDirect;
 
   var Bookname = "Report_" + currentTime + ".xlsx";
   // Write book name
@@ -1389,12 +1389,12 @@ function fn_excelExport_s2() {
   };
   // =====================THẾT KẾ HEADER=====================
   const imageId1 = workbook.addImage({
-    filename: "public/images/Logo/bk_name_en.png",
+    filename: "src/public/images/Logo/bk_name_en.png",
     extension: "png",
   });
   worksheet.addImage(imageId1, "A2:D5");
   const imageId2 = workbook.addImage({
-    filename: "public/images/Logo/OIP.jpg",
+    filename: "src/public/images/Logo/OIP.jpg",
     extension: "jpg",
   });
   worksheet.addImage(imageId2, "L1:L6");
@@ -1741,7 +1741,7 @@ function fn_excelExport_s2() {
     "s";
   var saveasDirect = "reports/product_s2/Report_s2_" + currentTime + ".xlsx";
   SaveAslink = saveasDirect; // Send to client
-  var booknameLink = "public/" + saveasDirect;
+  var booknameLink = "src/public/" + saveasDirect;
 
   var Bookname = "Report_s2_" + currentTime + ".xlsx";
   // Write book name
@@ -2187,12 +2187,12 @@ function fn_AL_excelExport() {
   };
   // =====================THẾT KẾ HEADER=====================
   const imageId1 = workbook.addImage({
-    filename: "public/images/Logo/bk_name_en.png",
+    filename: "src/public/images/Logo/bk_name_en.png",
     extension: "png",
   });
   worksheet.addImage(imageId1, "A2:D5");
   const imageId2 = workbook.addImage({
-    filename: "public/images/Logo/OIP.jpg",
+    filename: "src/public/images/Logo/OIP.jpg",
     extension: "jpg",
   });
   worksheet.addImage(imageId2, "L1:L6");
@@ -2478,7 +2478,7 @@ function fn_AL_excelExport() {
     "s";
   var saveasDirectAL = "reports/alarm/Alarm_Report_" + currentTimeAL + ".xlsx";
   SaveAslinkAL = saveasDirectAL; // Send to client
-  var booknameLinkAL = "public/" + saveasDirectAL;
+  var booknameLinkAL = "src/public/" + saveasDirectAL;
 
   var BooknameAL = "Alarm_Report_" + currentTimeAL + ".xlsx";
   // Write book name
@@ -2533,12 +2533,12 @@ function fn_AL_excelExport_s2() {
   };
   // =====================THẾT KẾ HEADER=====================
   const imageId1 = workbook.addImage({
-    filename: "public/images/Logo/bk_name_en.png",
+    filename: "src/public/images/Logo/bk_name_en.png",
     extension: "png",
   });
   worksheet.addImage(imageId1, "A2:D5");
   const imageId2 = workbook.addImage({
-    filename: "public/images/Logo/OIP.jpg",
+    filename: "src/public/images/Logo/OIP.jpg",
     extension: "jpg",
   });
   worksheet.addImage(imageId2, "L1:L6");
@@ -2825,7 +2825,7 @@ function fn_AL_excelExport_s2() {
   var saveasDirectAL =
     "reports/alarm_s2/Alarm_Report_s2_" + currentTimeAL + ".xlsx";
   SaveAslinkAL = saveasDirectAL; // Send to client
-  var booknameLinkAL = "public/" + saveasDirectAL;
+  var booknameLinkAL = "src/public/" + saveasDirectAL;
 
   var BooknameAL = "Alarm_Report_s2_" + currentTimeAL + ".xlsx";
   // Write book name
