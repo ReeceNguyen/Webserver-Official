@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ////////////// LOGO TRANG WEB //////////////  -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/Logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/Logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/Logo/favicon-16x16.png">
+    <link rel="manifest" href="/images/Logo/site.webmanifest">
+    <link rel="icon" href="/images/Logo/favicon.ico" type="image/x-icon">
+
+    <!-- /////////////////// SCRIPTs ///////////////////   -->
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("<%= ipAddress %>") // IP server
+    </script>
+    <script src="/js/FC6_Login.js"></script>
+    <!-- <script src="/js/FC6_Login.js"></script> -->
+    <!-- /////////////////// CSS ///////////////////   -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/screen_Login.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="login_hall"
+        class="fixed z-[5] w-full h-full overflow-auto bg-[rgba(0,0,0,0.85)] text-base font-bold pt-[60px] left-0 top-0 font-serif">
+        <div class="modal-content">
+            <div class="wrapper animate">
+                <div class="title"><img src="images/Logo/apple-touch-icon.png" class="max-w-[80px] max-h-[80px]"></div>
+                <form>
+                    <div class="row">
+                        <i class="fas fa-user"></i>
+                        <input id="inputuser" type="text" placeholder="Username" required>
+                    </div>
+                    <div class="row">
+                        <i class="fas fa-lock"></i>
+                        <input id="inputpass" type="password" placeholder="Password" required>
+                    </div>
+                    <div class="pass"><a href="#">Forgot password?</a></div>
+                    <div class="row button">
+                        <input type="button" value="LOGIN" onclick="login()">
+                    </div>
+                    <div class="signup-link"><a href="mailto:minhthai160501@outlook.com.vn">Contact me</a> <button
+                            class="w-[100px] h-[30px] bg-[#c42c2c] hover:bg-red-400 rounded-[5px] ml-8 text-white"
+                            onclick="cancel()">Cancel</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
