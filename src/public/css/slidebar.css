@@ -16,11 +16,11 @@
 #btt_Screen_Start:active,#btt_Screen_Main:active,#btt_Screen_Main_s2:active,#btt_Screen_SQL:active,#btt_Screen_Diagram:active,#btt_Screen_Alarm:active,#btt_Screen_About:active{
     background-color: #ffb600; 
 }
-.logo_btn img{
+.logo_btn i{
     margin-right: 24px;
     margin-left: -40px;
 }
-.logo_btn_2 img{
+.logo_btn_2 i{
     margin-right: 15px;
     margin-left: -30px;
 }
