@@ -539,20 +539,29 @@
     <!--///////////// STATION CONTROL 2 /////////////-->
     <div id="Scr_Main_s2"
         class="rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
-        <div id="Screen_Auto_Panel_s2">
-            <label style="margin-left:60px">STATION 2</label>
-            <div id="box-1-auto_s2">
-                <div id="box-1-auto-name_s2">OPERATION MODE</div>
+        <div id="Screen_Auto_Panel_s2"
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-[Montserrat] font-bold cursor-pointer select-none">
+            <label class="ml-[60px]">STATION 2</label>
+            <div id="box-1-auto_s2"
+                class="absolute w-[192px] h-[140px] left-[5px] top-5 text-center text-white bg-white">
+                <div id="box-1-auto-name_s2"
+                    class="absolute w-[176px] h-8 left-[5px] top-3 flex justify-center items-center bg-[#0000ff]">
+                    OPERATION MODE</div>
                 <button id="bttAuto_AutoMode_s2"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500"
                     onclick="socket.emit('cmd_Auto_s2', true),fn_ScreenChange1('Screen_Auto_s2','Screen_Manu_s2'),fn_ScreenChange1('Screen_Auto_Panel_s2','Screen_Manu_Panel_s2');">AUTO</button>
                 <!-- Nút nhấn chế độ bằng tay -->
                 <button id="bttAuto_ManuMode_s2"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500"
                     onclick="socket.emit('cmd_Manu_s2', true),fn_ScreenChange1('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange1('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">MANUAL</button>
                 <!-- Nút nhấn chế xác nhận vận hành -->
-                <button id="bttAuto_Confirm_s2" onclick="socket.emit('cmd_Confirm_s2', true);">CONFIRM</button>
+                <button id="bttAuto_Confirm_s2"
+                    class="bg-[#808080] inline-block absolute w-36 h-9 left-4 top-[90px] active:bg-green-500"
+                    onclick="socket.emit('cmd_Confirm_s2', true);">CONFIRM</button>
             </div>
 
-            <div class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-[#0000ff] systembtn">
+            <div
+                class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-[#0000ff] systembtn">
                 <button
                     class="absolute bg-[#808080] active:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-[5px] top-3 systembtn"
                     onclick="socket.emit('cmd_on_System_s2',true)">ON</button>
@@ -561,9 +570,12 @@
                     onclick="socket.emit('cmd_off_System_s2',true)">OFF</button>
             </div>
 
-            <div id="box-2-auto_s2">
-                <div id="box-2-auto-name_s2">PARAMETER SETTING</div>
-                <div id="box-2-auto-device-name_s2">
+            <div id="box-2-auto_s2" class="absolute w-48 h-[250px] left-[5px] top-[250px] bg-white">
+                <div id="box-2-auto-name_s2"
+                    class="absolute w-44 h-8 flex justify-center items-center left-[5px] top-3 font-bold text-sm bg-[#0000ff]">
+                    PARAMETER SETTING</div>
+                <div id="box-2-auto-device-name_s2"
+                    class="absolute w-auto h-[170px] left-[5px] top-14 leading-[2.1] text-[#0000ff] text-sm">
                     <ol>
                         <li>Order ID:</li>
                         <li>Material 1:</li>
@@ -573,30 +585,51 @@
                     </ol>
                 </div>
                 <!-- Cài đặt ID Sản phẩm-->
-                <input id="set_orderID_s2" disabled="disabled" type="text" />
+                <input id="set_orderID_s2"
+                    class="absolute left-[90px] top-[58px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
                 <script>fn_scrAuto_IOField_IO_s2("sql_OrderID_s2", "set_orderID_s2", 0);</script>
                 <!-- Cài đặt trọng lượng liệu 1 -->
-                <input id="set_Weight1_s2" disabled="disabled" type="text" />
+                <input id="set_Weight1_s2"
+                    class="absolute left-[90px] top-[88px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
                 <script>fn_scrAuto_IOField_IO_s2("Setting_Weight_1_s2", "set_Weight1_s2", 2);</script>
                 <!-- Cài đặt trọng lượng liệu 2 -->
-                <input id="set_Weight2_s2" disabled="disabled" type="text" />
+                <input id="set_Weight2_s2"
+                    class="absolute left-[90px] top-[118px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
                 <script>fn_scrAuto_IOField_IO_s2("Setting_Weight_2_s2", "set_Weight2_s2", 2);</script>
                 <!-- Cài đặt trọng lượng liệu 3 -->
-                <input id="set_Weight3_s2" disabled="disabled" type="text" />
+                <input id="set_Weight3_s2"
+                    class="absolute left-[90px] top-[148px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
                 <script>fn_scrAuto_IOField_IO_s2("Setting_Weight_3_s2", "set_Weight3_s2", 2);</script>
                 <!-- Cài đặt thời gian trộn -->
-                <input id="set_Time_s2" disabled="disabled" type="text" />
+                <input id="set_Time_s2"
+                    class="absolute left-[90px] top-[178px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
                 <script>fn_scrAuto_IOField_IO_s2("Setting_Time_Tron_s2", "set_Time_s2", 0);</script>
                 <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
-                <button id="btt_scrAuto_Save_s2" onclick="fn_scrAuto_SaveBtt_s2()">Save</button>
-                <button id="btt_scrAuto_Edit_s2" onclick="fn_scrAuto_EditBtt_s2()">Modify</button>
+                <button id="btt_scrAuto_Save_s2"
+                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-52"
+                    onclick="fn_scrAuto_SaveBtt_s2()">Save</button>
+                <button id="btt_scrAuto_Edit_s2"
+                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-52"
+                    onclick="fn_scrAuto_EditBtt_s2()">Modify</button>
             </div>
-            <div id="box-3-auto_s2">
-                <div id="box-3-auto-name_s2">DATABASE</div>
+            <div id="box-3-auto_s2" class="absolute w-48 h-[150px] left-[5px] top-[520px] bg-white text-center">
+                <div id="box-3-auto-name_s2"
+                    class="absolute w-44 h-8 flex justify-center items-center left-[5px] top-3 bg-[#0000ff]">DATABASE</div>
                 <!--Nút nhấn đẩy dữ liệu lên SQL-->
-                <button id="btt_sql_on_s2" onclick="socket.emit('cmd_sql_on_s2', true);">SQL On</button>
-                <button id="btt_sql_off_s2" onclick="socket.emit('cmd_sql_off_s2', true);">SQL Off</button>
-                <button id="btt_sql_delete_s2" onclick="socket.emit('cmd_sql_delete_s2', true)">Del SQL</button>
+                <button id="btt_sql_on_s2"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px]" 
+                    onclick="socket.emit('cmd_sql_on_s2', true);">SQL On</button>
+                <button id="btt_sql_off_s2" 
+                class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px]"
+                    onclick="socket.emit('cmd_sql_off_s2', true);">SQL Off</button>
+                <button id="btt_sql_delete_s2"
+                class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px]" 
+                    onclick="socket.emit('cmd_sql_delete_s2', true)">Del SQL</button>
             </div>
         </div>
         <div id="Screen_Auto_s2">
@@ -652,7 +685,8 @@
                     onclick="socket.emit('cmd_Manu_s2', true),fn_ScreenChange1('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange1('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">MANUAL</button>
             </div>
 
-            <div class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-[#0000ff] systembtn">
+            <div
+                class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-[#0000ff] systembtn">
                 <button
                     class="absolute bg-[#808080] active:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-[5px] top-3 systembtn"
                     onclick="socket.emit('cmd_on_System_s2',true)">ON</button>
