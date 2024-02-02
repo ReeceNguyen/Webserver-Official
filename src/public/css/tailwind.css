@@ -600,6 +600,10 @@ video {
   left: 212px;
 }
 
+.left-\[22px\] {
+  left: 22px;
+}
+
 .left-\[270px\] {
   left: 270px;
 }
@@ -660,6 +664,14 @@ video {
   right: 15px;
 }
 
+.right-\[5px\] {
+  right: 5px;
+}
+
+.right-\[60px\] {
+  right: 60px;
+}
+
 .top-0 {
   top: 0px;
 }
@@ -700,8 +712,16 @@ video {
   top: 118px;
 }
 
+.top-\[125px\] {
+  top: 125px;
+}
+
 .top-\[148px\] {
   top: 148px;
+}
+
+.top-\[160px\] {
+  top: 160px;
 }
 
 .top-\[172px\] {
@@ -714,6 +734,10 @@ video {
 
 .top-\[178px\] {
   top: 178px;
+}
+
+.top-\[195px\] {
+  top: 195px;
 }
 
 .top-\[250px\] {
@@ -740,6 +764,10 @@ video {
   top: 520px;
 }
 
+.top-\[55px\] {
+  top: 55px;
+}
+
 .top-\[582px\] {
   top: 582px;
 }
@@ -764,28 +792,44 @@ video {
   top: 90px;
 }
 
-.right-\[5px\] {
-  right: 5px;
+.top-20 {
+  top: 5rem;
 }
 
-.top-\[55px\] {
-  top: 55px;
+.top-\[220px\] {
+  top: 220px;
 }
 
-.right-\[60px\] {
-  right: 60px;
+.top-\[200px\] {
+  top: 200px;
 }
 
-.top-\[125px\] {
-  top: 125px;
+.bottom-\[140px\] {
+  bottom: 140px;
 }
 
-.top-\[160px\] {
-  top: 160px;
+.bottom-\[80px\] {
+  bottom: 80px;
 }
 
-.top-\[195px\] {
-  top: 195px;
+.bottom-\[200px\] {
+  bottom: 200px;
+}
+
+.left-5 {
+  left: 1.25rem;
+}
+
+.top-\[140px\] {
+  top: 140px;
+}
+
+.right-\[30px\] {
+  right: 30px;
+}
+
+.top-\[280px\] {
+  top: 280px;
 }
 
 .z-\[5\] {
@@ -856,6 +900,10 @@ video {
   margin-top: 5px;
 }
 
+.box-border {
+  box-sizing: border-box;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -876,6 +924,10 @@ video {
 .size-\[120px\] {
   width: 120px;
   height: 120px;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .h-16 {
@@ -1038,6 +1090,10 @@ video {
   width: 1437px;
 }
 
+.w-\[150px\] {
+  width: 150px;
+}
+
 .w-\[176px\] {
   width: 176px;
 }
@@ -1066,6 +1122,10 @@ video {
   width: 500px;
 }
 
+.w-\[50px\] {
+  width: 50px;
+}
+
 .w-\[660px\] {
   width: 660px;
 }
@@ -1084,14 +1144,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[70px\] {
-  width: 70px;
-}
-
-.w-\[50px\] {
-  width: 50px;
 }
 
 .max-w-\[1437px\] {
@@ -1486,6 +1538,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.active\:bg-\[\#00cc00\]:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 204 0 / var(--tw-bg-opacity));
+}
+
 .active\:bg-\[\#0aca0a\]:active {
   --tw-bg-opacity: 1;
   background-color: rgb(10 202 10 / var(--tw-bg-opacity));
@@ -1519,9 +1576,4 @@ video {
 .active\:bg-red-700:active {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-
-.active\:bg-\[\#00cc00\]:active {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 204 0 / var(--tw-bg-opacity));
 }

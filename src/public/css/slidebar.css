@@ -1,17 +1,3 @@
-/*Slide bar chính*/
-#slidebar {
-    border-radius: 10px;
-    position: absolute; 
-    left: 5px; top: 100px; 
-    width: 198px; height: 600px;
-    background-color: #030391;
-    color: #ffffff;
-    font-size: 14px; 
-    font-weight: bold;
-    font-family: Montserrat;
-    cursor: pointer;
-    user-select: none;
-}
 /*Nút Màn chính*/
 #btt_Screen_Start,#btt_Screen_Main,#btt_Screen_Main_s2,#btt_Screen_SQL,#btt_Screen_Diagram,#btt_Screen_Alarm,#btt_Screen_About{
     border: outset 3px #b4b8e3;
@@ -24,60 +10,8 @@
     position: absolute; 
     user-select: none;
 }
-#btt_Screen_Start{
-    width: 150px; height: 40px; 
-    left: 22px; top: 20px;
-}
-#btt_Screen_Main{
-    width: 150px; height: 40px; 
-    left: 22px; top: 80px;
-}
-#btt_Screen_Main_s2{
-    width: 150px; height: 40px; 
-    left: 22px; top: 220px;
-}
-#btt_Screen_SQL{
-    width: 150px; height: 40px; 
-    left: 22px; bottom:200px;
-}
-#btt_Screen_Diagram{
-    width: 150px; height: 40px; 
-    left: 22px; bottom:140px;
-}
-#btt_Screen_Alarm{ 
-    width: 150px; height: 40px; 
-    left: 22px; bottom:80px;
-}
-#btt_Screen_About{
-    width: 150px; height: 40px; 
-    left: 22px; bottom: 20px;
-}
 #Auto_LED,#Manual_LED,#Auto_LED_s2,#Manual_LED_s2{
     width: 50px; height: 50px; 
-}
-figure:nth-of-type(1){
-    position: absolute;
-    box-sizing: border-box;
-    left: 20px; top: 140px;
-    text-align: center;
-}
-figure:nth-of-type(2){
-    position: absolute;
-    box-sizing: border-box;
-    right: 30px; top: 140px;
-    text-align: center;
-}
-figure:nth-of-type(3){
-    position: absolute;
-    box-sizing: border-box;
-    left: 20px; top: 280px;
-    text-align: center;
-}
-figure:nth-of-type(4){
-    position: absolute;
-    box-sizing: border-box;
-    right: 30px; top: 280px;
-    text-align: center;
 }
 #btt_Screen_Start:active,#btt_Screen_Main:active,#btt_Screen_Main_s2:active,#btt_Screen_SQL:active,#btt_Screen_Diagram:active,#btt_Screen_Alarm:active,#btt_Screen_About:active{
     background-color: #ffb600; 
