@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="/css/screen_Auto_Panel_s2.css">
     <link rel="stylesheet" href="/css/screen_Manu_Panel.css">
     <link rel="stylesheet" href="/css/screen_Manu_Panel_s2.css">
-    <link rel="stylesheet" href="/css/screen_Auto.css">
     <link rel="stylesheet" href="/css/screen_Auto_s2.css">
     <link rel="stylesheet" href="/css/screen_Manu.css">
     <link rel="stylesheet" href="/css/screen_Manu_s2.css">
@@ -420,43 +419,51 @@
                 <button id="btt_sql_delete_manu" onclick="socket.emit('cmd_sql_delete', true)">Del SQL</button>
             </div>
         </div>
-        <div id="Screen_Manu">
+        <div id="Screen_Manu" class="rounded-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] font-base font-[Montserrat] font-bold select-none">
             <!-- Ảnh nền -->
-            <img src="images/background_SCR.PNG">
+            <img src="images/background_SCR.PNG" class="rounded-[10px]">
             <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
             <!-- Tạo động cơ trộn -->
-            <img id="scrManu_Motor_1">
+            <img id="scrManu_Motor_1" class="absolute left-[270px] top-[250px] size-[120px]">
             <script> fn_SymbolStatus("scrManu_Motor_1", "Motor", "status_DC_Tron") </script>
             <!-- Tạo máy đóng gói -->
-            <img id="scrManu_Export">
+            <img id="scrManu_Export" class="absolute left-[278px] top-[582px] w-[120px] h-[100px]">
             <script> fn_SymbolStatus("scrManu_Export", "Export", "status_DC_Export") </script>
             <!-- Tạo van 1 -->
-            <img id="scrManu_Valve_1">
+            <img id="scrManu_Valve_1" class="absolute left-[110px] top-[173px] size-20">
             <script> fn_SymbolStatus("scrManu_Valve_1", "Valve", "status_Valve_1") </script>
             <!-- Tạo van 2 -->
-            <img id="scrManu_Valve_2">
+            <img id="scrManu_Valve_2" class="absolute left-[494px] top-[172px] size-20">
             <script> fn_SymbolStatus("scrManu_Valve_2", "Valve", "status_Valve_2") </script>
             <!-- Tạo van 3 -->
-            <img id="scrManu_Valve_3">
+            <img id="scrManu_Valve_3" class="absolute left-[686px] top-[250px] size-20">
             <script> fn_SymbolStatus("scrManu_Valve_3", "Valve", "status_Valve_3") </script>
             <!-- Cảm biến cạn -->
-            <img id="scrManu_Sensor">
+            <img id="scrManu_Sensor" class="absolute left-[84px] top-[460px] w-20 h-[60px]">
             <script> fn_SymbolStatus("scrManu_Sensor", "Sensor", "CB_Can") </script>
             <!-- Thu thành phẩm -->
-            <img id="scrManu_Done">
+            <img id="scrManu_Done" class="absolute left-[600px] top-[640px] w-20 h-[60px]">
             <script> fn_SymbolStatus("scrManu_Done", "Done", "CB_Can") </script>
             <!-- //////////////HIỂN THỊ CÁC IOFIELD ////////////// -->
             <!-- Giá trị thực tế liệu 1 -->
-            <input id="actManu_Weight1" disabled="disabled" type="text" />
+            <input id="actManu_Weight1"
+                class="border-solid border-2 border-black absolute left-[30px] top-[50px] w-20 h-[30px] text-center" 
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Weight_1", "actManu_Weight1", 2)</script>
             <!-- Giá trị thực tế liệu 2 -->
-            <input id="actManu_Weight2" disabled="disabled" type="text" />
+            <input id="actManu_Weight2" 
+                class="border-solid border-2 border-black absolute left-[590px] top-[50px] w-20 h-[30px] text-center" 
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Weight_2", "actManu_Weight2", 2)</script>
             <!-- Giá trị thực tế liệu 3 -->
-            <input id="actManu_Weight3" disabled="disabled" type="text" />
+            <input id="actManu_Weight3" 
+                class="border-solid border-2 border-black absolute left-[830px] top-[50px] w-20 h-[30px] text-center" 
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Weight_3", "actManu_Weight3", 2)</script>
             <!-- Thời gian trộn thực tế -->
-            <input id="actManu_Time" disabled="disabled" type="text" />
+            <input id="actManu_Time" 
+                class="border-solid border-2 border-black absolute left-[190px] top-[396px] w-20 h-[30px] text-center" 
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Time_Tron", "actManu_Time", 0)</script>
         </div>
     </div>
