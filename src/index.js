@@ -128,6 +128,8 @@ var tags_list = {
   Alarm_M3: "DB4,X0.2",
   Alarm_Mix: "DB4,X0.3",
   Alarm_Export: "DB4,X0.4",
+  on_System: "DB1,X322.0",
+  off_System: "DB1,X322.1",
 };
 var tags_list_s2 = {
   btt_Auto_s2: "DB1,X0.0",
@@ -178,6 +180,8 @@ var tags_list_s2 = {
   Alarm_M3_s2: "DB4,X0.2",
   Alarm_Mix_s2: "DB4,X0.3",
   Alarm_Export_s2: "DB4,X0.4",
+  on_System_s2: "DB1,X322.0",
+  off_System_s2: "DB1,X322.1",
 };
 // GỬI DỮ LIỆu TAG CHO PLC
 //PLC1
@@ -237,6 +241,8 @@ function PLC_connected(err) {
     "Alarm_M3",
     "Alarm_Mix",
     "Alarm_Export",
+    "on_System",
+    "off_System",
   ]);
 }
 //PLC2
@@ -296,6 +302,8 @@ function PLC_connected_s2(err) {
     "Alarm_M3_s2",
     "Alarm_Mix_s2",
     "Alarm_Export_s2",
+    "on_System_s2",
+    "off_System_s2",
   ]);
 }
 // Đọc dữ liệu từ PLC và đưa vào array tags
@@ -402,6 +410,8 @@ function fn_tag() {
   io.sockets.emit("Alarm_M3", arr_tag_value[45]);
   io.sockets.emit("Alarm_Mix", arr_tag_value[46]);
   io.sockets.emit("Alarm_Export", arr_tag_value[47]);
+  io.sockets.emit("on_System", arr_tag_value[48]);
+  io.sockets.emit("off_System", arr_tag_value[49]);
 
   //Station 2
   io.sockets.emit("btt_Auto_s2", arr_tag_value_s2[0]);
@@ -452,6 +462,8 @@ function fn_tag() {
   io.sockets.emit("Alarm_M3_s2", arr_tag_value_s2[45]);
   io.sockets.emit("Alarm_Mix_s2", arr_tag_value_s2[46]);
   io.sockets.emit("Alarm_Export_s2", arr_tag_value_s2[47]);
+  io.sockets.emit("on_System_s2", arr_tag_value[48]);
+  io.sockets.emit("off_System_s2", arr_tag_value[49]);
 }
 // ///////////GỬI DỮ LIỆU BẢNG TAG ĐẾN CLIENT (TRÌNH DUYỆT)///////////
 io.on("connection", function (socket) {
@@ -483,6 +495,13 @@ function valuesWritten(anythingBad) {
 
 // Station 1
 io.on("connection", function (socket) {
+  // ///////////KHỞI ĐỘNG HỆ THỐNG ///////////
+  socket.on("cmd_on_System", function (data) {
+    conn_plc.writeItems("on_System", data, valuesWritten);
+  });
+  socket.on("cmd_off_System", function (data) {
+    conn_plc.writeItems("off_System", data, valuesWritten);
+  });
   // ///////////MÀN CHẾ ĐỘ TỰ ĐỘNG ///////////
   // Nút nhấn chế độ tự động
   socket.on("cmd_Auto", function (data) {
@@ -568,6 +587,13 @@ io.on("connection", function (socket) {
 
 // Station 2
 io.on("connection", function (socket) {
+  // ///////////KHỞI ĐỘNG HỆ THỐNG ///////////
+  socket.on("cmd_on_System_s2", function (data) {
+    conn_plc_s2.writeItems("on_System_s2", data, valuesWritten);
+  });
+  socket.on("cmd_off_System_s2", function (data) {
+    conn_plc_s2.writeItems("off_System_s2", data, valuesWritten);
+  });
   // ///////////MÀN CHẾ ĐỘ TỰ ĐỘNG ///////////
   // Nút nhấn chế độ tự động
   socket.on("cmd_Auto_s2", function (data) {

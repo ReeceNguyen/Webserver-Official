@@ -259,6 +259,12 @@
                 <!-- Nút nhấn chế xác nhận vận hành -->
                 <button id="bttAuto_Confirm" onclick="socket.emit('cmd_Confirm', true);">CONFIRM</button>
             </div>
+
+            <div class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-blue-700">
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-1 top-3" onclick="socket.emit('cmd_on_System',true)">ON</button>
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-red-700 rounded-full inline-block w-[84px] h-[35px] right-1 top-3" onclick="socket.emit('cmd_off_System',true)">OFF</button>
+            </div>
+
             <div id="box-2-auto">
                 <div id="box-2-auto-name">PARAMETER SETTING</div>
                 <div id="box-2-auto-device-name">
@@ -349,6 +355,12 @@
                 <button id="bttManu_ManuMode"
                     onclick="socket.emit('cmd_Manu', true),fn_ScreenChange1('Screen_Manu','Screen_Auto'),fn_ScreenChange1('Screen_Manu_Panel','Screen_Auto_Panel');">MANUAL</button>
             </div>
+
+            <div class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-blue-700">
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-1 top-3" onclick="socket.emit('cmd_on_System',true)">ON</button>
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-red-700 rounded-full inline-block w-[84px] h-[35px] right-1 top-3" onclick="socket.emit('cmd_off_System',true)">OFF</button>
+            </div>
+
             <div id="box-2-manu">
                 <div id="box-2-manu-name">OPERATION MANUAL</div>
                 <div id="box-2-manu-device-name">
@@ -444,6 +456,12 @@
                 <!-- Nút nhấn chế xác nhận vận hành -->
                 <button id="bttAuto_Confirm_s2" onclick="socket.emit('cmd_Confirm_s2', true);">CONFIRM</button>
             </div>
+
+            <div class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-blue-700">
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-1 top-3" onclick="socket.emit('cmd_on_System_s2',true)">ON</button>
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-red-700 rounded-full inline-block w-[84px] h-[35px] right-1 top-3" onclick="socket.emit('cmd_off_System_s2',true)">OFF</button>
+            </div>
+
             <div id="box-2-auto_s2">
                 <div id="box-2-auto-name_s2">PARAMETER SETTING</div>
                 <div id="box-2-auto-device-name_s2">
@@ -534,6 +552,12 @@
                 <button id="bttManu_ManuMode_s2"
                     onclick="socket.emit('cmd_Manu_s2', true),fn_ScreenChange1('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange1('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">MANUAL</button>
             </div>
+
+            <div class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-blue-700">
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-1 top-3" onclick="socket.emit('cmd_on_System_s2',true)">ON</button>
+                <button class="absolute border-[solid] border-2 border-[#b4b8e3] bg-[#808080] hover:bg-red-700 rounded-full inline-block w-[84px] h-[35px] right-1 top-3" onclick="socket.emit('cmd_off_System_s2',true)">OFF</button>
+            </div>
+
             <div id="box-2-manu_s2">
                 <div id="box-2-manu-name_s2">OPERATION MANUAL</div>
                 <div id="box-2-manu-device-name_s2">
