@@ -314,43 +314,51 @@
                     onclick="socket.emit('cmd_sql_delete', true)">Del SQL</button>
             </div>
         </div>
-        <div id="Screen_Auto">
+        <div id="Screen_Auto" class="rounded-[10px] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] text-base font-[Montserrat] font-bold select-none">
             <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
-            <img src="images/background_SCR.PNG">
+            <img src="images/background_SCR.PNG" class="rounded-[10px]">
             <!-- Ảnh nền -->
             <!-- Tạo động cơ trộn -->
-            <img id="scrAuto_Motor_1">
+            <img id="scrAuto_Motor_1" class="absolute left-[270px] top-[250px] size-[120px]">
             <script> fn_SymbolStatus("scrAuto_Motor_1", "Motor", "status_DC_Tron") </script>
             <!-- Tạo máy đóng gói -->
-            <img id="scrAuto_Export">
+            <img id="scrAuto_Export" class="absolute left-[278px] top-[582px] w-[120px] h-[100px]">
             <script> fn_SymbolStatus("scrAuto_Export", "Export", "status_DC_Export") </script>
             <!-- Tạo van 1 -->
-            <img id="scrAuto_Valve_1">
+            <img id="scrAuto_Valve_1" class="absolute left-[110px] top-[173px] size-20">
             <script> fn_SymbolStatus("scrAuto_Valve_1", "Valve", "status_Valve_1") </script>
             <!-- Tạo van 2 -->
-            <img id="scrAuto_Valve_2">
+            <img id="scrAuto_Valve_2" class="absolute left-[494px] top-[172px] size-20">
             <script> fn_SymbolStatus("scrAuto_Valve_2", "Valve", "status_Valve_2") </script>
             <!-- Tạo van 3 -->
-            <img id="scrAuto_Valve_3">
+            <img id="scrAuto_Valve_3" class="absolute left-[686px] top-[250px] size-20">
             <script> fn_SymbolStatus("scrAuto_Valve_3", "Valve", "status_Valve_3") </script>
             <!-- Cảm biến cạn -->
-            <img id="scrAuto_Sensor">
+            <img id="scrAuto_Sensor" class="absolute left-[84px] top-[460px] w-20 h-[60px]">
             <script> fn_SymbolStatus("scrAuto_Sensor", "Sensor", "CB_Can") </script>
             <!-- Thu thành phẩm -->
-            <img id="scrAuto_Done">
+            <img id="scrAuto_Done" class="absolute left-[600px] top-[640px] w-20 h-[60px]">
             <script> fn_SymbolStatus("scrAuto_Done", "Done", "CB_Can") </script>
             <!-- //////////////HIỂN THỊ CÁC IOFIELD ////////////// -->
             <!-- Giá trị thực tế liệu 1 -->
-            <input id="act_Weight1" disabled="disabled" type="text" />
+            <input id="act_Weight1" 
+                class="border-solid border-2 border-black absolute left-[30px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Weight_1", "act_Weight1", 2)</script>
             <!-- Giá trị thực tế liệu 2 -->
-            <input id="act_Weight2" disabled="disabled" type="text" />
+            <input id="act_Weight2"
+                class="border-solid border-2 border-black absolute left-[590px] top-[50px] w-20 h-[30px] text-center" 
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Weight_2", "act_Weight2", 2)</script>
             <!-- Giá trị thực tế liệu 3 -->
-            <input id="act_Weight3" disabled="disabled" type="text" />
+            <input id="act_Weight3"
+                class="border-solid border-2 border-black absolute left-[830px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Weight_3", "act_Weight3", 2)</script>
             <!-- Thời gian trộn thực tế -->
-            <input id="act_Time" disabled="disabled" type="text" />
+            <input id="act_Time" 
+                class="border-solid border-2 border-black absolute left-[190px] top-[396px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
             <script>fn_IOFieldDataShow("Act_Time_Tron", "act_Time", 0)</script>
         </div>
         <!-- //////////////Code cho màn hình Manu////////////// -->
