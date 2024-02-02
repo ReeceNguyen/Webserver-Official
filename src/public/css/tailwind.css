@@ -1294,19 +1294,9 @@ video {
   border-color: rgb(88 122 163 / var(--tw-border-opacity));
 }
 
-.border-\[\#5ae766\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(90 231 102 / var(--tw-border-opacity));
-}
-
 .border-\[\#b4b8e3\] {
   --tw-border-opacity: 1;
   border-color: rgb(180 184 227 / var(--tw-border-opacity));
-}
-
-.border-\[\#c75858\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(199 88 88 / var(--tw-border-opacity));
 }
 
 .border-\[outset\] {

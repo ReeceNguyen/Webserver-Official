@@ -1,17 +1,28 @@
 #box-1-auto,
 #box-2-auto,
-#box-3-auto {
+#box-3-auto,
+#box-1-auto_s2,
+#box-2-auto_s2,
+#box-3-auto_s2 {
   border: inset #0000ff 4px;
 }
 #bttAuto_AutoMode,
 #bttAuto_ManuMode,
 #bttAuto_Confirm,
-.systembtn,
 #btt_scrAuto_Save,
 #btt_scrAuto_Edit,
 #btt_sql_on,
 #btt_sql_off,
-#btt_sql_delete {
+#btt_sql_delete,
+#bttAuto_AutoMode_s2,
+#bttAuto_ManuMode_s2,
+#bttAuto_Confirm_s2,
+#btt_scrAuto_Save_s2,
+#btt_scrAuto_Edit_s2,
+#btt_sql_on_s2,
+#btt_sql_off_s2,
+#btt_sql_delete_s2,
+.systembtn {
   border: outset 3px #b4b8e3;
   border-radius: 999px;
 }
