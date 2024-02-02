@@ -1,227 +1,49 @@
-#Screen_Auto_Panel {
-    position: absolute; 
-    left: 0px; top: 0px; 
-    width: 202px; height: 766px;
-    background-color: #1488D8;            
-    border-bottom: solid 10px #0000ff;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 16px;
-    font-family: Montserrat;
-    font-weight: bold;
-    cursor: pointer;
-    user-select: none;
-}
 #box-1-auto{
-    position: absolute;
-    width: 192px; height: 140px; 
-    left: 5px; top: 20px;
-    border: inset 4px #0000ff;
-    text-align: center;
-    color: #fff;
-    background-color: #fff;
-}
-#box-1-auto-name{
-    position: absolute;
-    width: 176px; height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 4px; top: 10px;
-    background-color: #0000ff;
+    border: inset #0000ff 4px;
 }
 #bttAuto_AutoMode{
     border: outset 3px #b4b8e3;
-    border-radius: 999px; 
-    background-color: #3366ff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute;
-    width: 84px; height: 35px; 
-    left: 5px; top: 50px;
+    border-radius: 999px;
 }
 #bttAuto_ManuMode{
     border: outset 3px #b4b8e3;
-    border-radius: 999px;  
-    background-color: #3366ff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 84px; height: 35px;  
-    right: 5px; top: 50px;
+    border-radius: 999px;
 }
 #bttAuto_Confirm{
     border: outset 3px #b4b8e3;
-    border-radius: 999px; 
-    background-color: #808080;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 150px; height: 35px; 
-    left: 15px; top: 90px;
+    border-radius: 999px;
 }
-#bttAuto_Confirm:active{
-    background-color: #00cc00;
-}
-#bttAuto_ManuMode:active{
-    background-color: #00cc00;
-}
-#bttAuto_AutoMode:active{
-    background-color: #00cc00;
+.systembtn{
+    border: outset 3px #b4b8e3;
+    border-radius: 999px;
 }
 #box-2-auto{
-    position: absolute;
-    width: 192px; height: 250px; 
-    left: 5px; top: 250px;
     border: inset 4px #0000ff;
-    background-color: #fff;
-}
-#box-2-auto-name{
-    position: absolute;
-    width: 176px; height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 4px; top: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    background-color: #0000ff;
-}
-#box-2-auto-device-name{
-    position: absolute;
-    width: auto; height: 170px;
-    left: 5px; top: 55px;
-    line-height: 2.1;
-    color: #0000ff;
-    font-size: 14px;
 }
 #box-3-auto{
-    position: absolute;
-    width: 192px; height: 150px; 
-    left: 5px; top: 520px;
     border: inset 4px #0000ff;
-    background-color: #fff 
-}
-#box-3-auto-name{
-    position: absolute;
-    width: 176px; height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: 4px; top: 10px;
-    background-color: #0000ff; 
-}
-/*Tên đơn hàng*/
-#set_orderID{
-    position: absolute; 
-    left: 90px; top: 58px; 
-    width: 80px; height: 20px;
-    border: solid 2px #000000;
-    text-align: center;
-    color: #000000
-}
-/*Giá trị cài đặt liệu 1*/
-#set_Weight1 {
-    position: absolute; 
-    left: 90px; top: 88px; 
-    width: 80px; height: 20px;
-    border: solid 2px #000000;
-    text-align: center;
-    color: #000000
-}
-
-/*Giá trị cài đặt liệu 2*/
-#set_Weight2 {
-    position: absolute; 
-    left: 90px; top: 118px; 
-    width: 80px; height: 20px;
-    border: solid 2px #000000;
-    text-align: center;
-    color: #000000
-}
-#set_Weight3{
-    position: absolute; 
-    left: 90px; top: 148px; 
-    width: 80px; height: 20px;
-    border: solid 2px #000000;
-    text-align: center;
-    color: #000000
-}
-/*Giá trị cài đặt thời gian*/
-#set_Time {
-    position: absolute; 
-    left: 90px; top: 178px; 
-    width: 80px; height: 20px;
-    border: solid 2px #000000;
-    text-align: center;
-    color: #000000
 }
 /*Nút nhấn LƯU*/
 #btt_scrAuto_Save {
     border: outset 3px #b4b8e3;
-    border-radius: 999px; 
-    background-color: #000000; 
-    color: #ffffff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 80px; height: 30px; 
-    left: 50px; top: 210px;
+    border-radius: 999px;
 }
 /*Nút nhấn SỬA*/
 #btt_scrAuto_Edit {
     border: outset 3px #b4b8e3;
-    border-radius: 999px; 
-    background-color: rgb(0, 0, 255); 
-    color: #ffffff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 80px; height: 30px; 
-    left: 50px; top: 210px;
+    border-radius: 999px;
 }
 /*Thao tác đưa dữ liệu lên SQL*/
 #btt_sql_on{
     border: outset 3px #b4b8e3;
     border-radius: 999px;  
-    background-color: #808080; 
-    color: #ffffff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 80px; height: 30px;  
-    left: 5px; top: 50px;
-}
-#btt_sql_on:active{
-    background-color: #00cc00;
 }
 #btt_sql_off{
     border: outset 3px #b4b8e3;
-    border-radius: 999px;  
-    background-color: #808080; 
-    color: #ffffff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 80px; height: 30px;  
-    right: 5px; top: 50px;
-}
-#btt_sql_off:active{
-    background-color: #00cc00;
+    border-radius: 999px;
 }
 #btt_sql_delete{
     border: outset 3px #b4b8e3;
     border-radius: 999px; 
-    background-color: #808080; 
-    color: #ffffff;   
-    text-align: center; 
-    display: inline-block;
-    position: absolute; 
-    width: 120px; height: 30px;  
-    right: 30px; top: 100px;
 }
-#btt_sql_delete:active{
-    background-color: #ff0000;
-}
-
 //////////////////////////////////////////////
