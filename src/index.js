@@ -1352,7 +1352,7 @@ function fn_excelExport() {
 
   // Return
   return [SaveAslink, Bookname];
-} // Đóng fn_excelExport
+}
 
 function fn_excelExport_s2() {
   // =====================CÁC THUỘC TÍNH CHUNG=====================
