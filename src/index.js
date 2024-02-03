@@ -58,7 +58,7 @@ var Alarm_ID3_old_s2 = false;
 var Alarm_ID4_old_s2 = false;
 var Alarm_ID5_old_s2 = false;
 // Khởi tạo SQL
-var {sqlcon, sqlcon_s2} = require('./config/database')
+var {sqlcon, sqlcon_s2} = require('./config/connectDB')
 // Mảng xuất dữ liệu Excel
 var SQL_Excel = [];
 var AL_Excel = [];
