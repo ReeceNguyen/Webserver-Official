@@ -1068,7 +1068,7 @@ function fn_excelExport() {
     alignment: { horizontal: "left", vertical: "middle" },
   };
 
-  worksheet.getCell("A7").value = "PRODUCTION REPORT";
+  worksheet.getCell("A7").value = "PRODUCTION REPORT 1";
   worksheet.getCell("A7").style = {
     font: {
       name: "Times New Roman",
@@ -1476,7 +1476,7 @@ function fn_excelExport_s2() {
     alignment: { horizontal: "left", vertical: "middle" },
   };
 
-  worksheet.getCell("A7").value = "PRODUCTION REPORT";
+  worksheet.getCell("A7").value = "PRODUCTION REPORT 2";
   worksheet.getCell("A7").style = {
     font: {
       name: "Times New Roman",
@@ -2274,7 +2274,7 @@ function fn_AL_excelExport() {
     alignment: { horizontal: "left", vertical: "middle" },
   };
 
-  worksheet.getCell("C7").value = "ALARM REPORT";
+  worksheet.getCell("C7").value = "ALARM REPORT 1";
   worksheet.getCell("C7").style = {
     font: {
       name: "Times New Roman",
@@ -2620,7 +2620,7 @@ function fn_AL_excelExport_s2() {
     alignment: { horizontal: "left", vertical: "middle" },
   };
 
-  worksheet.getCell("C7").value = "ALARM REPORT";
+  worksheet.getCell("C7").value = "ALARM REPORT 2";
   worksheet.getCell("C7").style = {
     font: {
       name: "Times New Roman",
