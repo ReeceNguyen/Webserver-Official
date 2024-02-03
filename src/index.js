@@ -58,21 +58,7 @@ var Alarm_ID3_old_s2 = false;
 var Alarm_ID4_old_s2 = false;
 var Alarm_ID5_old_s2 = false;
 // Khởi tạo SQL
-var mysql = require("mysql");
-var sqlcon = mysql.createConnection({
-  host: process.env.SQL_HOST,
-  user: process.env.SQL_USER,
-  password: process.env.SQL_KEY,
-  database: process.env.SQL_STATION_1,
-  dateStrings: true,
-});
-var sqlcon_s2 = mysql.createConnection({
-  host: process.env.SQL_HOST,
-  user: process.env.SQL_USER,
-  password: process.env.SQL_KEY,
-  database: process.env.SQL_STATION_2,
-  dateStrings: true,
-});
+var {sqlcon, sqlcon_s2} = require('./config/database')
 // Mảng xuất dữ liệu Excel
 var SQL_Excel = [];
 var AL_Excel = [];
