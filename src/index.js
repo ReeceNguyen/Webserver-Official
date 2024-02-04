@@ -297,7 +297,7 @@ var arr_tag_value = []; // Tạo một mảng lưu giá trị tag đọc về
 var arr_tag_value_s2 = [];
 function valuesReady(anythingBad, values) {
   if (anythingBad) {
-    console.log("Lỗi khi đọc dữ liệu tag");
+    console.log("Read Tags Error - STATION 1");
   } // Cảnh báo lỗi
   var lodash = require("lodash"); // Chuyển variable sang array
   arr_tag_value = lodash.map(values, (item) => item);
@@ -306,7 +306,7 @@ function valuesReady(anythingBad, values) {
 
 function valuesReady_s2(anythingBad, values) {
   if (anythingBad) {
-    console.log("Lỗi khi đọc dữ liệu tag");
+    console.log("Read Tags Error - STATION 2");
   } // Cảnh báo lỗi
   var lodash = require("lodash"); // Chuyển variable sang array
   arr_tag_value_s2 = lodash.map(values, (item) => item);
