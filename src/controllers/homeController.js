@@ -10,6 +10,6 @@ const getLoginpage = (req, res) => {
 };
 
 module.exports = {
-  getHomepage,
-  getLoginpage
+  getHomepage : getHomepage,
+  getLoginpage : getLoginpage,
 };
