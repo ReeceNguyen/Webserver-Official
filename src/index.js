@@ -332,18 +332,18 @@ setInterval(() => fn_read_data_scan(), 500);
 // /////////////////////////++THIẾT LẬP KẾT NỐI WEB (WEB BORROW)++/////////////////////////
 var express = require("express");
 var app = express();
-const webRoutes = require('./routes/web')
+const initWebRoutes = require('./routes/web')
 const configViewEngine = require('./config/viewEngine')
-//config template
 
+//config template
 configViewEngine(app);
+
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(process.env.PORT);
 
-// Home calling
-
-app.use("/",webRoutes)
+//Initial all web routes
+initWebRoutes(app);
 
 // ///////////LẬP BẢNG TAG ĐỂ GỬI QUA CLIENT (TRÌNH DUYỆT)///////////
 function fn_tag() {
