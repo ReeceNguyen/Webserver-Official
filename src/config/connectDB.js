@@ -24,6 +24,18 @@ var sqlaccount = mysql.createConnection({
   dateStrings: true,
 });
 
+sqlcon.connect(function(err) {
+  if (err) throw err;
+  console.log("Database STATION 1 connected!");
+});
+sqlcon_s2.connect(function(err) {
+  if (err) throw err;
+  console.log("Database STATION 2 connected!");
+});
+sqlaccount.connect(function(err) {
+  if (err) throw err;
+  console.log("Database USER connected!");
+});
 module.exports = {
     sqlcon,
     sqlcon_s2,
