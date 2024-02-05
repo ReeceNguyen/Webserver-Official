@@ -58,7 +58,7 @@ var Alarm_ID3_old_s2 = false;
 var Alarm_ID4_old_s2 = false;
 var Alarm_ID5_old_s2 = false;
 // Khởi tạo SQL
-var {sqlcon, sqlcon_s2} = require('./config/connectDB')
+var { sqlcon, sqlcon_s2 } = require("./config/connectDB");
 // Mảng xuất dữ liệu Excel
 var SQL_Excel = [];
 var AL_Excel = [];
@@ -332,8 +332,8 @@ setInterval(() => fn_read_data_scan(), 500);
 // /////////////////////////++THIẾT LẬP KẾT NỐI WEB (WEB BORROW)++/////////////////////////
 var express = require("express");
 var app = express();
-const initWebRoutes = require('./routes/web')
-const configViewEngine = require('./config/viewEngine')
+const initWebRoutes = require("./routes/web");
+const configViewEngine = require("./config/viewEngine");
 
 //config template
 configViewEngine(app);
@@ -770,10 +770,7 @@ function fn_sql_delete() {
   delete_trigger = arr_tag_value[33];
   var sqltable_Name = process.env.TABLE_DATA_1;
   // Ghi dữ liệu vào SQL
-  if (
-    delete_trigger &&
-    !old_delete_trigger /*delete_trigger ==false & delete_trigger != old_delete_trigger*/
-  ) {
+  if (delete_trigger == true && delete_trigger != old_delete_trigger) {
     var sql_write_str2 = "DELETE FROM " + sqltable_Name;
     // Thực hiện ghi dữ liệu vào SQL
     sqlcon.query(sql_write_str2, function (err, result) {
@@ -791,10 +788,7 @@ function fn_sql_delete_s2() {
   delete_trigger_s2 = arr_tag_value_s2[33];
   var sqltable_Name_s2 = process.env.TABLE_DATA_2;
   // Ghi dữ liệu vào SQL
-  if (
-    delete_trigger_s2 &&
-    !old_delete_trigger_s2 /*delete_trigger ==false & delete_trigger != old_delete_trigger*/
-  ) {
+  if (delete_trigger_s2 == true && delete_trigger_s2 != old_delete_trigger_s2) {
     var sql_write_str2_s2 = "DELETE FROM " + sqltable_Name_s2;
     // Thực hiện ghi dữ liệu vào SQL
     sqlcon_s2.query(sql_write_str2_s2, function (err, result) {
@@ -1981,10 +1975,7 @@ function fn_Alarm_Delete() {
   delete_trigger = arr_tag_value[33];
   var sqltable_Name = process.env.TABLE_ALARM_1;
   // Ghi dữ liệu vào SQL
-  if (
-    delete_trigger &&
-    !old_delete_trigger /*delete_trigger ==false & delete_trigger != old_delete_trigger*/
-  ) {
+  if (delete_trigger && !old_delete_trigger) {
     var sql_write_str2 = "DELETE FROM " + sqltable_Name;
     // Thực hiện ghi dữ liệu vào SQL
     sqlcon.query(sql_write_str2, function (err, result) {
@@ -2002,10 +1993,7 @@ function fn_Alarm_Delete_s2() {
   delete_trigger_s2 = arr_tag_value_s2[33];
   var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
   // Ghi dữ liệu vào SQL
-  if (
-    delete_trigger_s2 &&
-    !old_delete_trigger_s2 /*delete_trigger_s2 ==false & delete_trigger_s2 != old_delete_trigger_s2*/
-  ) {
+  if (delete_trigger_s2 && !old_delete_trigger_s2) {
     var sql_write_str2 = "DELETE FROM " + sqltable_Name_s2;
     // Thực hiện ghi dữ liệu vào SQL
     sqlcon_s2.query(sql_write_str2, function (err, result) {
