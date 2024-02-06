@@ -2,19 +2,14 @@
     cursor: pointer;
 }
 #table_data tr:hover{background-color: #ec16a5;}
-#table_data   { overflow: auto; }
 #table_data thead th { position: sticky; top: 0;}
 #table_data { border-collapse: separate; width: 100%;}
 #table_data th, td { padding: 8px 10px; }
-#table_data th     { background:#0000ff; }
 
 #table_data_s2  tr{
     cursor: pointer;
 }
 #table_data_s2  tr:hover{background-color: #ec16a5;}
-#table_data_s2    { overflow: auto; }
 #table_data_s2  thead th { position: sticky; top: 0;}
 #table_data_s2  { border-collapse: separate; width: 100%;}
 #table_data_s2  th, td { padding: 8px 10px; }
-#table_data_s2  th     { background:#0000ff; }
-
