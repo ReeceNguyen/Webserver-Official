@@ -1178,6 +1178,10 @@ video {
   max-width: 80px;
 }
 
+.border-separate {
+  border-collapse: separate;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

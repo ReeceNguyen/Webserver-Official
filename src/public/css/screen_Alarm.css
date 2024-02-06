@@ -3,7 +3,6 @@
 }
 #table_Alarm tr:hover{background-color: #eff30e;}
 #table_Alarm thead th { position: sticky; top: 0;}
-#table_Alarm { border-collapse: separate; width: 100%;}
 #table_Alarm th, td { padding: 8px 10px; }
 
 #table_Alarm_s2  tr{
@@ -11,5 +10,4 @@
 }
 #table_Alarm_s2  tr:hover{background-color: #eff30e;}
 #table_Alarm_s2  thead th { position: sticky; top: 0;}
-#table_Alarm_s2  { border-collapse: separate; width: 100%;}
 #table_Alarm_s2  th, td { padding: 8px 10px; }
