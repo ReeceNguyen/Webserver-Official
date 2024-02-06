@@ -1,4 +1,3 @@
-/*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
 #table_Alarm tr{
     cursor: pointer;
 }
@@ -6,9 +5,7 @@
 #table_Alarm thead th { position: sticky; top: 0;}
 #table_Alarm { border-collapse: separate; width: 100%;}
 #table_Alarm th, td { padding: 8px 10px; }
-/*//////////////Hiển thị dữ liệu bảng 1 - end/////////////////*/
 
-/*//////////////Hiển thị dữ liệu bảng 2 - Start/////////////////*/
 #table_Alarm_s2  tr{
     cursor: pointer;
 }
@@ -16,5 +13,3 @@
 #table_Alarm_s2  thead th { position: sticky; top: 0;}
 #table_Alarm_s2  { border-collapse: separate; width: 100%;}
 #table_Alarm_s2  th, td { padding: 8px 10px; }
-
-/*//////////////Hiển thị dữ liệu bảng 2 - end/////////////////*/
