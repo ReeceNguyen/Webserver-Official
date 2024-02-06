@@ -33,8 +33,6 @@
     <link rel="stylesheet" href="/css/screen_Login.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/slidebar.css">
-    <link rel="stylesheet" href="/css/screen_Auto_Panel.css">
-    <link rel="stylesheet" href="/css/screen_Manu_Panel.css">
     <link rel="stylesheet" href="/css/screen_SQL.css">
     <link rel="stylesheet" href="/css/screen_Diagram.css">
     <link rel="stylesheet" href="/css/screen_Alarm.css">
@@ -258,15 +256,15 @@
                     class="absolute w-[176px] h-8 left-[5px] top-3 flex justify-center items-center bg-[#0000ff]">
                     OPERATION MODE</div>
                 <button id="bttAuto_AutoMode"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Auto', true),fn_ScreenChange1('Screen_Auto','Screen_Manu'),fn_ScreenChange1('Screen_Auto_Panel','Screen_Manu_Panel');">AUTO</button>
                 <!-- Nút nhấn chế độ bằng tay -->
                 <button id="bttAuto_ManuMode"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Manu', true),fn_ScreenChange1('Screen_Manu','Screen_Auto'),fn_ScreenChange1('Screen_Manu_Panel','Screen_Auto_Panel');">MANUAL</button>
                 <!-- Nút nhấn chế xác nhận vận hành -->
                 <button id="bttAuto_Confirm"
-                    class="bg-[#808080] inline-block absolute w-36 h-9 left-4 top-[90px] active:bg-green-500"
+                    class="bg-[#808080] inline-block absolute w-36 h-9 left-4 top-[90px] active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Confirm', true);">CONFIRM</button>
             </div>
 
@@ -321,10 +319,10 @@
                 <script>fn_scrAuto_IOField_IO("Setting_Time_Tron", "set_Time", 0);</script>
                 <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
                 <button id="btt_scrAuto_Save"
-                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-52"
+                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-52 systembtn"
                     onclick="fn_scrAuto_SaveBtt()">Save</button>
                 <button id="btt_scrAuto_Edit"
-                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-52"
+                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-52 systembtn"
                     onclick="fn_scrAuto_EditBtt()">Modify</button>
             </div>
             <div id="box-3-auto"
@@ -334,13 +332,13 @@
                 </div>
                 <!--Nút nhấn đẩy dữ liệu lên SQL-->
                 <button id="btt_sql_on"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_on', true);">SQL On</button>
                 <button id="btt_sql_off"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_off', true);">SQL Off</button>
                 <button id="btt_sql_delete"
-                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px]"
+                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px] systembtn"
                     onclick="socket.emit('cmd_sql_delete', true)">Del SQL</button>
             </div>
         </div>
@@ -403,11 +401,11 @@
                     OPERATION MODE</div>
                 <!-- Nút nhấn chế độ tự động -->
                 <button id="bttManu_AutoMode"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Auto', true),fn_ScreenChange1('Screen_Auto','Screen_Manu'),fn_ScreenChange1('Screen_Auto_Panel','Screen_Manu_Panel');">AUTO</button>
                 <!-- Nút nhấn chế độ bằng tay -->
                 <button id="bttManu_ManuMode"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Manu', true),fn_ScreenChange1('Screen_Manu','Screen_Auto'),fn_ScreenChange1('Screen_Manu_Panel','Screen_Auto_Panel');">MANUAL</button>
             </div>
 
@@ -437,43 +435,43 @@
                 </div>
                 <!-- Nút nhấn mở van 1 -->
                 <button id="bttManu_OpenV1"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[55px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[55px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_OpenV1', true);">RUN</button>
                 <!-- Nút nhấn ĐÓNG van 1 -->
                 <button id="bttManu_CloseV1"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[55px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[55px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_CloseV1', true);">OFF</button>
                 <!-- Nút nhấn mở van 2 -->
                 <button id="bttManu_OpenV2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[90px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[90px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_OpenV2', true);">RUN</button>
                 <!-- Nút nhấn ĐÓNG van 2 -->
                 <button id="bttManu_CloseV2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[90px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[90px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_CloseV2', true);">OFF</button>
                 <!-- Nút nhấn mở van 3 -->
                 <button id="bttManu_OpenV3"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[125px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[125px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_OpenV3', true);">RUN</button>
                 <!-- Nút nhấn ĐÓNG van 3 -->
                 <button id="bttManu_CloseV3"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[125px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[125px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_CloseV3', true);">OFF</button>
                 <!-- Nút nhấn CHẠY động cơ trộn -->
                 <button id="bttManu_RunM1"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[160px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[160px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_RunM', true);">RUN</button>
                 <!-- Nút nhấn DỪNG động cơ trộn -->
                 <button id="bttManu_StopM1"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[160px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[160px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_StopM', true);">OFF</button>
                 <!-- Nút nhấn CHẠY máy đóng gói -->
                 <button id="bttManu_RunE"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[195px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[195px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_RunE', true);">RUN</button>
                 <!-- Nút nhấn DỪNG máy đóng gói -->
                 <button id="bttManu_StopE"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[195px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[195px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_StopE', true);">OFF</button>
             </div>
             <div id="box-3-manu"
@@ -483,13 +481,13 @@
                 </div>
                 <!--Nút nhấn đẩy dữ liệu lên SQL-->
                 <button id="btt_sql_on_manu"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_on', true);">SQL On</button>
                 <button id="btt_sql_off_manu"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_off', true);">SQL Off</button>
                 <button id="btt_sql_delete_manu"
-                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px]"
+                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px] systembtn"
                     onclick="socket.emit('cmd_sql_delete', true)">Del SQL</button>
             </div>
         </div>
@@ -554,15 +552,15 @@
                     class="absolute w-[176px] h-8 left-[5px] top-3 flex justify-center items-center bg-[#0000ff]">
                     OPERATION MODE</div>
                 <button id="bttAuto_AutoMode_s2"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Auto_s2', true),fn_ScreenChange1('Screen_Auto_s2','Screen_Manu_s2'),fn_ScreenChange1('Screen_Auto_Panel_s2','Screen_Manu_Panel_s2');">AUTO</button>
                 <!-- Nút nhấn chế độ bằng tay -->
                 <button id="bttAuto_ManuMode_s2"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Manu_s2', true),fn_ScreenChange1('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange1('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">MANUAL</button>
                 <!-- Nút nhấn chế xác nhận vận hành -->
                 <button id="bttAuto_Confirm_s2"
-                    class="bg-[#808080] inline-block absolute w-36 h-9 left-4 top-[90px] active:bg-green-500"
+                    class="bg-[#808080] inline-block absolute w-36 h-9 left-4 top-[90px] active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Confirm_s2', true);">CONFIRM</button>
             </div>
 
@@ -617,10 +615,10 @@
                 <script>fn_scrAuto_IOField_IO_s2("Setting_Time_Tron_s2", "set_Time_s2", 0);</script>
                 <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
                 <button id="btt_scrAuto_Save_s2"
-                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-52"
+                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-52 systembtn"
                     onclick="fn_scrAuto_SaveBtt_s2()">Save</button>
                 <button id="btt_scrAuto_Edit_s2"
-                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-52"
+                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-52 systembtn"
                     onclick="fn_scrAuto_EditBtt_s2()">Modify</button>
             </div>
             <div id="box-3-auto_s2"
@@ -630,13 +628,13 @@
                 </div>
                 <!--Nút nhấn đẩy dữ liệu lên SQL-->
                 <button id="btt_sql_on_s2"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_on_s2', true);">SQL On</button>
                 <button id="btt_sql_off_s2"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_off_s2', true);">SQL Off</button>
                 <button id="btt_sql_delete_s2"
-                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px]"
+                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px] systembtn"
                     onclick="socket.emit('cmd_sql_delete_s2', true)">Del SQL</button>
             </div>
         </div>
@@ -700,11 +698,11 @@
                     OPERATION MODE</div>
                 <!-- Nút nhấn chế độ tự động -->
                 <button id="bttManu_AutoMode_s2"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Auto_s2', true),fn_ScreenChange1('Screen_Auto_s2','Screen_Manu_s2'),fn_ScreenChange1('Screen_Auto_Panel_s2','Screen_Manu_Panel_s2');">AUTO</button>
                 <!-- Nút nhấn chế độ bằng tay -->
                 <button id="bttManu_ManuMode_s2"
-                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500 systembtn"
                     onclick="socket.emit('cmd_Manu_s2', true),fn_ScreenChange1('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange1('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">MANUAL</button>
             </div>
 
@@ -734,43 +732,43 @@
                 </div>
                 <!-- Nút nhấn mở van 1 -->
                 <button id="bttManu_OpenV1_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[55px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[55px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_OpenV1_s2', true);">RUN</button>
                 <!-- Nút nhấn ĐÓNG van 1 -->
                 <button id="bttManu_CloseV1_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[55px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[55px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_CloseV1_s2', true);">OFF</button>
                 <!-- Nút nhấn mở van 2 -->
                 <button id="bttManu_OpenV2_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[90px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[90px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_OpenV2_s2', true);">RUN</button>
                 <!-- Nút nhấn ĐÓNG van 2 -->
                 <button id="bttManu_CloseV2_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[90px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[90px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_CloseV2_s2', true);">OFF</button>
                 <!-- Nút nhấn mở van 3 -->
                 <button id="bttManu_OpenV3_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[125px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[125px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_OpenV3_s2', true);">RUN</button>
                 <!-- Nút nhấn ĐÓNG van 3 -->
                 <button id="bttManu_CloseV3_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[125px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[125px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_CloseV3_s2', true);">OFF</button>
                 <!-- Nút nhấn CHẠY động cơ trộn -->
                 <button id="bttManu_RunM1_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[160px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[160px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_RunM_s2', true);">RUN</button>
                 <!-- Nút nhấn DỪNG động cơ trộn -->
                 <button id="bttManu_StopM1_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[160px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[160px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_StopM_s2', true);">OFF</button>
                 <!-- Nút nhấn CHẠY máy đóng gói -->
                 <button id="bttManu_RunE_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[195px] active:bg-[#00cc00]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[195px] active:bg-[#00cc00] systembtn"
                     onclick="socket.emit('cmd_RunE_s2', true);">RUN</button>
                 <!-- Nút nhấn DỪNG máy đóng gói -->
                 <button id="bttManu_StopE_s2"
-                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[195px] active:bg-[#ff0000]"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[195px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_StopE_s2', true);">OFF</button>
             </div>
             <div id="box-3-manu_s2"
@@ -780,13 +778,13 @@
                 </div>
                 <!--Nút nhấn đẩy dữ liệu lên SQL-->
                 <button id="btt_sql_on_manu_s2"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_on_s2', true);">SQL On</button>
                 <button id="btt_sql_off_manu_s2"
-                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px]"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px] systembtn"
                     onclick="socket.emit('cmd_sql_off_s2', true);">SQL Off</button>
                 <button id="btt_sql_delete_manu_s2"
-                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px]"
+                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px] systembtn"
                     onclick="socket.emit('cmd_sql_delete_s2', true)">Del SQL</button>
             </div>
         </div>
