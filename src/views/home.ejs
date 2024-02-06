@@ -93,53 +93,53 @@
     <div id="slidebar"
         class="rounded-[10px] absolute left-[5px] top-[100px] w-[198px] h-[600px] bg-[#030391] text-white text-sm font-bold font-[Montserrat] cursor-pointer select-none">
         <figure class="absolute box-border left-5 top-[140px] text-center">
-            <img id="Auto_LED" alt="auto mode">
+            <img id="Auto_LED" alt="auto mode" class="size-[50px]">
             <script>fn_SymbolStatus("Auto_LED", "Auto", "Q_Lamp_Auto")</script>
             <figcaption>Auto 1</figcaption>
         </figure>
         <figure class="absolute box-border right-[30px] top-[140px] text-center">
-            <img id="Manual_LED" alt="manual mode">
+            <img id="Manual_LED" alt="manual mode" class="size-[50px]">
             <script>fn_SymbolStatus("Manual_LED", "Manual", "Q_Lamp_Manu")</script>
             <figcaption>Manual 1</figcaption>
         </figure>
         <figure class="absolute box-border left-5 top-[280px]">
-            <img id="Auto_LED_s2" alt="auto mode">
+            <img id="Auto_LED_s2" alt="auto mode" class="size-[50px]">
             <script>fn_SymbolStatus("Auto_LED_s2", "Auto", "Q_Lamp_Auto_s2")</script>
             <figcaption>Auto 2</figcaption>
         </figure>
         <figure class="absolute box-border right-[30px] top-[280px]">
-            <img id="Manual_LED_s2" alt="manual mode">
+            <img id="Manual_LED_s2" alt="manual mode" class="size-[50px]">
             <script>fn_SymbolStatus("Manual_LED_s2", "Manual", "Q_Lamp_Manu_s2")</script>
             <figcaption>Manual 2</figcaption>
         </figure>
         <!--Nút chọn màn hình Start-->
-        <button id="btt_Screen_Start" class="w-[150px] h-10 left-[22px] top-5 logo_btn"
+        <button id="btt_Screen_Start" class="w-[150px] h-10 left-[22px] top-5 logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_Start','Scr_Main','Scr_Main_s2','Scr_SQL','Scr_Diagram','Scr_Alarm','Scr_About','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">
             <i class="fa-solid fa-house"></i>Home</button>
         <!--Nút chọn màn hình Main-->
-        <button id="btt_Screen_Main" class="w-[150px] h-10 left-[22px] top-20 logo_btn"
+        <button id="btt_Screen_Main" class="w-[150px] h-10 left-[22px] top-20 logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_Main','Scr_Main_s2','Scr_About','Scr_Start','Scr_SQL','Scr_Diagram','Scr_Alarm','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange1('Screen_Auto','Screen_Manu'),fn_ScreenChange1('Screen_Auto_Panel','Screen_Manu_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">
             <i class="fa-solid fa-location-dot"></i>Main
             1</button>
         <!--Nút chọn màn hình Main-->
-        <button id="btt_Screen_Main_s2" class="w-[150px] h-10 left-[22px] top-[220px] logo_btn"
+        <button id="btt_Screen_Main_s2" class="w-[150px] h-10 left-[22px] top-[220px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_Main_s2','Scr_Main','Scr_About','Scr_Start','Scr_SQL','Scr_Diagram','Scr_Alarm','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange1('Screen_Auto_s2','Screen_Manu_s2'),fn_ScreenChange1('Screen_Auto_Panel_s2','Screen_Manu_Panel_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel');">
             <i class="fa-solid fa-location-dot"></i>Main
             2</button>
         <!--Nút chọn màn hình SQL-->
-        <button id="btt_Screen_SQL" class="w-[150px] h-10 left-[22px] bottom-[200px] logo_btn_2"
+        <button id="btt_Screen_SQL" class="w-[150px] h-10 left-[22px] bottom-[200px] logo_btn_2 text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_SQL','Scr_Main','Scr_Main_s2','Scr_Start','Scr_Diagram','Scr_Alarm','Scr_About','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2'),fn_SQL_Table_Show(),fn_SQL_Table_Show_s2();">
             <i class="fa-solid fa-database"></i>Database</button>
         <!--Nút chọn màn hình Diagram-->
-        <button id="btt_Screen_Diagram" class="w-[150px] h-10 left-[22px] bottom-[140px] logo_btn_2"
+        <button id="btt_Screen_Diagram" class="w-[150px] h-10 left-[22px] bottom-[140px] logo_btn_2 text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_Diagram','Scr_Main','Scr_Main_s2','Scr_Alarm','Scr_SQL','Scr_About','Scr_Start','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">
             <i class="fa-solid fa-chart-column"></i>Diagram</button>
         <!--Nút chọn màn hình Alarm-->
-        <button id="btt_Screen_Alarm" class="w-[150px] h-10 left-[22px] bottom-[80px] logo_btn"
+        <button id="btt_Screen_Alarm" class="w-[150px] h-10 left-[22px] bottom-[80px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_Alarm','Scr_Main','Scr_Main_s2','Scr_Diagram','Scr_SQL','Scr_About','Scr_Start','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2'),fn_Alarm_Show(),fn_Alarm_Show_s2();">
             <i class="fa-solid fa-bell"></i>Alarm</button>
         <!--Nút chọn màn hình About-->
-        <button id="btt_Screen_About" class="w-[150px] h-10 left-[22px] bottom-[20px] logo_btn"
+        <button id="btt_Screen_About" class="w-[150px] h-10 left-[22px] bottom-[20px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
             onclick="fn_ScreenChangeMain('Scr_About','Scr_Main','Scr_Main_s2','Scr_Alarm','Scr_Diagram','Scr_SQL','Scr_Start','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">
             <i class="fa-solid fa-circle-info"></i>About</button>
     </div>
