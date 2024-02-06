@@ -11,3 +11,18 @@
 #table_data_s2  tr:hover{background-color: #ec16a5;}
 #table_data_s2  thead th { position: sticky; top: 0;}
 #table_data_s2  th, td { padding: 8px 10px; }
+
+///Alarm
+#table_Alarm tr{
+    cursor: pointer;
+}
+#table_Alarm tr:hover{background-color: #eff30e;}
+#table_Alarm thead th { position: sticky; top: 0;}
+#table_Alarm th, td { padding: 8px 10px; }
+
+#table_Alarm_s2  tr{
+    cursor: pointer;
+}
+#table_Alarm_s2  tr:hover{background-color: #eff30e;}
+#table_Alarm_s2  thead th { position: sticky; top: 0;}
+#table_Alarm_s2  th, td { padding: 8px 10px; }
