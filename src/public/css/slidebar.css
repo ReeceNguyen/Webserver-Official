@@ -6,7 +6,10 @@
     margin-right: 15px;
     margin-left: -30px;
 }
-.logo_btn,.logo_btn_2 {
+.logo_btn,.logo_btn_2,.systembtn {
     border: outset 3px #b4b8e3;
     border-radius: 999px;
+}
+.box-mode-border{
+    border: inset #0000ff 4px;
 }
