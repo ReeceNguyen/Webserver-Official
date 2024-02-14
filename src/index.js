@@ -109,13 +109,13 @@ var tags_list = {
   sql_Weight3_Actual: "DB1,REAL314",
   sql_Time_Tron_Setting: "DB1,INT318",
   sql_Time_Tron_Actual: "DB1,INT320",
+  on_System: "DB1,X322.0",
+  off_System: "DB1,X322.1",
   Alarm_M1: "DB4,X0.0",
   Alarm_M2: "DB4,X0.1",
   Alarm_M3: "DB4,X0.2",
   Alarm_Mix: "DB4,X0.3",
   Alarm_Export: "DB4,X0.4",
-  on_System: "DB1,X322.0",
-  off_System: "DB1,X322.1",
 };
 var tags_list_s2 = {
   btt_Auto_s2: "DB1,X0.0",
@@ -161,13 +161,13 @@ var tags_list_s2 = {
   sql_Weight3_Actual_s2: "DB1,REAL314",
   sql_Time_Tron_Setting_s2: "DB1,INT318",
   sql_Time_Tron_Actual_s2: "DB1,INT320",
+  on_System_s2: "DB1,X322.0",
+  off_System_s2: "DB1,X322.1",
   Alarm_M1_s2: "DB4,X0.0",
   Alarm_M2_s2: "DB4,X0.1",
   Alarm_M3_s2: "DB4,X0.2",
   Alarm_Mix_s2: "DB4,X0.3",
   Alarm_Export_s2: "DB4,X0.4",
-  on_System_s2: "DB1,X322.0",
-  off_System_s2: "DB1,X322.1",
 };
 // GỬI DỮ LIỆu TAG CHO PLC
 //PLC1
@@ -222,13 +222,13 @@ function PLC_connected(err) {
     "sql_Weight3_Actual",
     "sql_Time_Tron_Setting",
     "sql_Time_Tron_Actual",
+    "on_System",
+    "off_System",
     "Alarm_M1",
     "Alarm_M2",
     "Alarm_M3",
     "Alarm_Mix",
     "Alarm_Export",
-    "on_System",
-    "off_System",
   ]);
 }
 //PLC2
@@ -283,13 +283,13 @@ function PLC_connected_s2(err) {
     "sql_Weight3_Actual_s2",
     "sql_Time_Tron_Setting_s2",
     "sql_Time_Tron_Actual_s2",
+    "on_System_s2",
+    "off_System_s2",
     "Alarm_M1_s2",
     "Alarm_M2_s2",
     "Alarm_M3_s2",
     "Alarm_Mix_s2",
     "Alarm_Export_s2",
-    "on_System_s2",
-    "off_System_s2",
   ]);
 }
 // Đọc dữ liệu từ PLC và đưa vào array tags
@@ -391,13 +391,13 @@ function fn_tag() {
   io.sockets.emit("sql_Weight3_Actual", arr_tag_value[40]);
   io.sockets.emit("sql_Time_Tron_Setting", arr_tag_value[41]);
   io.sockets.emit("sql_Time_Tron_Actual", arr_tag_value[42]);
-  io.sockets.emit("Alarm_M1", arr_tag_value[43]);
-  io.sockets.emit("Alarm_M2", arr_tag_value[44]);
-  io.sockets.emit("Alarm_M3", arr_tag_value[45]);
-  io.sockets.emit("Alarm_Mix", arr_tag_value[46]);
-  io.sockets.emit("Alarm_Export", arr_tag_value[47]);
-  io.sockets.emit("on_System", arr_tag_value[48]);
-  io.sockets.emit("off_System", arr_tag_value[49]);
+  io.sockets.emit("on_System", arr_tag_value[43]);
+  io.sockets.emit("off_System", arr_tag_value[44]);
+  io.sockets.emit("Alarm_M1", arr_tag_value[45]);
+  io.sockets.emit("Alarm_M2", arr_tag_value[46]);
+  io.sockets.emit("Alarm_M3", arr_tag_value[47]);
+  io.sockets.emit("Alarm_Mix", arr_tag_value[48]);
+  io.sockets.emit("Alarm_Export", arr_tag_value[49]);
 
   //Station 2
   io.sockets.emit("btt_Auto_s2", arr_tag_value_s2[0]);
@@ -443,13 +443,13 @@ function fn_tag() {
   io.sockets.emit("sql_Weight3_Actual_s2", arr_tag_value_s2[40]);
   io.sockets.emit("sql_Time_Tron_Setting_s2", arr_tag_value_s2[41]);
   io.sockets.emit("sql_Time_Tron_Actual_s2", arr_tag_value_s2[42]);
-  io.sockets.emit("Alarm_M1_s2", arr_tag_value_s2[43]);
-  io.sockets.emit("Alarm_M2_s2", arr_tag_value_s2[44]);
-  io.sockets.emit("Alarm_M3_s2", arr_tag_value_s2[45]);
-  io.sockets.emit("Alarm_Mix_s2", arr_tag_value_s2[46]);
-  io.sockets.emit("Alarm_Export_s2", arr_tag_value_s2[47]);
-  io.sockets.emit("on_System_s2", arr_tag_value[48]);
-  io.sockets.emit("off_System_s2", arr_tag_value[49]);
+  io.sockets.emit("on_System_s2", arr_tag_value[43]);
+  io.sockets.emit("off_System_s2", arr_tag_value[44]);
+  io.sockets.emit("Alarm_M1_s2", arr_tag_value_s2[45]);
+  io.sockets.emit("Alarm_M2_s2", arr_tag_value_s2[46]);
+  io.sockets.emit("Alarm_M3_s2", arr_tag_value_s2[47]);
+  io.sockets.emit("Alarm_Mix_s2", arr_tag_value_s2[48]);
+  io.sockets.emit("Alarm_Export_s2", arr_tag_value_s2[49]);
 }
 // ///////////GỬI DỮ LIỆU BẢNG TAG ĐẾN CLIENT (TRÌNH DUYỆT)///////////
 io.on("connection", function (socket) {
@@ -1876,11 +1876,11 @@ function fn_sql_alarm_ack_s2(ID) {
 }
 // Hàm chức năng insert Alarm
 function fn_Alarm_Manage() {
-  Alarm_ID1 = arr_tag_value[43];
-  Alarm_ID2 = arr_tag_value[44];
-  Alarm_ID3 = arr_tag_value[45];
-  Alarm_ID4 = arr_tag_value[46];
-  Alarm_ID5 = arr_tag_value[47];
+  Alarm_ID1 = arr_tag_value[45];
+  Alarm_ID2 = arr_tag_value[46];
+  Alarm_ID3 = arr_tag_value[47];
+  Alarm_ID4 = arr_tag_value[48];
+  Alarm_ID5 = arr_tag_value[49];
   // Cảnh báo van 1
   if (Alarm_ID1 && !Alarm_ID1_old) {
     fn_sql_alarm_insert(1, "Valve 1 Error");
@@ -1924,11 +1924,11 @@ function fn_Alarm_Manage() {
 }
 
 function fn_Alarm_Manage_s2() {
-  Alarm_ID1_s2 = arr_tag_value_s2[43];
-  Alarm_ID2_s2 = arr_tag_value_s2[44];
-  Alarm_ID3_s2 = arr_tag_value_s2[45];
-  Alarm_ID4_s2 = arr_tag_value_s2[46];
-  Alarm_ID5_s2 = arr_tag_value_s2[47];
+  Alarm_ID1_s2 = arr_tag_value_s2[45];
+  Alarm_ID2_s2 = arr_tag_value_s2[46];
+  Alarm_ID3_s2 = arr_tag_value_s2[47];
+  Alarm_ID4_s2 = arr_tag_value_s2[48];
+  Alarm_ID5_s2 = arr_tag_value_s2[49];
   // Cảnh báo van 1
   if (Alarm_ID1_s2 && !Alarm_ID1_old_s2) {
     fn_sql_alarm_insert_s2(1, "Valve 1 Error");
