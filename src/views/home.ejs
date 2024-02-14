@@ -39,7 +39,7 @@
 
     <!-- //////////////////////// LOGIN FORM //////////////////////////-->
     <div id="login_hall"
-        class="fixed z-[5] w-full h-full overflow-auto bg-[rgba(0,0,0,0.85)] text-base font-bold pt-[60px] left-0 top-0 font-serif">
+        class="fixed z-[5] w-full h-full overflow-auto bg-[rgba(0,0,0,1)] text-base font-bold pt-[60px] left-0 top-0 font-serif">
         <div class="modal-content">
             <div class="wrapper animate">
                 <div class="title"><img src="images/Logo/apple-touch-icon.png" class="max-w-[80px] max-h-[80px]"></div>
@@ -88,22 +88,22 @@
     <!-- ////////////// NAVIGATION ////////////// -->
     <div id="slidebar"
         class="rounded-[10px] absolute left-[5px] top-[100px] w-[198px] h-[600px] bg-[#030391] text-white text-sm font-bold font-[Montserrat] cursor-pointer select-none">
-        <figure class="absolute box-border left-5 top-[140px] text-center">
+        <figure id="container_al" class="absolute box-border left-5 top-[140px] text-center">
             <img id="Auto_LED" alt="auto mode" class="size-[50px]">
             <script>fn_SymbolStatus("Auto_LED", "Auto", "Q_Lamp_Auto")</script>
             <figcaption>Auto 1</figcaption>
         </figure>
-        <figure class="absolute box-border right-[30px] top-[140px] text-center">
+        <figure id="container_ml" class="absolute box-border right-[30px] top-[140px] text-center">
             <img id="Manual_LED" alt="manual mode" class="size-[50px]">
             <script>fn_SymbolStatus("Manual_LED", "Manual", "Q_Lamp_Manu")</script>
             <figcaption>Manual 1</figcaption>
         </figure>
-        <figure class="absolute box-border left-5 top-[280px]">
+        <figure id="container_al_s2" class="absolute box-border left-5 top-[280px]">
             <img id="Auto_LED_s2" alt="auto mode" class="size-[50px]">
             <script>fn_SymbolStatus("Auto_LED_s2", "Auto", "Q_Lamp_Auto_s2")</script>
             <figcaption>Auto 2</figcaption>
         </figure>
-        <figure class="absolute box-border right-[30px] top-[280px]">
+        <figure id="container_ml_s2" class="absolute box-border right-[30px] top-[280px]">
             <img id="Manual_LED_s2" alt="manual mode" class="size-[50px]">
             <script>fn_SymbolStatus("Manual_LED_s2", "Manual", "Q_Lamp_Manu_s2")</script>
             <figcaption>Manual 2</figcaption>
@@ -143,7 +143,7 @@
         <!--Nút chọn màn hình About-->
         <button id="btt_Screen_About"
             class="w-[150px] h-10 left-[22px] bottom-[20px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
-            onclick="fn_ScreenChangeMain('Scr_About','Scr_Main','Scr_Main_s2','Scr_Alarm','Scr_Diagram','Scr_SQL','Scr_Start','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2');">
+            onclick="fn_ScreenChangeMain('Scr_About','Scr_Main','Scr_Main_s2','Scr_Alarm','Scr_Diagram','Scr_SQL','Scr_Start','dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_ScreenChange2('Screen_Manu_s2','Screen_Auto_s2'),fn_ScreenChange2('Screen_Manu_Panel_s2','Screen_Auto_Panel_s2')">
             <i class="fa-solid fa-circle-info"></i>About</button>
     </div>
     <!--////////////// USER BAR /////////////-->

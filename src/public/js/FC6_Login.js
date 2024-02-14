@@ -58,6 +58,8 @@ function login() {
     document.getElementById("userselect").value='us1';
     var checkBox = document.getElementById("myCheckbox");
     checkBox.disabled = true;
+    document.getElementById("container_al_s2").style.visibility = "hidden";
+    document.getElementById("container_ml_s2").style.visibility = "hidden";
   }
   // ////////////////// USER2 /////////////////////
 
@@ -88,9 +90,10 @@ function login() {
     var checkBox = document.getElementById("myCheckbox");
     checkBox.checked = true;
     checkBox.disabled = true;
+    document.getElementById("container_al").style.visibility = "hidden";
+    document.getElementById("container_ml").style.visibility = "hidden";
   }
   else {
-    window.location.href = "";
     window.location.reload();
   }
 }
@@ -108,4 +111,8 @@ function cancel(){
   });
   document.getElementById("btt_Screen_Start").disabled = false;
   document.getElementById("btt_Screen_About").disabled = false;
+  document.getElementById("container_al").style.visibility = "hidden";
+  document.getElementById("container_ml").style.visibility = "hidden";
+  document.getElementById("container_al_s2").style.visibility = "hidden";
+  document.getElementById("container_ml_s2").style.visibility = "hidden";
 }
