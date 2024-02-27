@@ -1,7 +1,7 @@
 # Environment Settings 
 ## Installation
-Download [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/).
+Download [![Static Badge](https://img.shields.io/badge/Nodejs-green)](https://nodejs.org/en/) module available through the
+[![Static Badge](https://img.shields.io/badge/npm-registry-orange)](https://www.npmjs.com/).
 1. Generate **package.json** for project
 ```console
 npm init
@@ -44,8 +44,8 @@ npm init
   npm install dotenv
   ``` 
 ## CSS  Framework
-Download [TailwindCSS](https://tailwindcss.com/docs/installation) module available through the
-[npm registry](https://www.npmjs.com/).
+Download [![Static Badge](https://img.shields.io/badge/css-Tailwind-blue)](https://tailwindcss.com/docs/installation) module available through the
+[![Static Badge](https://img.shields.io/badge/npm-registry-orange)](https://www.npmjs.com/).
 1. Install ***TailwindCSS*** module in Project:
     ```console
     npm install -D tailwindcss
@@ -70,7 +70,7 @@ Download [TailwindCSS](https://tailwindcss.com/docs/installation) module availab
    }
 ```
 ## Configure DEV Environment
-Configure ***package.json*** :
+1. Configure ***package.json*** :
 
 ```json
 "scripts": {
@@ -78,12 +78,42 @@ Configure ***package.json*** :
         "lvtn:css": "npx tailwindcss build -o ./src/public/css/tailwind.css --watch"
 },
 ```
+2. Configure **.env** file:
+```txt
+#----------SERVER--------------------------
+SERVER_IP=
+PORT=
+#----------CPU CONFIGURATION---------------
+CPU_PORT=
+CPU_RACK=
+CPU_SLOT=
+## STATION 1
+CPU_HOST_1=
+## STATION 2
+CPU_HOST_2=
+#-----------SQL CONNECTION-----------------
+SQL_HOST=
+SQL_USER=
+SQL_KEY=
+#------------------------------------------
+# DATABASE STATION 1
+SQL_STATION_1=
+TABLE_DATA_1=
+TABLE_ALARM_1=
+# DATABASE STATION 2
+SQL_STATION_2=
+TABLE_DATA_2=
+TABLE_ALARM_2=
+# DATABASE USERS
+SQL_ACCOUNT=
+TABLE_ACCOUNT=
+```
 ## Running Test
 * Run ***Tailwind*** :
 ```console
 npm run lvtn:css 
 ```
-* Run ***Server***:
+* Run ***Server*** :
 ```console
 npm run lvtn  
 ```
