@@ -213,7 +213,7 @@ function DownloadGraph3() {
   });
 }
 function DownloadGraph1_s2() {
-  Plotly.downloadImage("dia-weight1", {
+  Plotly.downloadImage("dia-weight1_s2", {
     format: "png",
     height: 800,
     width: 1300,
@@ -221,7 +221,7 @@ function DownloadGraph1_s2() {
   });
 }
 function DownloadGraph2_s2() {
-  Plotly.downloadImage("dia-weight2", {
+  Plotly.downloadImage("dia-weight2_s2", {
     format: "png",
     height: 800,
     width: 1300,
@@ -229,7 +229,7 @@ function DownloadGraph2_s2() {
   });
 }
 function DownloadGraph3_s2() {
-  Plotly.downloadImage("dia-weight3", {
+  Plotly.downloadImage("dia-weight3_s2", {
     format: "png",
     height: 800,
     width: 1300,

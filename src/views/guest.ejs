@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Phần Header của Website -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
+    <script src="/js/moment.js"></script>
+    <script src="/js/plotly.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/FileSaver.js"></script>
+    <script src="/js/FC1_Common.js"></script>
+    <script src="/js/FC2_SQL.js"></script>
+    <script src="/js/FC3_Excel.js"></script>
+    <script src="/js/FC5_Alarm.js"></script>
+    <script src="/js/Common.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("<%= ipAddress %>") // IP server
+    </script>
+    <!-- ////////////// LOGO TRANG WEB //////////////  -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/Logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/Logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/Logo/favicon-16x16.png">
+    <link rel="manifest" href="/images/Logo/site.webmanifest">
+    <link rel="icon" href="/images/Logo/favicon.ico" type="image/x-icon">
+
+    <!-- ////////////// GỌI CÁC CSS //////////////  -->
+    <link rel="stylesheet" href="/css/Montserrat.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/screen_Login.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/slidebar.css">
+    <link rel="stylesheet" href="/css/screen_SQL.css">
+    <link rel="stylesheet" href="/css/screen_Diagram.css">
+    <title>Webserver for Automation System</title>
+</head>
+
+<!-- Phần thân của Website -->
+
+<body>
+    <div id="logo-brand"
+        class="h-[90px] w-[1437px] rounded-[10px] border-[outset] border-[5px] border-[#0000ab] ml-[5px] mt-[5px] bg-[#b6b6b6] bg-contain flex items-center justify-center font-['Times_New_Roman',_Times,_serif] text-xl">
+        <a href="https://hcmut.edu.vn/" target="_blank"><img src="/images/Logo/bk_name_en.png"
+                class="max-w-[1437px] max-h-[80px]"></a>
+        <div class="ml-[300px] columns-md">
+            <div class="flex items-center justify-items-start">
+                <i class="fa-solid fa-location-dot ml-1 mr-1"></i>
+                <a href="http://dca.dee.hcmut.edu.vn/" target="_blank" class="text-[#030391] hover:text-white">R109B3
+                    268 Ly Thuong Kiet st, Ward 14, Dist. 10, HCMC</a>
+            </div>
+            <div class="flex items-center justify-items-start">
+                <i class="fa-solid fa-envelope"></i>
+                <a href="mailto:dac@hcmut.edu.vn" class="text-[#030391] hover:text-white ml-1">dac@hcmut.edu.vn</a>
+            </div>
+        </div>
+    </div>
+    <!-- ////////////// NAVIGATION ////////////// -->
+    <div id="slidebar"
+        class="rounded-[10px] absolute left-[5px] top-[100px] w-[198px] h-[600px] bg-[#030391] text-white text-sm font-bold font-[Montserrat] cursor-pointer select-none">
+        <!--Nút chọn màn hình Start-->
+        <button id="btt_Screen_Start"
+            class="w-[150px] h-10 left-[22px] top-5 logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChange1('Scr_Start','Scr_About');">
+            <i class="fa-solid fa-house"></i>Home</button>
+        <!--Nút chọn màn hình About-->
+        <button id="btt_Screen_About"
+            class="w-[150px] h-10 left-[22px] top-[80px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChange1('Scr_About','Scr_Start');">
+            <i class="fa-solid fa-circle-info"></i>About</button>
+    </div>
+    <!--////////////// USER BAR /////////////-->
+    <div id="loginbar"
+        class="rounded-[10px] absolute left-[5px] top-[726px] w-[198px] h-[140px] bg-[#030391] text-[#ffffff] text-[14px] font-bold font-['Times_New_Roman',_Times,_serif] cursor-pointer select-none text-center text-xl">
+        <br>
+        <i class="fas fa-user mr-2"></i>
+        <select name="userselect" id="userselect" class="w-32 h-5 text-black text-sm text-center" disabled>
+            <option value="">GUEST</option>
+        </select>
+        <!--Nút đăng nhập-->
+        <button id="btt_Login"
+            class="border-[outset] systembtn bg-[#129c35] active:bg-green-500 text-center inline-block absolute w-[76px] h-[40px] left-[15px] bottom-[20px] select-none"
+            onclick="window.location.reload();"><i class="fa-solid fa-right-to-bracket"></i></button>
+        <!--Nút đăng xuất-->
+        <button id="btt_Logout"
+            class="border-[outset] systembtn bg-[#c42c2c] active:bg-red-500 text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
+            onclick="window.close()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
+    <!--////////////// ABOUT /////////////-->
+    <div id="Scr_About"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-['Times_New_Roman',_Times,_serif] font-bold flex flex-wrap">
+        <div
+            class="w-[500px] h-[280px] rounded-b-lg border-solid border-2 border-black pl-0 ml-3 mt-3 text-left text-xl">
+            <div class="w-[496px] h-[80px] bg-gray-300 pt-1 pl-1 border-b-4 border-blue-700">
+                <img src="/images/Logo/bk_name_en.png" class="max-w-[400px] max-h-[60px]">
+            </div>
+            <h2 class="text-white font-bold ml-1"> Topic : </h2>
+            <p class="text-xl ml-1">Buiding Webserver Application for Automation System</p>
+            <p class="text-white font-bold ml-1"> Mentor:</p>
+            <p class="ml-5 text-[#030391] text-lg">PhD,Nguyen Trong Tai</p>
+            <p class="text-white font-bold ml-1"> Student:</p>
+            <p class="ml-5 text-[#030391] text-lg">Nguyen Minh Thai - 1910526</p>
+        </div>
+        <div
+            class="w-[660px] h-[280px] rounded-lg border-solid border-2 border-black ml-10 mt-3 text-xl text-center pt-3">
+            <h2 class="text-white text-center">ABOUT ME</h2>
+            <div class="flex items-center justify-center">
+                <img src="/images/portrait.png" class="max-w-[150px] max-h-[200px] ml-3">
+                <div class="ml-[30px] columns-md text-sm">
+                    <div class="flex items-center justify-items-start">
+                        <!-- <img src="/images/id-card.png" class="max-w-[20px] max-h-[20px] mr-1"> -->
+                        <i class="fa-solid fa-id-card mr-1"></i>
+                        <span class="text-[#030391] text-lg">Nguyen Minh Thai - 1910526</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-calendar-days  mr-2"></i>
+                        <span class="text-[#030391] text-lg">16/05/2001</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-house mr-1"></i>
+                        <span class="text-[#030391] text-lg text-left">148/5/16 Nguyen Van Cong st, Ward 13, Dist. Go
+                            Vap, HCM</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-envelope mr-1"></i>
+                        <span class="text-[#030391] text-lg">thai.nguyenminhthai@hcmut.edu.vn</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-phone mr-1"></i>
+                        <span class="text-[#030391] text-lg">0342400518</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-[1200px] h-auto rounded-lg border-solid border-2 border-black ml-3 mt-5 mb-3 text-xl pl-2 pt-3">
+            <p>This Project is builded base on <a
+                    href="https://www.geeksforgeeks.org/model-view-controllermvc-architecture-for-node-applications/"
+                    target="_blank" class="underline text-white"><i>MVC architecture</i></a> and using <a
+                    href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank"
+                    class="underline text-white"><i>Nodejs Platform</i></a></p> </br>
+            <ul class="list-decimal list-inside">
+                <li>Node.js is an open-source and cross-platform JavaScript runtime environment. It is a popular tool
+                    for
+                    almost any kind of project!
+                    Node.js runs the V8 JavaScript engine, the core of Google Chrome, outside of the browser. This
+                    allows
+                    Node.js to be very performant.</li>
+                <li>With Nodejs, you can:
+                    <ul class="list-disc list-inside">
+                        <li>Build web apps and services, IoT apps, and server backends</li>
+                        <li>Use your favorite development tools on Windows, macOS and Linux</li>
+                        <li>Easy to maintaining and developing server in your own Local environment</li>
+                    </ul>
+                </li>
+                <li>The MVC framework is an architectural/design pattern that separates an
+                    application into three main logical components Model, View, and Controller. Each architectural
+                    component is built to handle specific development aspects of an application. It isolates the
+                    business logic and presentation layer from each other. It was traditionally used for desktop
+                    graphical user interfaces (GUIs). Nowadays, MVC is one of the most frequently used industry-standard
+                    web development frameworks to create scalable and extensible projects. It is also used for designing
+                    mobile apps.</li>
+            </ul>
+        </div>
+    </div>
+    <!--////////////// HOME /////////////-->
+    <div id="Scr_Start"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] bg-[#ffffff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none font-['Times_New_Roman',_Times,_serif] font-bold text-center text-xl">
+        <h2>VIETNAM NATIONAL UNIVERSITY HO CHI MINH CITY</h2>
+        <h3>HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY</h3></br>
+        <p>Eletrical and Electronic Engineering Faculty<br />Department of Control Engineering and Automation</p>
+        <img src="/images/Logo/android-chrome-512x512.png"
+            class="max-w-[150px] max-h-[150px] inline-block mt-5 pointer-events-none">
+        <p class="mt-5 text-3xl">GRADUATION PROJECT</p></br>
+        <p>BUILDING WEBSERVER APPLICATION USING NODEJS FOR AUTOMATION SYSTEM</p>
+        <img src="/images/Logo/OIP.jpg" class="max-w-[80px] max-h-[80px] absolute ml-1 top-1">
+        <p class="mt-72">Ho Chi Minh City, 2023</p>
+    </div>
+    <script src="/js/FC4_Graph.js"></script>
+</body>
+
+</html>

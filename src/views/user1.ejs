@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Phần Header của Website -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
+    <script src="/js/moment.js"></script>
+    <script src="/js/plotly.js"></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/FileSaver.js"></script>
+    <script src="/js/FC1_Common.js"></script>
+    <script src="/js/FC2_SQL.js"></script>
+    <script src="/js/FC3_Excel.js"></script>
+    <script src="/js/FC5_Alarm.js"></script>
+    <script src="/js/Common.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+        var socket = io("<%= ipAddress %>") // IP server
+    </script>
+    <!-- ////////////// LOGO TRANG WEB //////////////  -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/Logo/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/Logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/Logo/favicon-16x16.png">
+    <link rel="manifest" href="/images/Logo/site.webmanifest">
+    <link rel="icon" href="/images/Logo/favicon.ico" type="image/x-icon">
+
+    <!-- ////////////// GỌI CÁC CSS //////////////  -->
+    <link rel="stylesheet" href="/css/Montserrat.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/screen_Login.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/slidebar.css">
+    <link rel="stylesheet" href="/css/screen_SQL.css">
+    <link rel="stylesheet" href="/css/screen_Diagram.css">
+    <title>Webserver for Automation System</title>
+</head>
+
+<!-- Phần thân của Website -->
+
+<body>
+    <div id="logo-brand"
+        class="h-[90px] w-[1437px] rounded-[10px] border-[outset] border-[5px] border-[#0000ab] ml-[5px] mt-[5px] bg-[#b6b6b6] bg-contain flex items-center justify-center font-['Times_New_Roman',_Times,_serif] text-xl">
+        <a href="https://hcmut.edu.vn/" target="_blank"><img src="/images/Logo/bk_name_en.png"
+                class="max-w-[1437px] max-h-[80px]"></a>
+        <div class="ml-[300px] columns-md">
+            <div class="flex items-center justify-items-start">
+                <i class="fa-solid fa-location-dot ml-1 mr-1"></i>
+                <a href="http://dca.dee.hcmut.edu.vn/" target="_blank" class="text-[#030391] hover:text-white">R109B3
+                    268 Ly Thuong Kiet st, Ward 14, Dist. 10, HCMC</a>
+            </div>
+            <div class="flex items-center justify-items-start">
+                <i class="fa-solid fa-envelope"></i>
+                <a href="mailto:dac@hcmut.edu.vn" class="text-[#030391] hover:text-white ml-1">dac@hcmut.edu.vn</a>
+            </div>
+        </div>
+    </div>
+    <!-- ////////////// NAVIGATION ////////////// -->
+    <div id="slidebar"
+        class="rounded-[10px] absolute left-[5px] top-[100px] w-[198px] h-[600px] bg-[#030391] text-white text-sm font-bold font-[Montserrat] cursor-pointer select-none">
+        <figure id="container_al" class="absolute box-border left-5 top-[140px] text-center">
+            <img id="Auto_LED" alt="auto mode" class="size-[50px]">
+            <script>fn_SymbolStatus("Auto_LED", "Auto", "Q_Lamp_Auto")</script>
+            <figcaption>Auto 1</figcaption>
+        </figure>
+        <figure id="container_ml" class="absolute box-border right-[30px] top-[140px] text-center">
+            <img id="Manual_LED" alt="manual mode" class="size-[50px]">
+            <script>fn_SymbolStatus("Manual_LED", "Manual", "Q_Lamp_Manu")</script>
+            <figcaption>Manual 1</figcaption>
+        </figure>
+        <!--Nút chọn màn hình Start-->
+        <button id="btt_Screen_Start"
+            class="w-[150px] h-10 left-[22px] top-5 logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChangeSub('Scr_Start','Scr_Main','Scr_SQL','Scr_Diagram','Scr_Alarm','Scr_About','dia-weight1','dia-weight2','dia-weight3'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel');">
+            <i class="fa-solid fa-house"></i>Home</button>
+        <!--Nút chọn màn hình Main-->
+        <button id="btt_Screen_Main"
+            class="w-[150px] h-10 left-[22px] top-20 logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChangeSub('Scr_Main','Scr_Start','Scr_SQL','Scr_Diagram','Scr_Alarm','Scr_About','dia-weight1','dia-weight2','dia-weight3'),fn_ScreenChange1('Screen_Auto','Screen_Manu'),fn_ScreenChange1('Screen_Auto_Panel','Screen_Manu_Panel');">
+            <i class="fa-solid fa-location-dot"></i>Main
+            1</button>
+        <!--Nút chọn màn hình SQL-->
+        <button id="btt_Screen_SQL"
+            class="w-[150px] h-10 left-[22px] bottom-[200px] logo_btn_2 text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChangeSub('Scr_SQL','Scr_Main','Scr_Start','Scr_Diagram','Scr_Alarm','Scr_About','dia-weight1','dia-weight2','dia-weight3'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_SQL_Table_Show();">
+            <i class="fa-solid fa-database"></i>Database</button>
+        <!--Nút chọn màn hình Diagram-->
+        <button id="btt_Screen_Diagram"
+            class="w-[150px] h-10 left-[22px] bottom-[140px] logo_btn_2 text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChangeSub('Scr_Diagram','Scr_Main','Scr_Alarm','Scr_SQL','Scr_About','Scr_Start','dia-weight1','dia-weight2','dia-weight3'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel');">
+            <i class="fa-solid fa-chart-column"></i>Diagram</button>
+        <!--Nút chọn màn hình Alarm-->
+        <button id="btt_Screen_Alarm"
+            class="w-[150px] h-10 left-[22px] bottom-[80px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChangeSub('Scr_Alarm','Scr_Main','Scr_Diagram','Scr_SQL','Scr_About','Scr_Start','dia-weight1','dia-weight2','dia-weight3'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel'),fn_Alarm_Show();">
+            <i class="fa-solid fa-bell"></i>Alarm</button>
+        <!--Nút chọn màn hình About-->
+        <button id="btt_Screen_About"
+            class="w-[150px] h-10 left-[22px] bottom-[20px] logo_btn text-center flex items-center justify-center absolute select-none bg-[#808080] active:bg-yellow-500"
+            onclick="fn_ScreenChangeSub('Scr_About','Scr_Main','Scr_Alarm','Scr_Diagram','Scr_SQL','Scr_Start','dia-weight1','dia-weight2','dia-weight3'),fn_ScreenChange2('Screen_Manu','Screen_Auto'),fn_ScreenChange2('Screen_Manu_Panel','Screen_Auto_Panel');">
+            <i class="fa-solid fa-circle-info"></i>About</button>
+    </div>
+    <!--////////////// USER BAR /////////////-->
+    <div id="loginbar"
+        class="rounded-[10px] absolute left-[5px] top-[726px] w-[198px] h-[140px] bg-[#030391] text-[#ffffff] text-[14px] font-bold font-['Times_New_Roman',_Times,_serif] cursor-pointer select-none text-center text-xl">
+        <br>
+        <i class="fas fa-user mr-2"></i>
+        <select name="userselect" id="userselect" class="w-32 h-5 text-black text-sm text-center" disabled>
+            <option value="us1">USER 1</option>
+        </select>
+        <!--Nút đăng nhập-->
+        <button id="btt_Login"
+            class="border-[outset] systembtn bg-[#129c35] active:bg-green-500 text-center inline-block absolute w-[76px] h-[40px] left-[15px] bottom-[20px] select-none"
+            onclick="window.location.reload();"><i class="fa-solid fa-right-to-bracket"></i></button>
+        <!--Nút đăng xuất-->
+        <button id="btt_Logout"
+            class="border-[outset] systembtn bg-[#c42c2c] active:bg-red-500 text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
+            onclick="window.close()"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
+    <!--////////////// ABOUT /////////////-->
+    <div id="Scr_About"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-['Times_New_Roman',_Times,_serif] font-bold flex flex-wrap">
+        <div
+            class="w-[500px] h-[280px] rounded-b-lg border-solid border-2 border-black pl-0 ml-3 mt-3 text-left text-xl">
+            <div class="w-[496px] h-[80px] bg-gray-300 pt-1 pl-1 border-b-4 border-blue-700">
+                <img src="/images/Logo/bk_name_en.png" class="max-w-[400px] max-h-[60px]">
+            </div>
+            <h2 class="text-white font-bold ml-1"> Topic : </h2>
+            <p class="text-xl ml-1">Buiding Webserver Application for Automation System</p>
+            <p class="text-white font-bold ml-1"> Mentor:</p>
+            <p class="ml-5 text-[#030391] text-lg">PhD,Nguyen Trong Tai</p>
+            <p class="text-white font-bold ml-1"> Student:</p>
+            <p class="ml-5 text-[#030391] text-lg">Nguyen Minh Thai - 1910526</p>
+        </div>
+        <div
+            class="w-[660px] h-[280px] rounded-lg border-solid border-2 border-black ml-10 mt-3 text-xl text-center pt-3">
+            <h2 class="text-white text-center">ABOUT ME</h2>
+            <div class="flex items-center justify-center">
+                <img src="/images/portrait.png" class="max-w-[150px] max-h-[200px] ml-3">
+                <div class="ml-[30px] columns-md text-sm">
+                    <div class="flex items-center justify-items-start">
+                        <!-- <img src="/images/id-card.png" class="max-w-[20px] max-h-[20px] mr-1"> -->
+                        <i class="fa-solid fa-id-card mr-1"></i>
+                        <span class="text-[#030391] text-lg">Nguyen Minh Thai - 1910526</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-calendar-days  mr-2"></i>
+                        <span class="text-[#030391] text-lg">16/05/2001</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-house mr-1"></i>
+                        <span class="text-[#030391] text-lg text-left">148/5/16 Nguyen Van Cong st, Ward 13, Dist. Go
+                            Vap, HCM</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-envelope mr-1"></i>
+                        <span class="text-[#030391] text-lg">thai.nguyenminhthai@hcmut.edu.vn</span>
+                    </div>
+                    <div class="flex items-center justify-items-start">
+                        <i class="fa-solid fa-phone mr-1"></i>
+                        <span class="text-[#030391] text-lg">0342400518</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-[1200px] h-auto rounded-lg border-solid border-2 border-black ml-3 mt-5 mb-3 text-xl pl-2 pt-3">
+            <p>This Project is builded base on <a
+                    href="https://www.geeksforgeeks.org/model-view-controllermvc-architecture-for-node-applications/"
+                    target="_blank" class="underline text-white"><i>MVC architecture</i></a> and using <a
+                    href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank"
+                    class="underline text-white"><i>Nodejs Platform</i></a></p> </br>
+            <ul class="list-decimal list-inside">
+                <li>Node.js is an open-source and cross-platform JavaScript runtime environment. It is a popular tool
+                    for
+                    almost any kind of project!
+                    Node.js runs the V8 JavaScript engine, the core of Google Chrome, outside of the browser. This
+                    allows
+                    Node.js to be very performant.</li>
+                <li>With Nodejs, you can:
+                    <ul class="list-disc list-inside">
+                        <li>Build web apps and services, IoT apps, and server backends</li>
+                        <li>Use your favorite development tools on Windows, macOS and Linux</li>
+                        <li>Easy to maintaining and developing server in your own Local environment</li>
+                    </ul>
+                </li>
+                <li>The MVC framework is an architectural/design pattern that separates an
+                    application into three main logical components Model, View, and Controller. Each architectural
+                    component is built to handle specific development aspects of an application. It isolates the
+                    business logic and presentation layer from each other. It was traditionally used for desktop
+                    graphical user interfaces (GUIs). Nowadays, MVC is one of the most frequently used industry-standard
+                    web development frameworks to create scalable and extensible projects. It is also used for designing
+                    mobile apps.</li>
+            </ul>
+        </div>
+    </div>
+    <!--////////////// STATION CONTROL 1 /////////////-->
+    <div id="Scr_Main"
+        class="rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
+        <!-- //////////////Code cho màn hình Auto////////////// -->
+        <div id="Screen_Auto_Panel"
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-[Montserrat] font-bold cursor-pointer select-none">
+            <label class="ml-[60px]">STATION 1</label>
+            <div id="box-1-auto"
+                class="absolute w-[192px] h-[140px] left-[5px] top-5 text-center text-white bg-white box-mode-border">
+                <div id="box-1-auto-name"
+                    class="absolute w-[176px] h-8 left-[5px] top-3 flex justify-center items-center bg-[#0000ff]">
+                    OPERATION MODE</div>
+                <button id="bttAuto_AutoMode"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500 systembtn"
+                    onclick="socket.emit('cmd_Auto', true),fn_ScreenChange1('Screen_Auto','Screen_Manu'),fn_ScreenChange1('Screen_Auto_Panel','Screen_Manu_Panel');">AUTO</button>
+                <!-- Nút nhấn chế độ bằng tay -->
+                <button id="bttAuto_ManuMode"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500 systembtn"
+                    onclick="socket.emit('cmd_Manu', true),fn_ScreenChange1('Screen_Manu','Screen_Auto'),fn_ScreenChange1('Screen_Manu_Panel','Screen_Auto_Panel');">MANUAL</button>
+                <!-- Nút nhấn chế xác nhận vận hành -->
+                <button id="bttAuto_Confirm"
+                    class="bg-[#808080] inline-block absolute w-36 h-9 left-4 top-[90px] active:bg-green-500 systembtn"
+                    onclick="socket.emit('cmd_Confirm', true);">CONFIRM</button>
+            </div>
+
+            <div
+                class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-[#0000ff] systembtn">
+                <button
+                    class="absolute bg-[#808080] active:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-[5px] top-3 systembtn"
+                    onclick="socket.emit('cmd_on_System',true)">ON</button>
+                <button
+                    class="absolute bg-[#808080] active:bg-red-700 rounded-full inline-block w-[84px] h-[35px] right-1 top-3 systembtn"
+                    onclick="socket.emit('cmd_off_System',true)">OFF</button>
+            </div>
+
+            <div id="box-2-auto" class="absolute w-48 h-[250px] left-[5px] top-[250px] bg-white box-mode-border">
+                <div id="box-2-auto-name"
+                    class="absolute w-44 h-8 flex justify-center items-center left-[5px] top-3 font-bold text-sm bg-[#0000ff]">
+                    PARAMETER SETTING</div>
+                <div id="box-2-auto-device-name"
+                    class="absolute w-auto h-[170px] left-[5px] top-14 leading-[2.1] text-[#0000ff] text-sm">
+                    <ol>
+                        <li>Order ID:</li>
+                        <li>Material 1:</li>
+                        <li>Material 2:</li>
+                        <li>Material 3:</li>
+                        <li>Mix Time:</li>
+                    </ol>
+                </div>
+                <!-- Cài đặt ID Sản phẩm-->
+                <input id="set_orderID"
+                    class="absolute left-[90px] top-[58px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
+                <script>fn_scrAuto_IOField_IO("sql_OrderID", "set_orderID", 0);</script>
+                <!-- Cài đặt trọng lượng liệu 1 -->
+                <input id="set_Weight1"
+                    class="absolute left-[90px] top-[88px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
+                <script>fn_scrAuto_IOField_IO("Setting_Weight_1", "set_Weight1", 2);</script>
+                <!-- Cài đặt trọng lượng liệu 2 -->
+                <input id="set_Weight2"
+                    class="absolute left-[90px] top-[118px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
+                <script>fn_scrAuto_IOField_IO("Setting_Weight_2", "set_Weight2", 2);</script>
+                <!-- Cài đặt trọng lượng liệu 3 -->
+                <input id="set_Weight3"
+                    class="absolute left-[90px] top-[148px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
+                <script>fn_scrAuto_IOField_IO("Setting_Weight_3", "set_Weight3", 2);</script>
+                <!-- Cài đặt thời gian trộn -->
+                <input id="set_Time"
+                    class="absolute left-[90px] top-[178px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
+                <script>fn_scrAuto_IOField_IO("Setting_Time_Tron", "set_Time", 0);</script>
+                <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
+                <button id="btt_scrAuto_Save"
+                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-52 systembtn"
+                    onclick="fn_scrAuto_SaveBtt()">Save</button>
+                <button id="btt_scrAuto_Edit"
+                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-52 systembtn"
+                    onclick="fn_scrAuto_EditBtt()">Modify</button>
+            </div>
+            <div id="box-3-auto"
+                class="absolute w-48 h-[150px] left-[5px] top-[520px] bg-white text-center box-mode-border">
+                <div id="box-3-auto-name"
+                    class="absolute w-44 h-8 flex justify-center items-center left-[5px] top-3 bg-[#0000ff]">DATABASE
+                </div>
+                <!--Nút nhấn đẩy dữ liệu lên SQL-->
+                <button id="btt_sql_on"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px] systembtn"
+                    onclick="socket.emit('cmd_sql_on', true);">SQL On</button>
+                <button id="btt_sql_off"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px] systembtn"
+                    onclick="socket.emit('cmd_sql_off', true);">SQL Off</button>
+                <button id="btt_sql_delete"
+                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px] systembtn"
+                    onclick="socket.emit('cmd_sql_delete', true)">Del SQL</button>
+            </div>
+        </div>
+        <div id="Screen_Auto"
+            class="rounded-[10px] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] text-base font-[Montserrat] font-bold select-none">
+            <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
+            <img src="images/background_SCR.PNG" class="rounded-[10px]">
+            <!-- Ảnh nền -->
+            <!-- Tạo động cơ trộn -->
+            <img id="scrAuto_Motor_1" class="absolute left-[270px] top-[250px] size-[120px]">
+            <script> fn_SymbolStatus("scrAuto_Motor_1", "Motor", "status_DC_Tron") </script>
+            <!-- Tạo máy đóng gói -->
+            <img id="scrAuto_Export" class="absolute left-[278px] top-[582px] w-[120px] h-[100px]">
+            <script> fn_SymbolStatus("scrAuto_Export", "Export", "status_DC_Export") </script>
+            <!-- Tạo van 1 -->
+            <img id="scrAuto_Valve_1" class="absolute left-[110px] top-[173px] size-20">
+            <script> fn_SymbolStatus("scrAuto_Valve_1", "Valve", "status_Valve_1") </script>
+            <!-- Tạo van 2 -->
+            <img id="scrAuto_Valve_2" class="absolute left-[494px] top-[172px] size-20">
+            <script> fn_SymbolStatus("scrAuto_Valve_2", "Valve", "status_Valve_2") </script>
+            <!-- Tạo van 3 -->
+            <img id="scrAuto_Valve_3" class="absolute left-[686px] top-[250px] size-20">
+            <script> fn_SymbolStatus("scrAuto_Valve_3", "Valve", "status_Valve_3") </script>
+            <!-- Cảm biến cạn -->
+            <img id="scrAuto_Sensor" class="absolute left-[84px] top-[460px] w-20 h-[60px]">
+            <script> fn_SymbolStatus("scrAuto_Sensor", "Sensor", "CB_Can") </script>
+            <!-- Thu thành phẩm -->
+            <img id="scrAuto_Done" class="absolute left-[600px] top-[640px] w-20 h-[60px]">
+            <script> fn_SymbolStatus("scrAuto_Done", "Done", "CB_Can") </script>
+            <!-- //////////////HIỂN THỊ CÁC IOFIELD ////////////// -->
+            <!-- Giá trị thực tế liệu 1 -->
+            <input id="act_Weight1"
+                class="border-solid border-2 border-black absolute left-[30px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Weight_1", "act_Weight1", 2)</script>
+            <!-- Giá trị thực tế liệu 2 -->
+            <input id="act_Weight2"
+                class="border-solid border-2 border-black absolute left-[590px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Weight_2", "act_Weight2", 2)</script>
+            <!-- Giá trị thực tế liệu 3 -->
+            <input id="act_Weight3"
+                class="border-solid border-2 border-black absolute left-[830px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Weight_3", "act_Weight3", 2)</script>
+            <!-- Thời gian trộn thực tế -->
+            <input id="act_Time"
+                class="border-solid border-2 border-black absolute left-[190px] top-[396px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Time_Tron", "act_Time", 0)</script>
+        </div>
+        <!-- //////////////Code cho màn hình Manu////////////// -->
+        <div id="Screen_Manu_Panel"
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white font-base font-[Montserrat] font-bold cursor-pointer select-none">
+            <!-- //////////////NÚT NHẤN ĐIỀU KHIỂN ////////////// -->
+            <label class="ml-[60px]">STATION 1</label>
+            <div id="box-1-manu" class="absolute w-48 h-[100px] left-[5px] top-5 text-center bg-white box-mode-border">
+                <div id="box-1-manu-name"
+                    class="absolute w-[176px] h-8 flex justify-center items-center left-[5px] top-3 bg-[#0000ff]">
+                    OPERATION MODE</div>
+                <!-- Nút nhấn chế độ tự động -->
+                <button id="bttManu_AutoMode"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 left-[5px] top-12 active:bg-green-500 systembtn"
+                    onclick="socket.emit('cmd_Auto', true),fn_ScreenChange1('Screen_Auto','Screen_Manu'),fn_ScreenChange1('Screen_Auto_Panel','Screen_Manu_Panel');">AUTO</button>
+                <!-- Nút nhấn chế độ bằng tay -->
+                <button id="bttManu_ManuMode"
+                    class="bg-[#3366ff] inline-block absolute w-[84px] h-9 right-[5px] top-12 active:bg-green-500 systembtn"
+                    onclick="socket.emit('cmd_Manu', true),fn_ScreenChange1('Screen_Manu','Screen_Auto'),fn_ScreenChange1('Screen_Manu_Panel','Screen_Auto_Panel');">MANUAL</button>
+            </div>
+
+            <div
+                class="absolute w-[192px] h-16 left-[5px] top-44 rounded-full text-center text-white bg-[#0000ff] systembtn">
+                <button
+                    class="absolute bg-[#808080] active:bg-green-700 rounded-full inline-block w-[84px] h-[35px] left-[5px] top-3 systembtn"
+                    onclick="socket.emit('cmd_on_System',true)">ON</button>
+                <button
+                    class="absolute bg-[#808080] active:bg-red-700 rounded-full inline-block w-[84px] h-[35px] right-1 top-3 systembtn"
+                    onclick="socket.emit('cmd_off_System',true)">OFF</button>
+            </div>
+
+            <div id="box-2-manu" class="absolute w-48 h-[250px] left-[5px] top-[250px] bg-white box-mode-border">
+                <div id="box-2-manu-name"
+                    class="absolute w-44 h-8 flex justify-center items-center left-1 top-3 bg-[#0000ff]">OPERATION
+                    MANUAL</div>
+                <div id="box-2-manu-device-name"
+                    class="absolute w-auto h-[170px] left-[5px] top-14 leading-[2.1] text-[#0000ff]">
+                    <ol>
+                        <li>Valve 1:</li>
+                        <li>Valve 2:</li>
+                        <li>Valve 3:</li>
+                        <li>Mix :</li>
+                        <li>Export :</li>
+                    </ol>
+                </div>
+                <!-- Nút nhấn mở van 1 -->
+                <button id="bttManu_OpenV1"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[55px] active:bg-[#00cc00] systembtn"
+                    onclick="socket.emit('cmd_OpenV1', true);">RUN</button>
+                <!-- Nút nhấn ĐÓNG van 1 -->
+                <button id="bttManu_CloseV1"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[55px] active:bg-[#ff0000] systembtn"
+                    onclick="socket.emit('cmd_CloseV1', true);">OFF</button>
+                <!-- Nút nhấn mở van 2 -->
+                <button id="bttManu_OpenV2"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[90px] active:bg-[#00cc00] systembtn"
+                    onclick="socket.emit('cmd_OpenV2', true);">RUN</button>
+                <!-- Nút nhấn ĐÓNG van 2 -->
+                <button id="bttManu_CloseV2"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[90px] active:bg-[#ff0000] systembtn"
+                    onclick="socket.emit('cmd_CloseV2', true);">OFF</button>
+                <!-- Nút nhấn mở van 3 -->
+                <button id="bttManu_OpenV3"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[125px] active:bg-[#00cc00] systembtn"
+                    onclick="socket.emit('cmd_OpenV3', true);">RUN</button>
+                <!-- Nút nhấn ĐÓNG van 3 -->
+                <button id="bttManu_CloseV3"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[125px] active:bg-[#ff0000] systembtn"
+                    onclick="socket.emit('cmd_CloseV3', true);">OFF</button>
+                <!-- Nút nhấn CHẠY động cơ trộn -->
+                <button id="bttManu_RunM1"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[160px] active:bg-[#00cc00] systembtn"
+                    onclick="socket.emit('cmd_RunM', true);">RUN</button>
+                <!-- Nút nhấn DỪNG động cơ trộn -->
+                <button id="bttManu_StopM1"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[160px] active:bg-[#ff0000] systembtn"
+                    onclick="socket.emit('cmd_StopM', true);">OFF</button>
+                <!-- Nút nhấn CHẠY máy đóng gói -->
+                <button id="bttManu_RunE"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[60px] top-[195px] active:bg-[#00cc00] systembtn"
+                    onclick="socket.emit('cmd_RunE', true);">RUN</button>
+                <!-- Nút nhấn DỪNG máy đóng gói -->
+                <button id="bttManu_StopE"
+                    class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[195px] active:bg-[#ff0000] systembtn"
+                    onclick="socket.emit('cmd_StopE', true);">OFF</button>
+            </div>
+            <div id="box-3-manu"
+                class="absolute w-48 h-[150px] left-[5px] top-[520px] bg-white text-center box-mode-border">
+                <div id="box-3-manu-name"
+                    class="absolute w-44 h-8 flex justify-center items-center left-[5px] top-3 bg-[#0000ff]">DATABASE
+                </div>
+                <!--Nút nhấn đẩy dữ liệu lên SQL-->
+                <button id="btt_sql_on_manu"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 left-[5px] top-[50px] systembtn"
+                    onclick="socket.emit('cmd_sql_on', true);">SQL On</button>
+                <button id="btt_sql_off_manu"
+                    class="bg-[#808080] active:bg-green-500 inline-block absolute w-20 h-8 right-1 top-[50px] systembtn"
+                    onclick="socket.emit('cmd_sql_off', true);">SQL Off</button>
+                <button id="btt_sql_delete_manu"
+                    class="bg-[#808080] active:bg-[#ff0000] inline-block absolute w-32 h-8 right-8 top-[100px] systembtn"
+                    onclick="socket.emit('cmd_sql_delete', true)">Del SQL</button>
+            </div>
+        </div>
+        <div id="Screen_Manu"
+            class="rounded-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] font-base font-[Montserrat] font-bold select-none">
+            <!-- Ảnh nền -->
+            <img src="images/background_SCR.PNG" class="rounded-[10px]">
+            <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
+            <!-- Tạo động cơ trộn -->
+            <img id="scrManu_Motor_1" class="absolute left-[270px] top-[250px] size-[120px]">
+            <script> fn_SymbolStatus("scrManu_Motor_1", "Motor", "status_DC_Tron") </script>
+            <!-- Tạo máy đóng gói -->
+            <img id="scrManu_Export" class="absolute left-[278px] top-[582px] w-[120px] h-[100px]">
+            <script> fn_SymbolStatus("scrManu_Export", "Export", "status_DC_Export") </script>
+            <!-- Tạo van 1 -->
+            <img id="scrManu_Valve_1" class="absolute left-[110px] top-[173px] size-20">
+            <script> fn_SymbolStatus("scrManu_Valve_1", "Valve", "status_Valve_1") </script>
+            <!-- Tạo van 2 -->
+            <img id="scrManu_Valve_2" class="absolute left-[494px] top-[172px] size-20">
+            <script> fn_SymbolStatus("scrManu_Valve_2", "Valve", "status_Valve_2") </script>
+            <!-- Tạo van 3 -->
+            <img id="scrManu_Valve_3" class="absolute left-[686px] top-[250px] size-20">
+            <script> fn_SymbolStatus("scrManu_Valve_3", "Valve", "status_Valve_3") </script>
+            <!-- Cảm biến cạn -->
+            <img id="scrManu_Sensor" class="absolute left-[84px] top-[460px] w-20 h-[60px]">
+            <script> fn_SymbolStatus("scrManu_Sensor", "Sensor", "CB_Can") </script>
+            <!-- Thu thành phẩm -->
+            <img id="scrManu_Done" class="absolute left-[600px] top-[640px] w-20 h-[60px]">
+            <script> fn_SymbolStatus("scrManu_Done", "Done", "CB_Can") </script>
+            <!-- //////////////HIỂN THỊ CÁC IOFIELD ////////////// -->
+            <!-- Giá trị thực tế liệu 1 -->
+            <input id="actManu_Weight1"
+                class="border-solid border-2 border-black absolute left-[30px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Weight_1", "actManu_Weight1", 2)</script>
+            <!-- Giá trị thực tế liệu 2 -->
+            <input id="actManu_Weight2"
+                class="border-solid border-2 border-black absolute left-[590px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Weight_2", "actManu_Weight2", 2)</script>
+            <!-- Giá trị thực tế liệu 3 -->
+            <input id="actManu_Weight3"
+                class="border-solid border-2 border-black absolute left-[830px] top-[50px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Weight_3", "actManu_Weight3", 2)</script>
+            <!-- Thời gian trộn thực tế -->
+            <input id="actManu_Time"
+                class="border-solid border-2 border-black absolute left-[190px] top-[396px] w-20 h-[30px] text-center"
+                disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("Act_Time_Tron", "actManu_Time", 0)</script>
+        </div>
+    </div>
+    <!--////////////// DATABASE /////////////-->
+    <div id="Scr_SQL"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none text-[#ffffff] font-['Times_New_Roman',_Times,_serif] font-bold">
+        <div id="date-picker" class="absolute left-[14px] top-[10px] w-[1000px] h-[30px]">
+            <!--Date time piker-->
+            <label id="lb_Search_Start">From:</label>
+            <input id="dtpk_Search_Start"
+                class="bg-[#1488D8] border-[2px] border-[solid] border-[#0000ff] text-center w-[206px]"
+                type="datetime-local">
+            <label id="lb_Search_End">To:</label>
+            <input id="dtpk_Search_End"
+                class="bg-[#1488D8] border-[2px] border-[solid] border-[#0000ff] text-center w-[206px]"
+                type="datetime-local">
+            <!--Nút tìm kiếm-->
+            <button id="btt_Search"
+                class="systembtn logo_btn_2 bg-[#808080] text-[#ffffff] text-center inline-block cursor-pointer absolute w-[120px] h-[30px] left-[600px] active:bg-[#0aca0a]"
+                class="btn" onclick="fn_SQL_By_Time();"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+            <!--Nút xuất báo cáo-->
+            <button id="btt_Excel"
+                class="systembtn logo_btn_2 bg-[#808080] text-[#ffffff] text-center inline-block cursor-pointer absolute w-[120px] h-[30px] left-[730px] active:bg-[#0aca0a]"
+                class="btn" onclick="fn_excel();"><i class="fa-solid fa-print"></i>Report</button>
+            <label>STATION 1:</label>
+        </div>
+        <div id="SQL_Table"
+            class="absolute left-[14px] top-[60px] w-[1200px] h-[300px] overflow-y-scroll border-solid border-white border-4 text-center">
+            <table id="table_data" class="absolute w-full overflow-auto border-separate">
+                <thead>
+                    <tr>
+                        <th class="bg-[#0000ff]">Time Line</th>
+                        <th class="bg-[#0000ff]">Order ID</th>
+                        <th class="bg-[#0000ff]">Material 1 Setting</th>
+                        <th class="bg-[#0000ff]">Material 2 Setting</th>
+                        <th class="bg-[#0000ff]">Material 3 Setting</th>
+                        <th class="bg-[#0000ff]">Mix Time Setting</th>
+                        <th class="bg-[#0000ff]">Material 1 Actual</th>
+                        <th class="bg-[#0000ff]">Material 2 Actual</th>
+                        <th class="bg-[#0000ff]">Material 3 Actual</th>
+                        <th class="bg-[#0000ff]">Mix Time Actual</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!--////////////// ALARM /////////////-->
+    <div id="Scr_Alarm"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none text-[#ffffff] font-['Times_New_Roman',_Times,_serif] font-bold">
+        <div id="alarm_picker" class="absolute left-[14px] top-[10px] w-[1000px] h-[30px]">
+            <!--Date time piker-->
+            <label id="lb_AL_Search_Start">From:</label>
+            <input id="dtpk_AL_Search_Start"
+                class="bg-[#1488D8] border-[2px] border-[solid] border-[#0000ff] text-center w-[206px]"
+                type="datetime-local">
+            <label id="lb_AL_Search_End">To:</label>
+            <input id="dtpk_AL_Search_End"
+                class="bg-[#1488D8] border-[2px] border-[solid] border-[#0000ff] text-center w-[206px]"
+                type="datetime-local">
+            <!--Nút tìm kiếm-->
+            <button id="btt_AL_Search"
+                class="systembtn logo_btn_2 bg-[#808080] text-[#ffffff] text-center inline-block cursor-pointer absolute w-[120px] h-[30px] left-[600px] active:bg-[#0aca0a]"
+                class="btn" onclick="fn_Alarm_By_Time();"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+            <!--Nút xuất báo cáo-->
+            <button id="btt_AL_Excel"
+                class="systembtn logo_btn_2 bg-[#808080] text-[#ffffff] text-center inline-block cursor-pointer absolute w-[120px] h-[30px] left-[730px] active:bg-[#0aca0a]"
+                class="btn" onclick="fn_excel_al();"><i class="fa-solid fa-print"></i>Report</button>
+            <label>STATION 1:</label>
+        </div>
+        <div id="Alarm_Table"
+            class="absolute left-[14px] top-[60px] w-[1200px] h-[262px] overflow-y-scroll border-4 border-white border-solid text-center">
+            <table id="table_Alarm" class="absolute w-full bg-red-600 overflow-auto border-separate">
+                <thead>
+                    <tr>
+                        <th class="bg-[#0000ff]">Date</th>
+                        <th class="bg-[#0000ff]">ID</th>
+                        <th class="bg-[#0000ff]">Status</th>
+                        <th class="bg-[#0000ff]">Alarm Name</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <!--////////////// TREND /////////////-->
+    <div id="Scr_Diagram"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-['Times_New_Roman',_Times,_serif] font-bold cursor-pointer">
+        <!--//Màn hình tram 1//-->
+        <div id="dia-weight1" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph1();"><i
+                    class="fa-solid fa-download"></i></button>
+        </div>
+        <div id="dia-weight2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph2();"><i
+                    class="fa-solid fa-download"></i></button>
+        </div>
+        <div id="dia-weight3" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
+            <button class="download-img" onclick="DownloadGraph3();"><i
+                    class="fa-solid fa-download"></i></button>
+        </div>
+        <div id="pag" class="pagination">
+            <a
+                onclick="fn_ScreenChange3('dia-weight1','dia-weight2','dia-weight3')">1</a>
+            <a
+                onclick="fn_ScreenChange3('dia-weight2','dia-weight1','dia-weight3')">2</a>
+            <a
+                onclick="fn_ScreenChange3('dia-weight3','dia-weight2','dia-weight1')">3</a>
+        </div>
+    </div>
+    <!--////////////// HOME /////////////-->
+    <div id="Scr_Start"
+        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] bg-[#ffffff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none font-['Times_New_Roman',_Times,_serif] font-bold text-center text-xl">
+        <h2>VIETNAM NATIONAL UNIVERSITY HO CHI MINH CITY</h2>
+        <h3>HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY</h3></br>
+        <p>Eletrical and Electronic Engineering Faculty<br />Department of Control Engineering and Automation</p>
+        <img src="/images/Logo/android-chrome-512x512.png"
+            class="max-w-[150px] max-h-[150px] inline-block mt-5 pointer-events-none">
+        <p class="mt-5 text-3xl">GRADUATION PROJECT</p></br>
+        <p>BUILDING WEBSERVER APPLICATION USING NODEJS FOR AUTOMATION SYSTEM</p>
+        <img src="/images/Logo/OIP.jpg" class="max-w-[80px] max-h-[80px] absolute ml-1 top-1">
+        <p class="mt-72">Ho Chi Minh City, 2023</p>
+    </div>
+    <script src="/js/FC4_Graph.js"></script>
+</body>
+
+</html>
