@@ -334,7 +334,21 @@ var express = require("express");
 var app = express();
 const initWebRoutes = require("./routes/web");
 const configViewEngine = require("./config/viewEngine");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
+//use cookie parser
+app.use(cookieParser('secret'));
+//config session
+app.use(session({
+  secret: '123456cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60000 }
+}));
+// Enable body parser post data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 //config template
 configViewEngine(app);
 

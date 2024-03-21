@@ -6,15 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
-    <script src="/js/moment.js"></script>
-    <script src="/js/plotly.js"></script>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/FileSaver.js"></script>
     <script src="/js/FC1_Common.js"></script>
-    <script src="/js/FC2_SQL.js"></script>
-    <script src="/js/FC3_Excel.js"></script>
-    <script src="/js/FC5_Alarm.js"></script>
-    <script src="/js/Common.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script>
         var socket = io("<%= ipAddress %>") // IP server
@@ -33,8 +25,6 @@
     <link rel="stylesheet" href="/css/screen_Login.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/slidebar.css">
-    <link rel="stylesheet" href="/css/screen_SQL.css">
-    <link rel="stylesheet" href="/css/screen_Diagram.css">
     <title>Webserver for Automation System</title>
 </head>
 
@@ -80,9 +70,9 @@
             <option value="">GUEST</option>
         </select>
         <!--Nút đăng nhập-->
-        <button id="btt_Login"
+        <a id="btt_Login"
             class="border-[outset] systembtn bg-[#129c35] active:bg-green-500 text-center inline-block absolute w-[76px] h-[40px] left-[15px] bottom-[20px] select-none"
-            onclick="window.location.reload();"><i class="fa-solid fa-right-to-bracket"></i></button>
+            href="/login"><i class="fa-solid fa-right-to-bracket"></i></a>
         <!--Nút đăng xuất-->
         <button id="btt_Logout"
             class="border-[outset] systembtn bg-[#c42c2c] active:bg-red-500 text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
@@ -173,7 +163,7 @@
         <img src="/images/Logo/android-chrome-512x512.png"
             class="max-w-[150px] max-h-[150px] inline-block mt-5 pointer-events-none">
         <p class="mt-5 text-3xl">GRADUATION PROJECT</p></br>
-        <p>BUILDING WEBSERVER APPLICATION USING NODEJS FOR AUTOMATION SYSTEM</p>
+        <p>BUILDING WEBSERVER APPLICATION FOR AUTOMATION SYSTEM</p>
         <img src="/images/Logo/OIP.jpg" class="max-w-[80px] max-h-[80px] absolute ml-1 top-1">
         <p class="mt-72">Ho Chi Minh City, 2023</p>
     </div>

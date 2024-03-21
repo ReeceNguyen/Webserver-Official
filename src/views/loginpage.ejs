@@ -18,8 +18,6 @@
     <script>
         var socket = io("<%= ipAddress %>") // IP server
     </script>
-    <script src="/js/FC6_Login.js"></script>
-    <!-- <script src="/js/FC6_Login.js"></script> -->
     <!-- /////////////////// CSS ///////////////////   -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -37,19 +35,18 @@
                 <form method="POST" action="/login">
                     <div class="row">
                         <i class="fas fa-user"></i>
-                        <input id="inputuser" type="text" placeholder="Username" required>
+                        <input id="inputuser" name="username" type="text" placeholder="Username" required>
                     </div>
                     <div class="row">
                         <i class="fas fa-lock"></i>
-                        <input id="inputpass" type="password" placeholder="Password" required>
+                        <input id="inputpass" name="password" type="password" placeholder="Password" required>
                     </div>
-                    <div class="pass"><a href="#">Forgot password?</a></div>
+                    <!-- <div class="pass"><a href="#">Forgot password?</a></div> -->
                     <div class="row button">
-                        <input type="button" value="LOGIN" onclick="login()">
+                        <input type="submit" value="LOGIN">
                     </div>
-                    <div class="signup-link"><a href="/">Homepage</a> <button
-                            class="w-[100px] h-[30px] bg-[#c42c2c] hover:bg-red-400 rounded-[5px] ml-8 text-white"
-                            onclick=window.close()>Cancel</button></div>
+                    <div class="signup-link"><a href="#">Forgot password?</a><button
+                            class="w-[100px] h-[30px] bg-[#c42c2c] hover:bg-red-400 rounded-[5px] text-white ml-8"><a href="/">Cancel</a></button>
                 </form>
             </div>
         </div>
