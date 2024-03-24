@@ -7,7 +7,7 @@ let getLoginpage = (req, res) => {
 let handleLogin = (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
-  let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT + " WHERE Name = ? AND Password = ?";
+  let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT;
   if (username && password) {
     sqlaccount.query(
       query,
@@ -18,11 +18,12 @@ let handleLogin = (req, res) => {
           // Authenticate the user
           req.session.loggedin = true;
           req.session.username = username;
-          if (username === "admin") {
+          req.session.password = password;
+          if (username == results[0].Email && password == results[0].Password) {
             res.redirect("/admin");
-          } else if (username === "user1") {
+          } else if (username == results[1].Email && password == results[1].Password) {
             res.redirect("/user1");
-          } else if (username === "user2") {
+          } else if (username == results[2].Email && password == results[2].Password) {
             res.redirect("/user2");
           }
         } else {
@@ -40,21 +41,21 @@ let postLogOut = (req, res) => {
   res.redirect('/login');
 };
 let checkLoggedIn1 = (req, res, next) => {
-  if (req.session.username === "user1") {
+  if (req.session.username === "user1@gmail.com") {
       next();
   } else {
       res.redirect('/login');
   }
 }
 let checkLoggedIn2 = (req, res, next) => {
-  if (req.session.username === "user2") {
+  if (req.session.username === "user2@gmail.com") {
       next();
   } else {
       res.redirect('/login');
   }
 }
 let checkLoggedIn0 = (req, res, next) => {
-  if (req.session.username === "admin") {
+  if (req.session.username === "admin@gmail.com") {
       next();
   } else {
       res.redirect('/login');
