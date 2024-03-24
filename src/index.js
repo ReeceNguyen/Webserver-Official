@@ -336,6 +336,7 @@ const initWebRoutes = require("./routes/web");
 const configViewEngine = require("./config/viewEngine");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const connectFlash = require('connect-flash')
 
 //use cookie parser
 app.use(cookieParser('secret'));
@@ -351,6 +352,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //config template
 configViewEngine(app);
+
+//Enable flash message
+app.use(connectFlash());
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);

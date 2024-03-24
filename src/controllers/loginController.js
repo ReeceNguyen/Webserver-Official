@@ -1,7 +1,10 @@
 var { sqlaccount } = require("../config/connectDB");
 let getLoginpage = (req, res) => {
   var ipAddress = "http://" + process.env.SERVER_IP + ":" + process.env.PORT;
-  res.render("loginpage.ejs", { ipAddress });
+  res.render("loginpage.ejs", { 
+    ipAddress : ipAddress,
+    alertMsg: req.flash('error')
+   });
 };
 
 let handleLogin = (req, res) => {
@@ -25,6 +28,9 @@ let handleLogin = (req, res) => {
             res.redirect("/user1");
           } else if (username == results[2].Email && password == results[2].Password) {
             res.redirect("/user2");
+          } else {
+            req.flash('error', 'Wrong email or password')
+            res.redirect('/login');
           }
         } else {
           res.redirect('/login');

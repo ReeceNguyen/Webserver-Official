@@ -19,7 +19,8 @@
         var socket = io("<%= ipAddress %>") // IP server
     </script>
     <!-- /////////////////// CSS ///////////////////   -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/tailwind.css">
     <link rel="stylesheet" href="/css/screen_Login.css">
 
@@ -29,9 +30,12 @@
 <body>
     <div id="login_hall"
         class="fixed z-[5] w-full h-full overflow-auto bg-[rgba(0,0,0,0.85)] text-base font-bold pt-[60px] left-0 top-0 font-serif">
-        <div class="modal-content">
+        <div class="modal-content bg-transparent">
             <div class="wrapper animate">
                 <div class="title"><img src="images/Logo/apple-touch-icon.png" class="max-w-[80px] max-h-[80px]"></div>
+                <% if (alertMsg) { %>
+                    <div class="alert alert-danger"><%= alertMsg %></div>
+                <% } %>
                 <form method="POST" action="/login">
                     <div class="row">
                         <i class="fas fa-user"></i>
