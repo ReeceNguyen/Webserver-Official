@@ -46,26 +46,46 @@ let postLogOut = (req, res) => {
   req.session.destroy();
   res.redirect('/login');
 };
+// let checkLoggedIn1 = (req, res, next) => {
+//   if (req.session.username === "user1@gmail.com") {
+//       next();
+//   } else {
+//       res.redirect('/login');
+//   }
+// }
 let checkLoggedIn1 = (req, res, next) => {
-  if (req.session.username === "user1@gmail.com") {
+  let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT;
+  sqlaccount.query(query, (err,results,fields) =>{
+    if (err) throw err;
+    if (req.session.username === results[1].Email) {
       next();
-  } else {
+    }else{
       res.redirect('/login');
-  }
+    }
+  })
 }
+
 let checkLoggedIn2 = (req, res, next) => {
-  if (req.session.username === "user2@gmail.com") {
+  let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT;
+  sqlaccount.query(query, (err,results,fields) =>{
+    if (err) throw err;
+    if (req.session.username === results[2].Email) {
       next();
-  } else {
+    }else{
       res.redirect('/login');
-  }
+    }
+  })
 }
 let checkLoggedIn0 = (req, res, next) => {
-  if (req.session.username === "admin@gmail.com") {
+  let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT;
+  sqlaccount.query(query, (err,results,fields) =>{
+    if (err) throw err;
+    if (req.session.username === results[0].Email) {
       next();
-  } else {
+    }else{
       res.redirect('/login');
-  }
+    }
+  })
 }
 module.exports = {
   getLoginpage: getLoginpage,
