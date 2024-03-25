@@ -6,7 +6,7 @@ let getLoginpage = (req, res) => {
     alertMsg: req.flash('error')
    });
 };
-
+// Authenticate User
 let handleLogin = (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
@@ -42,17 +42,12 @@ let handleLogin = (req, res) => {
     res.end();
   }
 };
+// Check Log Out
 let postLogOut = (req, res) => {
   req.session.destroy();
   res.redirect('/login');
 };
-// let checkLoggedIn1 = (req, res, next) => {
-//   if (req.session.username === "user1@gmail.com") {
-//       next();
-//   } else {
-//       res.redirect('/login');
-//   }
-// }
+// Check Login 
 let checkLoggedIn1 = (req, res, next) => {
   let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT;
   sqlaccount.query(query, (err,results,fields) =>{
