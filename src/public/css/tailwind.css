@@ -1382,10 +1382,6 @@ video {
   background-color: rgba(0,0,0,0.85);
 }
 
-.bg-\[rgba\(0\2c 0\2c 0\2c 1\)\] {
-  background-color: rgba(0,0,0,1);
-}
-
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1399,6 +1395,10 @@ video {
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+}
+
+.bg-transparent {
+  background-color: transparent;
 }
 
 .bg-white {
