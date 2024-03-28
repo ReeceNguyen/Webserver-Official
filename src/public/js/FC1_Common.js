@@ -172,7 +172,7 @@ function fn_scrAuto_SaveBtt_s2() {
     document.getElementById("set_Weight1_s2").value,
     document.getElementById("set_Weight2_s2").value,
     document.getElementById("set_Weight3_s2").value,
-    document.getElementById("set_Time").value,
+    document.getElementById("set_Time_s2").value,
   ];
   socket.emit("cmd_Edit_Data_s2", data_edit_array);
   alert("Data is saved!");
