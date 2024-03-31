@@ -489,7 +489,6 @@ io.on("connection", function (socket) {
   fn_Alarm_Search_ByTime();
   fn_AL_Require_ExcelExport();
   fn_Mass_Search_ByTime();
-  fn_Require_MassExport();
 
   fn_SQLSearch_s2(); // Hàm tìm kiếm SQL
   fn_SQLSearch_ByTime_s2(); // Hàm tìm kiếm theo thời gian
@@ -498,7 +497,6 @@ io.on("connection", function (socket) {
   fn_Alarm_Search_ByTime_s2();
   fn_AL_Require_ExcelExport_s2();
   fn_Mass_Search_ByTime_s2();
-  fn_Require_MassExport_s2();
 });
 // HÀM GHI DỮ LIỆU XUỐNG PLC
 function valuesWritten(anythingBad) {
@@ -2778,6 +2776,11 @@ function fn_Require_ExcelExport() {
       var data = [SaveAslink1, Bookname];
       socket.emit("send_Excel_Report", data);
     });
+    socket.on("msg_Mass_Report", function (data) {
+      const [SaveAslink1, Bookname] = fn_massExport();
+      var data = [SaveAslink1, Bookname];
+      socket.emit("send_Mass_Report", data);
+    });
   });
 }
 function fn_Require_ExcelExport_s2() {
@@ -2787,20 +2790,6 @@ function fn_Require_ExcelExport_s2() {
       var data = [SaveAslink2, Bookname2];
       socket.emit("send_Excel_Report_s2", data);
     });
-  });
-}
-
-function fn_Require_MassExport() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Mass_Report", function (data) {
-      const [SaveAslink1, Bookname] = fn_massExport();
-      var data = [SaveAslink1, Bookname];
-      socket.emit("send_Mass_Report", data);
-    });
-  });
-}
-function fn_Require_MassExport_s2() {
-  io.on("connection", function (socket) {
     socket.on("msg_Mass_Report_s2", function (data) {
       const [SaveAslink1, Bookname] = fn_massExport_s2();
       var data = [SaveAslink1, Bookname];
