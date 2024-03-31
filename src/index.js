@@ -62,8 +62,10 @@ var { sqlcon, sqlcon_s2 } = require("./config/connectDB");
 // Mảng xuất dữ liệu Excel
 var SQL_Excel = [];
 var AL_Excel = [];
+var Mass_Excel = [];
 var SQL_Excel_s2 = [];
 var AL_Excel_s2 = [];
+var Mass_Excel_s2 = [];
 // Bảng tag trong Visual studio code
 var tags_list = {
   btt_Auto: "DB1,X0.0",
@@ -321,11 +323,15 @@ function fn_read_data_scan() {
   fn_sql_delete();
   fn_Alarm_Manage();
   fn_Alarm_Delete();
+  fn_sql_insert_mass();
+  fn_sql_delete_mass();
   //Station 2
   fn_sql_insert_s2();
   fn_sql_delete_s2();
   fn_Alarm_Manage_s2();
   fn_Alarm_Delete_s2();
+  fn_sql_insert_mass_s2();
+  fn_sql_delete_mass_s2();
 }
 // Time cập nhật mỗi s
 setInterval(() => fn_read_data_scan(), 500);
@@ -336,17 +342,19 @@ const initWebRoutes = require("./routes/web");
 const configViewEngine = require("./config/viewEngine");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const connectFlash = require('connect-flash')
+const connectFlash = require("connect-flash");
 
 //use cookie parser
-app.use(cookieParser('secret'));
+app.use(cookieParser("secret"));
 //config session
-app.use(session({
-  secret: '123456cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 }
-}));
+app.use(
+  session({
+    secret: "123456cat",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  })
+);
 // Enable body parser post data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -480,6 +488,8 @@ io.on("connection", function (socket) {
   fn_AlarmSearch();
   fn_Alarm_Search_ByTime();
   fn_AL_Require_ExcelExport();
+  fn_Mass_Search_ByTime();
+  fn_Require_MassExport();
 
   fn_SQLSearch_s2(); // Hàm tìm kiếm SQL
   fn_SQLSearch_ByTime_s2(); // Hàm tìm kiếm theo thời gian
@@ -487,6 +497,8 @@ io.on("connection", function (socket) {
   fn_AlarmSearch_s2();
   fn_Alarm_Search_ByTime_s2();
   fn_AL_Require_ExcelExport_s2();
+  fn_Mass_Search_ByTime_s2();
+  fn_Require_MassExport_s2();
 });
 // HÀM GHI DỮ LIỆU XUỐNG PLC
 function valuesWritten(anythingBad) {
@@ -783,6 +795,93 @@ function fn_sql_insert_s2() {
   }
   old_insert_trigger_s2 = insert_trigger_s2;
 }
+
+function fn_sql_insert_mass() {
+  insert_trigger = arr_tag_value[30]; // Read trigger from PLC
+  var sqltable_Name = process.env.TABLE_MASS_1;
+  // Lấy thời gian hiện tại
+  var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
+  var temp_datenow = new Date();
+  var timeNow = new Date(temp_datenow - tzoffset)
+    .toISOString()
+    .slice(0, -1)
+    .replace("T", " ");
+  var timeNow_toSQL = "'" + timeNow + "',";
+
+  // Dữ liệu đọc lên từ các tag
+  var data_sql_OrderID = "'" + arr_tag_value[34] + "',";
+  var data_sql_Weight1_Setting = "'" + arr_tag_value[35] + "',";
+  var data_sql_Weight2_Setting = "'" + arr_tag_value[36] + "',";
+  var data_sql_Weight3_Setting = "'" + arr_tag_value[37] + "',";
+  var data_sql_Time_Tron_Setting = "'" + arr_tag_value[41] + "'";
+  // Ghi dữ liệu vào SQL
+  if (insert_trigger && !old_insert_trigger) {
+    var sql_write_str11 =
+      "INSERT INTO " +
+      sqltable_Name +
+      " (`Date`, `Order ID`, `Material 1 Setting`, `Material 2 Setting`, `Material 3 Setting`, `Mix Time Setting`) VALUES (";
+    var sql_write_str12 =
+      timeNow_toSQL +
+      data_sql_OrderID +
+      data_sql_Weight1_Setting +
+      data_sql_Weight2_Setting +
+      data_sql_Weight3_Setting +
+      data_sql_Time_Tron_Setting;
+    var sql_write_str1 = sql_write_str11 + sql_write_str12 + ");";
+    // Thực hiện ghi dữ liệu vào SQL
+    sqlcon.query(sql_write_str1, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("SQL - Write Data Successfully");
+      }
+    });
+  }
+  old_insert_trigger = insert_trigger;
+}
+function fn_sql_insert_mass_s2() {
+  insert_trigger_s2 = arr_tag_value_s2[30]; // Read trigger from PLC
+  var sqltable_Name_s2 = process.env.TABLE_MASS_2;
+  // Lấy thời gian hiện tại
+  var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
+  var temp_datenow = new Date();
+  var timeNow = new Date(temp_datenow - tzoffset)
+    .toISOString()
+    .slice(0, -1)
+    .replace("T", " ");
+  var timeNow_toSQL = "'" + timeNow + "',";
+
+  // Dữ liệu đọc lên từ các tag
+  var data_sql_OrderID_s2 = "'" + arr_tag_value_s2[34] + "',";
+  var data_sql_Weight1_Setting_s2 = "'" + arr_tag_value_s2[35] + "',";
+  var data_sql_Weight2_Setting_s2 = "'" + arr_tag_value_s2[36] + "',";
+  var data_sql_Weight3_Setting_s2 = "'" + arr_tag_value_s2[37] + "',";
+  var data_sql_Time_Tron_Setting_s2 = "'" + arr_tag_value_s2[41] + "'";
+  // Ghi dữ liệu vào SQL
+  if (insert_trigger_s2 && !old_insert_trigger_s2) {
+    var sql_write_str11_s2 =
+      "INSERT INTO " +
+      sqltable_Name_s2 +
+      " (`Date`, `Order ID`, `Material 1 Setting`, `Material 2 Setting`, `Material 3 Setting`, `Mix Time Setting`) VALUES (";
+    var sql_write_str12_s2 =
+      timeNow_toSQL +
+      data_sql_OrderID_s2 +
+      data_sql_Weight1_Setting_s2 +
+      data_sql_Weight2_Setting_s2 +
+      data_sql_Weight3_Setting_s2 +
+      data_sql_Time_Tron_Setting_s2;
+    var sql_write_str1_s2 = sql_write_str11_s2 + sql_write_str12_s2 + ");";
+    // Thực hiện ghi dữ liệu vào SQL
+    sqlcon_s2.query(sql_write_str1_s2, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("SQL - Write Data Successfully");
+      }
+    });
+  }
+  old_insert_trigger_s2 = insert_trigger_s2;
+}
 // ///////////TẠO HÀM XÓA DỮ LIỆU BẢNG SQL////////////////
 function fn_sql_delete() {
   delete_trigger = arr_tag_value[33];
@@ -805,6 +904,42 @@ function fn_sql_delete() {
 function fn_sql_delete_s2() {
   delete_trigger_s2 = arr_tag_value_s2[33];
   var sqltable_Name_s2 = process.env.TABLE_DATA_2;
+  // Ghi dữ liệu vào SQL
+  if (delete_trigger_s2 == true && delete_trigger_s2 != old_delete_trigger_s2) {
+    var sql_write_str2_s2 = "DELETE FROM " + sqltable_Name_s2;
+    // Thực hiện ghi dữ liệu vào SQL
+    sqlcon_s2.query(sql_write_str2_s2, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("SQL - Delete Data Successfully");
+      }
+    });
+  }
+  old_delete_trigger_s2 = delete_trigger_s2;
+}
+
+function fn_sql_delete_mass() {
+  delete_trigger = arr_tag_value[33];
+  var sqltable_Name = process.env.TABLE_MASS_1;
+  // Ghi dữ liệu vào SQL
+  if (delete_trigger == true && delete_trigger != old_delete_trigger) {
+    var sql_write_str2 = "DELETE FROM " + sqltable_Name;
+    // Thực hiện ghi dữ liệu vào SQL
+    sqlcon.query(sql_write_str2, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("SQL - Delete Data Successfully");
+      }
+    });
+  }
+  old_delete_trigger = delete_trigger;
+}
+
+function fn_sql_delete_mass_s2() {
+  delete_trigger_s2 = arr_tag_value_s2[33];
+  var sqltable_Name_s2 = process.env.TABLE_MASS_2;
   // Ghi dữ liệu vào SQL
   if (delete_trigger_s2 == true && delete_trigger_s2 != old_delete_trigger_s2) {
     var sql_write_str2_s2 = "DELETE FROM " + sqltable_Name_s2;
@@ -950,6 +1085,102 @@ function fn_SQLSearch_ByTime_s2() {
           const convertedResponse = results.map(objectifyRawPacket);
           SQL_Excel_s2 = convertedResponse; // Xuất báo cáo Excel
           socket.emit("SQL_ByTime_s2", convertedResponse);
+        }
+      });
+    });
+  });
+}
+
+function fn_Mass_Search_ByTime() {
+  io.on("connection", function (socket) {
+    socket.on("msg_SQL_Mass_ByTime", function (data) {
+      var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
+      // Lấy thời gian tìm kiếm từ date time piker
+      var timeS = new Date(data[0]); // Thời gian bắt đầu
+      var timeE = new Date(data[1]); // Thời gian kết thúc
+      // Quy đổi thời gian ra định dạng cua MySQL
+      var timeS1 =
+        "'" +
+        new Date(timeS - tzoffset)
+          .toISOString()
+          .slice(0, -1)
+          .replace("T", " ") +
+        "'";
+      var timeE1 =
+        "'" +
+        new Date(timeE - tzoffset)
+          .toISOString()
+          .slice(0, -1)
+          .replace("T", " ") +
+        "'";
+      var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
+
+      var sqltable_Name = process.env.TABLE_MASS_1; // Tên bảng
+      var dt_col_Name = "Date"; // Tên cột thời gian
+
+      var Query1 =
+        "SELECT * FROM " +
+        sqltable_Name +
+        " WHERE " +
+        dt_col_Name +
+        " BETWEEN ";
+      var Query = Query1 + timeR + ";";
+
+      sqlcon.query(Query, function (err, results, fields) {
+        if (err) {
+          console.log(err);
+        } else {
+          const objectifyRawPacket = (row) => ({ ...row });
+          const convertedResponse = results.map(objectifyRawPacket);
+          Mass_Excel = convertedResponse; // Xuất báo cáo Excel
+        }
+      });
+    });
+  });
+}
+
+function fn_Mass_Search_ByTime_s2() {
+  io.on("connection", function (socket) {
+    socket.on("msg_SQL_Mass_ByTime_s2", function (data) {
+      var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
+      // Lấy thời gian tìm kiếm từ date time piker
+      var timeS = new Date(data[0]); // Thời gian bắt đầu
+      var timeE = new Date(data[1]); // Thời gian kết thúc
+      // Quy đổi thời gian ra định dạng cua MySQL
+      var timeS1 =
+        "'" +
+        new Date(timeS - tzoffset)
+          .toISOString()
+          .slice(0, -1)
+          .replace("T", " ") +
+        "'";
+      var timeE1 =
+        "'" +
+        new Date(timeE - tzoffset)
+          .toISOString()
+          .slice(0, -1)
+          .replace("T", " ") +
+        "'";
+      var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
+
+      var sqltable_Name = process.env.TABLE_MASS_2; // Tên bảng
+      var dt_col_Name = "Date"; // Tên cột thời gian
+
+      var Query1 =
+        "SELECT * FROM " +
+        sqltable_Name +
+        " WHERE " +
+        dt_col_Name +
+        " BETWEEN ";
+      var Query = Query1 + timeR + ";";
+
+      sqlcon_s2.query(Query, function (err, results, fields) {
+        if (err) {
+          console.log(err);
+        } else {
+          const objectifyRawPacket = (row) => ({ ...row });
+          const convertedResponse = results.map(objectifyRawPacket);
+          Mass_Excel_s2 = convertedResponse; // Xuất báo cáo Excel
         }
       });
     });
@@ -1773,6 +2004,772 @@ function fn_excelExport_s2() {
   // Return
   return [SaveAslink, Bookname];
 }
+
+function fn_massExport() {
+  // =====================CÁC THUỘC TÍNH CHUNG=====================
+  // Lấy ngày tháng hiện tại
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  let day = date_ob.getDay();
+  var dayName = "";
+  if (day == 0) {
+    dayName = "Sunday,";
+  } else if (day == 1) {
+    dayName = "Monday,";
+  } else if (day == 2) {
+    dayName = "Tuesday,";
+  } else if (day == 3) {
+    dayName = "Wednesday,";
+  } else if (day == 4) {
+    dayName = "Thursday,";
+  } else if (day == 5) {
+    dayName = "Friday,";
+  } else if (day == 6) {
+    dayName = "Saturday,";
+  } else {
+  }
+  // Tạo và khai báo Excel
+  let workbook = new Excel.Workbook();
+  let worksheet = workbook.addWorksheet("Total Report 1", {
+    pageSetup: { paperSize: 9, orientation: "landscape" },
+    properties: { tabColor: { argb: "FFC0000" } },
+  });
+  // Page setup (cài đặt trang)
+  worksheet.properties.defaultRowHeight = 20;
+  worksheet.pageSetup.margins = {
+    left: 0.3,
+    right: 0.25,
+    top: 0.75,
+    bottom: 0.75,
+    header: 0.3,
+    footer: 0.3,
+  };
+  // =====================THẾT KẾ HEADER=====================
+  const imageId1 = workbook.addImage({
+    filename: "src/public/images/Logo/bk_name_en.png",
+    extension: "png",
+  });
+  worksheet.addImage(imageId1, "A2:D5");
+  const imageId2 = workbook.addImage({
+    filename: "src/public/images/Logo/OIP.jpg",
+    extension: "jpg",
+  });
+  worksheet.addImage(imageId2, "L1:L6");
+
+  worksheet.mergeCells("A2:D5");
+  worksheet.mergeCells("A1:K1");
+  worksheet.mergeCells("L1:L6");
+  worksheet.mergeCells("E2:H2");
+  worksheet.mergeCells("E3:H3");
+  worksheet.mergeCells("E4:H4");
+  worksheet.mergeCells("E5:H5");
+  worksheet.mergeCells("J2:K2");
+  worksheet.mergeCells("J3:K3");
+  worksheet.mergeCells("J4:K4");
+  worksheet.mergeCells("J5:K5");
+  worksheet.mergeCells("A6:K6");
+  worksheet.mergeCells("C7:J7");
+  worksheet.mergeCells("C8:G8");
+  worksheet.mergeCells("H8:J8");
+
+  worksheet.getCell("A1").value = "GRADUATION PROJECT - EE4357";
+  worksheet.getCell("A1").style = {
+    font: {
+      name: "Cascadia Code",
+      bold: true,
+      size: 12,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "center", vertical: "middle" },
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "1f497d" } },
+  };
+  worksheet.getCell("E2").value =
+    "Faculty : Electrical and Electronic Engineering";
+  worksheet.getCell("E2").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("E3").value =
+    "Major   : Control Engineering and Automation";
+  worksheet.getCell("E3").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("E4").value =
+    "Address : 268 Ly Thuong Kiet, Ward 14, District 10, HCM City";
+  worksheet.getCell("E4").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J2").value = "Name   : Nguyen Minh Thai";
+  worksheet.getCell("J2").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J3").value = "Code   : 1910526";
+  worksheet.getCell("J3").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J4").value = "Tel    : 0342400518";
+  worksheet.getCell("J4").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J5").value = "Mentor : Nguyen Trong Tai";
+  worksheet.getCell("J5").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+
+  worksheet.getCell("C7").value = "MASS REPORT 1";
+  worksheet.getCell("C7").style = {
+    font: {
+      name: "Times New Roman",
+      bold: true,
+      size: 16,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "center", vertical: "middle" },
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "1488db" } },
+  };
+  worksheet.getCell("C8").style = {
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "132d64" } },
+  };
+  worksheet.getCell("H8").value =
+    "Time Line: " +
+    dayName +
+    date +
+    "/" +
+    month +
+    "/" +
+    year +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds;
+  worksheet.getCell("H8").style = {
+    font: {
+      name: "Times New Roman",
+      bold: false,
+      italic: true,
+      size: 14,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "right", vertical: "bottom", wrapText: false },
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "062251" } },
+  };
+
+  // Tên nhãn các cột
+  var rowpos = 9;
+  var collumName = [
+    "",
+    "",
+    "STT",
+    "Date",
+    "Order ID",
+    "Material 1 Setting",
+    "Material 2 Setting",
+    "Material 3 Setting",
+    "Mix Time Setting",
+    "Note",
+  ];
+  worksheet.spliceRows(rowpos, 1, collumName);
+
+  // =====================XUẤT DỮ LIỆU SQL LÊN EXCEL  =====================
+  // Dump all the data into Excel
+  var rowIndex = 0;
+  Mass_Excel.forEach((e, index) => {
+    rowIndex = index + rowpos;
+    worksheet.columns = [
+      { key: "" },
+      { key: "" },
+      { key: "STT" },
+      { key: "Date" },
+      { key: "Order ID" },
+      { key: "Material 1 Setting" },
+      { key: "Material 2 Setting" },
+      { key: "Material 3 Setting" },
+      { key: "Mix Time Setting" },
+    ];
+    worksheet.addRow({
+      STT: {
+        formula: index + 1,
+      },
+      ...e, //Kết thúc ghi dữ liệu
+    });
+  });
+  // Lấy tổng số hàng
+  const totalNumberOfRows = worksheet.rowCount;
+  // Tính tổng
+  worksheet.addRow([
+    "",
+    "",
+    "Total",
+    "",
+    "",
+    { formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})` },
+    { formula: `=sum(G${rowpos + 1}:G${totalNumberOfRows})` },
+    { formula: `=sum(H${rowpos + 1}:H${totalNumberOfRows})` },
+    { formula: `=sum(I${rowpos + 1}:I${totalNumberOfRows})` },
+  ]);
+
+  // =====================STYLE CHO CÁC HÀNG DỮ LIỆU =====================
+  worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
+    var datastartrow = rowpos;
+    var rowindex = rowNumber + datastartrow;
+    const rowlength = datastartrow + Mass_Excel.length;
+    if (rowindex >= rowlength + 1) {
+      rowindex = rowlength + 1;
+    }
+    const insideColumns = ["C", "D", "E", "F", "G", "H", "I", "J"];
+    // Tạo border
+    insideColumns.forEach((v) => {
+      // Border
+      (worksheet.getCell(`${v}${rowindex}`).border = {
+        top: { style: "thin" },
+        bottom: { style: "thin" },
+        left: { style: "thin" },
+        right: { style: "thin" },
+      }),
+        // Alignment
+        (worksheet.getCell(`${v}${rowindex}`).alignment = {
+          horizontal: "center",
+          vertical: "middle",
+          wrapText: true,
+        }),
+        // Font
+        (worksheet.getCell(`${v}${rowindex}`).font = {
+          name: "Cascadia Code",
+          bold: true,
+          size: 12,
+        });
+    });
+  });
+  // =======================STYLE CHO HÀNG TỔNG CỘNG======================
+  worksheet.getCell(`A${totalNumberOfRows + 1}`).style = {
+    font: {
+      name: "Cascadia Code",
+      bold: true,
+      size: 14,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "center" },
+  };
+  // Tô màu cho hàng total (Tổng cộng)
+  const total_row = ["C", "D", "E", "F", "G", "H", "I", "J"];
+  total_row.forEach((v) => {
+    (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "062251" },
+    }),
+      (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).font = {
+        name: "Cascadia Code",
+        bold: true,
+        size: 14,
+        color: { argb: "ffffff" },
+      });
+  });
+
+  // ====================STYLE CÁC CỘT/ HÀNG ===============================
+  const HeaderStyle = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+  ];
+  const HeaderStyle2 = ["C", "D", "E", "F", "G", "H", "I", "J"];
+  HeaderStyle.forEach((v) => {
+    worksheet.getCell(`${v}${rowpos}`).style = {
+      font: { name: "Times New Roman", bold: true },
+      alignment: { horizontal: "center", vertical: "middle", wrapText: true },
+    };
+  });
+  HeaderStyle2.forEach((v) => {
+    worksheet.getCell(`${v}${rowpos}`).border = {
+      top: { style: "thin" },
+      left: { style: "thin" },
+      bottom: { style: "thin" },
+      right: { style: "thin" },
+    };
+  });
+  // Cài đặt độ rộng cột
+  worksheet.columns.forEach((column, index) => {
+    column.width = 30;
+  });
+  // Set width column
+  worksheet.getColumn(1).width = 10;
+  worksheet.getColumn(2).width = 50;
+  worksheet.getColumn(12).width = 30;
+  // Set height row
+  worksheet.getRow(7).height = 36;
+  worksheet.getRow(9).height = 36;
+  // =====================THẾT KẾ FOOTER=====================
+  worksheet.getCell(`J${totalNumberOfRows + 2}`).value =
+    "Day........Month........Year........";
+  worksheet.getCell(`J${totalNumberOfRows + 2}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "right", vertical: "middle", wrapText: false },
+  };
+
+  worksheet.getCell(`C${totalNumberOfRows + 3}`).value = "Giám đốc";
+  worksheet.getCell(`C${totalNumberOfRows + 4}`).value = "(Ký, ghi rõ họ tên)";
+  worksheet.getCell(`C${totalNumberOfRows + 3}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "center", vertical: "bottom", wrapText: false },
+  };
+  worksheet.getCell(`C${totalNumberOfRows + 4}`).style = {
+    font: { name: "Cascadia Code", bold: false, italic: true },
+    alignment: { horizontal: "center", vertical: "top", wrapText: false },
+  };
+
+  worksheet.getCell(`F${totalNumberOfRows + 3}`).value = "Trưởng ca";
+  worksheet.getCell(`F${totalNumberOfRows + 4}`).value = "(Ký, ghi rõ họ tên)";
+  worksheet.getCell(`F${totalNumberOfRows + 3}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "center", vertical: "bottom", wrapText: false },
+  };
+  worksheet.getCell(`F${totalNumberOfRows + 4}`).style = {
+    font: { name: "Cascadia Code", bold: false, italic: true },
+    alignment: { horizontal: "center", vertical: "top", wrapText: false },
+  };
+
+  worksheet.getCell(`J${totalNumberOfRows + 3}`).value = "Người in biểu";
+  worksheet.getCell(`J${totalNumberOfRows + 4}`).value = "(Ký, ghi rõ họ tên)";
+  worksheet.getCell(`J${totalNumberOfRows + 3}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "center", vertical: "bottom", wrapText: false },
+  };
+  worksheet.getCell(`J${totalNumberOfRows + 4}`).style = {
+    font: { name: "Cascadia Code", bold: false, italic: true },
+    alignment: { horizontal: "center", vertical: "top", wrapText: false },
+  };
+
+  // =====================THỰC HIỆN XUẤT DỮ LIỆU EXCEL=====================
+  // Export Link
+  var currentTime =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
+  var saveasDirect = "reports/mass/Mass_" + currentTime + ".xlsx";
+  SaveAslink = saveasDirect; // Send to client
+  var booknameLink = "src/public/" + saveasDirect;
+
+  var Bookname = "Mass_" + currentTime + ".xlsx";
+  // Write book name
+  workbook.xlsx.writeFile(booknameLink);
+
+  // Return
+  return [SaveAslink, Bookname];
+}
+
+function fn_massExport_s2() {
+  // =====================CÁC THUỘC TÍNH CHUNG=====================
+  // Lấy ngày tháng hiện tại
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  let day = date_ob.getDay();
+  var dayName = "";
+  if (day == 0) {
+    dayName = "Sunday,";
+  } else if (day == 1) {
+    dayName = "Monday,";
+  } else if (day == 2) {
+    dayName = "Tuesday,";
+  } else if (day == 3) {
+    dayName = "Wednesday,";
+  } else if (day == 4) {
+    dayName = "Thursday,";
+  } else if (day == 5) {
+    dayName = "Friday,";
+  } else if (day == 6) {
+    dayName = "Saturday,";
+  } else {
+  }
+  // Tạo và khai báo Excel
+  let workbook = new Excel.Workbook();
+  let worksheet = workbook.addWorksheet("Total Report 2", {
+    pageSetup: { paperSize: 9, orientation: "landscape" },
+    properties: { tabColor: { argb: "FFC0000" } },
+  });
+  // Page setup (cài đặt trang)
+  worksheet.properties.defaultRowHeight = 20;
+  worksheet.pageSetup.margins = {
+    left: 0.3,
+    right: 0.25,
+    top: 0.75,
+    bottom: 0.75,
+    header: 0.3,
+    footer: 0.3,
+  };
+  // =====================THẾT KẾ HEADER=====================
+  const imageId1 = workbook.addImage({
+    filename: "src/public/images/Logo/bk_name_en.png",
+    extension: "png",
+  });
+  worksheet.addImage(imageId1, "A2:D5");
+  const imageId2 = workbook.addImage({
+    filename: "src/public/images/Logo/OIP.jpg",
+    extension: "jpg",
+  });
+  worksheet.addImage(imageId2, "L1:L6");
+
+  worksheet.mergeCells("A2:D5");
+  worksheet.mergeCells("A1:K1");
+  worksheet.mergeCells("L1:L6");
+  worksheet.mergeCells("E2:H2");
+  worksheet.mergeCells("E3:H3");
+  worksheet.mergeCells("E4:H4");
+  worksheet.mergeCells("E5:H5");
+  worksheet.mergeCells("J2:K2");
+  worksheet.mergeCells("J3:K3");
+  worksheet.mergeCells("J4:K4");
+  worksheet.mergeCells("J5:K5");
+  worksheet.mergeCells("A6:K6");
+  worksheet.mergeCells("C7:J7");
+  worksheet.mergeCells("C8:G8");
+  worksheet.mergeCells("H8:J8");
+
+  worksheet.getCell("A1").value = "GRADUATION PROJECT - EE4357";
+  worksheet.getCell("A1").style = {
+    font: {
+      name: "Cascadia Code",
+      bold: true,
+      size: 12,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "center", vertical: "middle" },
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "1f497d" } },
+  };
+  worksheet.getCell("E2").value =
+    "Faculty : Electrical and Electronic Engineering";
+  worksheet.getCell("E2").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("E3").value =
+    "Major   : Control Engineering and Automation";
+  worksheet.getCell("E3").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("E4").value =
+    "Address : 268 Ly Thuong Kiet, Ward 14, District 10, HCM City";
+  worksheet.getCell("E4").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J2").value = "Name   : Nguyen Minh Thai";
+  worksheet.getCell("J2").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J3").value = "Code   : 1910526";
+  worksheet.getCell("J3").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J4").value = "Tel    : 0342400518";
+  worksheet.getCell("J4").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+  worksheet.getCell("J5").value = "Mentor : Nguyen Trong Tai";
+  worksheet.getCell("J5").style = {
+    font: { name: "Cascadia Code", bold: true, size: 12 },
+    alignment: { horizontal: "left", vertical: "middle" },
+  };
+
+  worksheet.getCell("C7").value = "MASS REPORT 2";
+  worksheet.getCell("C7").style = {
+    font: {
+      name: "Times New Roman",
+      bold: true,
+      size: 16,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "center", vertical: "middle" },
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "1488db" } },
+  };
+  worksheet.getCell("C8").style = {
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "132d64" } },
+  };
+  worksheet.getCell("H8").value =
+    "Time Line: " +
+    dayName +
+    date +
+    "/" +
+    month +
+    "/" +
+    year +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds;
+  worksheet.getCell("H8").style = {
+    font: {
+      name: "Times New Roman",
+      bold: false,
+      italic: true,
+      size: 14,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "right", vertical: "bottom", wrapText: false },
+    fill: { type: "pattern", pattern: "solid", fgColor: { argb: "062251" } },
+  };
+
+  // Tên nhãn các cột
+  var rowpos = 9;
+  var collumName = [
+    "",
+    "",
+    "STT",
+    "Date",
+    "Order ID",
+    "Material 1 Setting",
+    "Material 2 Setting",
+    "Material 3 Setting",
+    "Mix Time Setting",
+    "Note",
+  ];
+  worksheet.spliceRows(rowpos, 1, collumName);
+
+  // =====================XUẤT DỮ LIỆU SQL LÊN EXCEL  =====================
+  // Dump all the data into Excel
+  var rowIndex = 0;
+  Mass_Excel_s2.forEach((e, index) => {
+    rowIndex = index + rowpos;
+    worksheet.columns = [
+      { key: "" },
+      { key: "" },
+      { key: "STT" },
+      { key: "Date" },
+      { key: "Order ID" },
+      { key: "Material 1 Setting" },
+      { key: "Material 2 Setting" },
+      { key: "Material 3 Setting" },
+      { key: "Mix Time Setting" },
+    ];
+    worksheet.addRow({
+      STT: {
+        formula: index + 1,
+      },
+      ...e, //Kết thúc ghi dữ liệu
+    });
+  });
+  // Lấy tổng số hàng
+  const totalNumberOfRows = worksheet.rowCount;
+  // Tính tổng
+  worksheet.addRow([
+    "",
+    "",
+    "Total",
+    "",
+    "",
+    { formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})` },
+    { formula: `=sum(G${rowpos + 1}:G${totalNumberOfRows})` },
+    { formula: `=sum(H${rowpos + 1}:H${totalNumberOfRows})` },
+    { formula: `=sum(I${rowpos + 1}:I${totalNumberOfRows})` },
+  ]);
+
+  // =====================STYLE CHO CÁC HÀNG DỮ LIỆU =====================
+  worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
+    var datastartrow = rowpos;
+    var rowindex = rowNumber + datastartrow;
+    const rowlength = datastartrow + Mass_Excel_s2.length;
+    if (rowindex >= rowlength + 1) {
+      rowindex = rowlength + 1;
+    }
+    const insideColumns = ["C", "D", "E", "F", "G", "H", "I", "J"];
+    // Tạo border
+    insideColumns.forEach((v) => {
+      // Border
+      (worksheet.getCell(`${v}${rowindex}`).border = {
+        top: { style: "thin" },
+        bottom: { style: "thin" },
+        left: { style: "thin" },
+        right: { style: "thin" },
+      }),
+        // Alignment
+        (worksheet.getCell(`${v}${rowindex}`).alignment = {
+          horizontal: "center",
+          vertical: "middle",
+          wrapText: true,
+        }),
+        // Font
+        (worksheet.getCell(`${v}${rowindex}`).font = {
+          name: "Cascadia Code",
+          bold: true,
+          size: 12,
+        });
+    });
+  });
+  // =======================STYLE CHO HÀNG TỔNG CỘNG======================
+  worksheet.getCell(`A${totalNumberOfRows + 1}`).style = {
+    font: {
+      name: "Cascadia Code",
+      bold: true,
+      size: 14,
+      color: { argb: "ffffff" },
+    },
+    alignment: { horizontal: "center" },
+  };
+  // Tô màu cho hàng total (Tổng cộng)
+  const total_row = ["C", "D", "E", "F", "G", "H", "I", "J"];
+  total_row.forEach((v) => {
+    (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "062251" },
+    }),
+      (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).font = {
+        name: "Cascadia Code",
+        bold: true,
+        size: 14,
+        color: { argb: "ffffff" },
+      });
+  });
+
+  // ====================STYLE CÁC CỘT/ HÀNG ===============================
+  const HeaderStyle = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+  ];
+  const HeaderStyle2 = ["C", "D", "E", "F", "G", "H", "I", "J"];
+  HeaderStyle.forEach((v) => {
+    worksheet.getCell(`${v}${rowpos}`).style = {
+      font: { name: "Times New Roman", bold: true },
+      alignment: { horizontal: "center", vertical: "middle", wrapText: true },
+    };
+  });
+  HeaderStyle2.forEach((v) => {
+    worksheet.getCell(`${v}${rowpos}`).border = {
+      top: { style: "thin" },
+      left: { style: "thin" },
+      bottom: { style: "thin" },
+      right: { style: "thin" },
+    };
+  });
+  // Cài đặt độ rộng cột
+  worksheet.columns.forEach((column, index) => {
+    column.width = 30;
+  });
+  // Set width column
+  worksheet.getColumn(1).width = 10;
+  worksheet.getColumn(2).width = 50;
+  worksheet.getColumn(12).width = 30;
+  // Set height row
+  worksheet.getRow(7).height = 36;
+  worksheet.getRow(9).height = 36;
+  // =====================THẾT KẾ FOOTER=====================
+  worksheet.getCell(`J${totalNumberOfRows + 2}`).value =
+    "Day........Month........Year........";
+  worksheet.getCell(`J${totalNumberOfRows + 2}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "right", vertical: "middle", wrapText: false },
+  };
+
+  worksheet.getCell(`C${totalNumberOfRows + 3}`).value = "Giám đốc";
+  worksheet.getCell(`C${totalNumberOfRows + 4}`).value = "(Ký, ghi rõ họ tên)";
+  worksheet.getCell(`C${totalNumberOfRows + 3}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "center", vertical: "bottom", wrapText: false },
+  };
+  worksheet.getCell(`C${totalNumberOfRows + 4}`).style = {
+    font: { name: "Cascadia Code", bold: false, italic: true },
+    alignment: { horizontal: "center", vertical: "top", wrapText: false },
+  };
+
+  worksheet.getCell(`F${totalNumberOfRows + 3}`).value = "Trưởng ca";
+  worksheet.getCell(`F${totalNumberOfRows + 4}`).value = "(Ký, ghi rõ họ tên)";
+  worksheet.getCell(`F${totalNumberOfRows + 3}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "center", vertical: "bottom", wrapText: false },
+  };
+  worksheet.getCell(`F${totalNumberOfRows + 4}`).style = {
+    font: { name: "Cascadia Code", bold: false, italic: true },
+    alignment: { horizontal: "center", vertical: "top", wrapText: false },
+  };
+
+  worksheet.getCell(`J${totalNumberOfRows + 3}`).value = "Người in biểu";
+  worksheet.getCell(`J${totalNumberOfRows + 4}`).value = "(Ký, ghi rõ họ tên)";
+  worksheet.getCell(`J${totalNumberOfRows + 3}`).style = {
+    font: { name: "Cascadia Code", bold: true, italic: false },
+    alignment: { horizontal: "center", vertical: "bottom", wrapText: false },
+  };
+  worksheet.getCell(`J${totalNumberOfRows + 4}`).style = {
+    font: { name: "Cascadia Code", bold: false, italic: true },
+    alignment: { horizontal: "center", vertical: "top", wrapText: false },
+  };
+
+  // =====================THỰC HIỆN XUẤT DỮ LIỆU EXCEL=====================
+  // Export Link
+  var currentTime =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
+  var saveasDirect = "reports/mass_s2/Mass_s2_" + currentTime + ".xlsx";
+  SaveAslink = saveasDirect; // Send to client
+  var booknameLink = "src/public/" + saveasDirect;
+
+  var Bookname = "Mass_s2" + currentTime + ".xlsx";
+  // Write book name
+  workbook.xlsx.writeFile(booknameLink);
+
+  // Return
+  return [SaveAslink, Bookname];
+}
 // =====================TRUYỀN NHẬN DỮ LIỆU VỚI TRÌNH DUYỆT=====================
 function fn_Require_ExcelExport() {
   io.on("connection", function (socket) {
@@ -1789,6 +2786,25 @@ function fn_Require_ExcelExport_s2() {
       const [SaveAslink2, Bookname2] = fn_excelExport_s2();
       var data = [SaveAslink2, Bookname2];
       socket.emit("send_Excel_Report_s2", data);
+    });
+  });
+}
+
+function fn_Require_MassExport() {
+  io.on("connection", function (socket) {
+    socket.on("msg_Mass_Report", function (data) {
+      const [SaveAslink1, Bookname] = fn_massExport();
+      var data = [SaveAslink1, Bookname];
+      socket.emit("send_Mass_Report", data);
+    });
+  });
+}
+function fn_Require_MassExport_s2() {
+  io.on("connection", function (socket) {
+    socket.on("msg_Mass_Report_s2", function (data) {
+      const [SaveAslink1, Bookname] = fn_massExport_s2();
+      var data = [SaveAslink1, Bookname];
+      socket.emit("send_Mass_Report_s2", data);
     });
   });
 }
