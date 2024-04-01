@@ -1395,15 +1395,15 @@ function fn_excelExport() {
   // Lấy tổng số hàng
   const totalNumberOfRows = worksheet.rowCount;
   // Tính tổng
-  worksheet.addRow([
-    "Total",
-    "",
-    "",
-    { formula: `=sum(D${rowpos + 1}:D${totalNumberOfRows})` },
-    { formula: `=sum(E${rowpos + 1}:E${totalNumberOfRows})` },
-    { formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})` },
-    { formula: `=sum(G${rowpos + 1}:G${totalNumberOfRows})` },
-  ]);
+  // worksheet.addRow([
+  //   "Total",
+  //   "",
+  //   "",
+  //   { formula: `=sum(D${rowpos + 1}:D${totalNumberOfRows})` },
+  //   { formula: `=sum(E${rowpos + 1}:E${totalNumberOfRows})` },
+  //   { formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})` },
+  //   { formula: `=sum(G${rowpos + 1}:G${totalNumberOfRows})` },
+  // ]);
 
   // =====================STYLE CHO CÁC HÀNG DỮ LIỆU =====================
   worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
@@ -1451,16 +1451,6 @@ function fn_excelExport() {
     });
   });
   // =======================STYLE CHO HÀNG TỔNG CỘNG======================
-  worksheet.getCell(`A${totalNumberOfRows + 1}`).style = {
-    font: {
-      name: "Cascadia Code",
-      bold: true,
-      size: 14,
-      color: { argb: "ffffff" },
-    },
-    alignment: { horizontal: "center" },
-  };
-  // Tô màu cho hàng total (Tổng cộng)
   const total_row = [
     "A",
     "B",
@@ -1480,13 +1470,7 @@ function fn_excelExport() {
       type: "pattern",
       pattern: "solid",
       fgColor: { argb: "062251" },
-    }),
-      (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).font = {
-        name: "Cascadia Code",
-        bold: true,
-        size: 14,
-        color: { argb: "ffffff" },
-      });
+    });
   });
 
   // ====================STYLE CÁC CỘT/ HÀNG ===============================
@@ -1802,16 +1786,6 @@ function fn_excelExport_s2() {
   });
   // Lấy tổng số hàng
   const totalNumberOfRows = worksheet.rowCount;
-  // Tính tổng
-  worksheet.addRow([
-    "Total",
-    "",
-    "",
-    { formula: `=sum(D${rowpos + 1}:D${totalNumberOfRows})` },
-    { formula: `=sum(E${rowpos + 1}:E${totalNumberOfRows})` },
-    { formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})` },
-    { formula: `=sum(G${rowpos + 1}:G${totalNumberOfRows})` },
-  ]);
 
   // =====================STYLE CHO CÁC HÀNG DỮ LIỆU =====================
   worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
@@ -1859,15 +1833,6 @@ function fn_excelExport_s2() {
     });
   });
   // =======================STYLE CHO HÀNG TỔNG CỘNG======================
-  worksheet.getCell(`A${totalNumberOfRows + 1}`).style = {
-    font: {
-      name: "Cascadia Code",
-      bold: true,
-      size: 14,
-      color: { argb: "ffffff" },
-    },
-    alignment: { horizontal: "center" },
-  };
   // Tô màu cho hàng total (Tổng cộng)
   const total_row = [
     "A",
@@ -1888,13 +1853,7 @@ function fn_excelExport_s2() {
       type: "pattern",
       pattern: "solid",
       fgColor: { argb: "062251" },
-    }),
-      (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).font = {
-        name: "Cascadia Code",
-        bold: true,
-        size: 14,
-        color: { argb: "ffffff" },
-      });
+    });
   });
 
   // ====================STYLE CÁC CỘT/ HÀNG ===============================
