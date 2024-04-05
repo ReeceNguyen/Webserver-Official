@@ -26,7 +26,7 @@ function doalert(e) {
 var data_w1 = 0;
 var data_w2 = 0;
 var data_w3 = 0;
-var timeStamps = [];
+
 // Trạm 2
 var data_w1_s2 = 0;
 var data_w2_s2 = 0;
