@@ -100,6 +100,7 @@ var layout = {
     title: "Time",
     tickangle: 90,
     type: "date",
+    range: [new Date(Date.now() - 100 * 1000), new Date(Date.now())],
   },
   font: {
     family: "Montserrat",
@@ -115,6 +116,7 @@ var layout_s2 = {
     title: "Time",
     tickangle: 90,
     type: "date",
+    range: [new Date(Date.now() - 100 * 1000), new Date(Date.now())],
   },
   font: {
     family: "Montserrat",
@@ -125,6 +127,10 @@ var layout_s2 = {
 };
 
 // // Draw Chart
+
+var timeRange1 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
+var timeRange2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
+var timeRange3 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
 // STATION 1
 Plotly.newPlot("dia-weight1", [trace1], layout, {
   responsive: true,
@@ -132,6 +138,16 @@ Plotly.newPlot("dia-weight1", [trace1], layout, {
 });
 function updateGraph_1() {
   const now = new Date();
+  // Update time range
+  timeRange1[0] = new Date(timeRange1[0].getTime() + 1000);
+  timeRange1[1] = new Date(timeRange1[1].getTime() + 1000);
+
+  // Update xaxis range
+  Plotly.relayout("dia-weight1", {
+    "xaxis.range": timeRange1,
+  });
+
+  // Add new data point
   Plotly.extendTraces("dia-weight1", { x: [[now]], y: [[data_w1]] }, [0]);
 }
 setInterval(updateGraph_1, 1000);
@@ -142,6 +158,16 @@ Plotly.newPlot("dia-weight2", [trace2], layout, {
 });
 function updateGraph_2() {
   const now = new Date();
+  // Update time range
+  timeRange2[0] = new Date(timeRange2[0].getTime() + 1000);
+  timeRange2[1] = new Date(timeRange2[1].getTime() + 1000);
+
+  // Update xaxis range
+  Plotly.relayout("dia-weight2", {
+    "xaxis.range": timeRange2,
+  });
+
+  // Add new data point
   Plotly.extendTraces("dia-weight2", { x: [[now]], y: [[data_w2]] }, [0]);
 }
 setInterval(updateGraph_2, 1000);
@@ -152,17 +178,40 @@ Plotly.newPlot("dia-weight3", [trace3], layout, {
 });
 function updateGraph_3() {
   const now = new Date();
+  // Update time range
+  timeRange3[0] = new Date(timeRange3[0].getTime() + 1000);
+  timeRange3[1] = new Date(timeRange3[1].getTime() + 1000);
+
+  // Update xaxis range
+  Plotly.relayout("dia-weight3", {
+    "xaxis.range": timeRange3,
+  });
+
+  // Add new data point
   Plotly.extendTraces("dia-weight3", { x: [[now]], y: [[data_w3]] }, [0]);
 }
 setInterval(updateGraph_3, 1000);
 
 // STATION 2
+var timeRange1_s2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
+var timeRange2_s2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
+var timeRange3_s2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   responsive: true,
   staticPlot: true,
 });
 function updateGraph_1_s2() {
   const now = new Date();
+    // Update time range
+    timeRange1_s2[0] = new Date(timeRange1_s2[0].getTime() + 1000);
+    timeRange1_s2[1] = new Date(timeRange1_s2[1].getTime() + 1000);
+  
+    // Update xaxis range
+    Plotly.relayout("dia-weight1_s2", {
+      "xaxis.range": timeRange1_s2,
+    });
+  
+    // Add new data point
   Plotly.extendTraces("dia-weight1_s2", { x: [[now]], y: [[data_w1_s2]] }, [0]);
 }
 setInterval(updateGraph_1_s2, 1000);
@@ -173,6 +222,16 @@ Plotly.newPlot("dia-weight2_s2", [trace2_s2], layout_s2, {
 });
 function updateGraph_2_s2() {
   const now = new Date();
+    // Update time range
+    timeRange2_s2[0] = new Date(timeRange2_s2[0].getTime() + 1000);
+    timeRange2_s2[1] = new Date(timeRange2_s2[1].getTime() + 1000);
+  
+    // Update xaxis range
+    Plotly.relayout("dia-weight2_s2", {
+      "xaxis.range": timeRange2_s2,
+    });
+  
+    // Add new data point
   Plotly.extendTraces("dia-weight2_s2", { x: [[now]], y: [[data_w2_s2]] }, [0]);
 }
 setInterval(updateGraph_2_s2, 1000);
@@ -183,6 +242,16 @@ Plotly.newPlot("dia-weight3_s2", [trace3_s2], layout_s2, {
 });
 function updateGraph_3_s2() {
   const now = new Date();
+    // Update time range
+    timeRange3_s2[0] = new Date(timeRange3_s2[0].getTime() + 1000);
+    timeRange3_s2[1] = new Date(timeRange3_s2[1].getTime() + 1000);
+  
+    // Update xaxis range
+    Plotly.relayout("dia-weight3_s2", {
+      "xaxis.range": timeRange3_s2,
+    });
+  
+    // Add new data point
   Plotly.extendTraces("dia-weight3_s2", { x: [[now]], y: [[data_w3_s2]] }, [0]);
 }
 setInterval(updateGraph_3_s2, 1000);
