@@ -322,16 +322,12 @@ function fn_read_data_scan() {
   fn_sql_insert();
   fn_sql_delete();
   fn_Alarm_Manage();
-  fn_Alarm_Delete();
   fn_sql_insert_mass();
-  fn_sql_delete_mass();
   //Station 2
   fn_sql_insert_s2();
   fn_sql_delete_s2();
   fn_Alarm_Manage_s2();
-  fn_Alarm_Delete_s2();
   fn_sql_insert_mass_s2();
-  fn_sql_delete_mass_s2();
 }
 // Time cập nhật mỗi s
 setInterval(() => fn_read_data_scan(), 500);
@@ -884,15 +880,35 @@ function fn_sql_insert_mass_s2() {
 function fn_sql_delete() {
   delete_trigger = arr_tag_value[33];
   var sqltable_Name = process.env.TABLE_DATA_1;
+  var sqltable_Mass = process.env.TABLE_MASS_1;
+  var sqltable_Alarm = process.env.TABLE_ALARM_1;
   // Ghi dữ liệu vào SQL
   if (delete_trigger == true && delete_trigger != old_delete_trigger) {
-    var sql_write_str2 = "DELETE FROM " + sqltable_Name;
+    var sql_delete_data = "DELETE FROM " + sqltable_Name;
     // Thực hiện ghi dữ liệu vào SQL
-    sqlcon.query(sql_write_str2, function (err, result) {
+    sqlcon.query(sql_delete_data, function (err, result) {
       if (err) {
         console.log(err);
       } else {
         console.log("SQL - Delete Data Successfully");
+      }
+    });
+    var sql_delete_mass = "DELETE FROM " + sqltable_Mass;
+    // Thực hiện ghi dữ liệu vào SQL
+    sqlcon.query(sql_delete_mass, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Mass - Delete Data Successfully");
+      }
+    });
+    var sql_delete_alarm = "DELETE FROM " + sqltable_Alarm;
+    // Thực hiện ghi dữ liệu vào SQL
+    sqlcon.query(sql_delete_alarm, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Alarm - Delete Data Successfully");
       }
     });
   }
@@ -902,51 +918,35 @@ function fn_sql_delete() {
 function fn_sql_delete_s2() {
   delete_trigger_s2 = arr_tag_value_s2[33];
   var sqltable_Name_s2 = process.env.TABLE_DATA_2;
+  var sqltable_Mass_s2 = process.env.TABLE_MASS_2;
+  var sqltable_Alarm_s2 = process.env.TABLE_ALARM_2;
   // Ghi dữ liệu vào SQL
   if (delete_trigger_s2 == true && delete_trigger_s2 != old_delete_trigger_s2) {
-    var sql_write_str2_s2 = "DELETE FROM " + sqltable_Name_s2;
+    var sql_delete_data_s2 = "DELETE FROM " + sqltable_Name_s2;
     // Thực hiện ghi dữ liệu vào SQL
-    sqlcon_s2.query(sql_write_str2_s2, function (err, result) {
+    sqlcon_s2.query(sql_delete_data_s2, function (err, result) {
       if (err) {
         console.log(err);
       } else {
         console.log("SQL - Delete Data Successfully");
       }
     });
-  }
-  old_delete_trigger_s2 = delete_trigger_s2;
-}
-
-function fn_sql_delete_mass() {
-  delete_trigger = arr_tag_value[33];
-  var sqltable_Name = process.env.TABLE_MASS_1;
-  // Ghi dữ liệu vào SQL
-  if (delete_trigger == true && delete_trigger != old_delete_trigger) {
-    var sql_write_str2 = "DELETE FROM " + sqltable_Name;
+    var sql_delete_mass_s2 = "DELETE FROM " + sqltable_Mass_s2;
     // Thực hiện ghi dữ liệu vào SQL
-    sqlcon.query(sql_write_str2, function (err, result) {
+    sqlcon_s2.query(sql_delete_mass_s2, function (err, result) {
       if (err) {
         console.log(err);
       } else {
-        console.log("SQL - Delete Data Successfully");
+        console.log("Mass - Delete Data Successfully");
       }
     });
-  }
-  old_delete_trigger = delete_trigger;
-}
-
-function fn_sql_delete_mass_s2() {
-  delete_trigger_s2 = arr_tag_value_s2[33];
-  var sqltable_Name_s2 = process.env.TABLE_MASS_2;
-  // Ghi dữ liệu vào SQL
-  if (delete_trigger_s2 == true && delete_trigger_s2 != old_delete_trigger_s2) {
-    var sql_write_str2_s2 = "DELETE FROM " + sqltable_Name_s2;
+    var sql_delete_alarm_s2 = "DELETE FROM " + sqltable_Alarm_s2;
     // Thực hiện ghi dữ liệu vào SQL
-    sqlcon_s2.query(sql_write_str2_s2, function (err, result) {
+    sqlcon_s2.query(sql_delete_alarm_s2, function (err, result) {
       if (err) {
         console.log(err);
       } else {
-        console.log("SQL - Delete Data Successfully");
+        console.log("Alarm - Delete Data Successfully");
       }
     });
   }
@@ -2951,42 +2951,6 @@ function fn_Alarm_Manage_s2() {
     fn_sql_alarm_ack_s2(5);
   }
   Alarm_ID5_old_s2 = Alarm_ID5_s2;
-}
-// Hàm xóa Alarm
-function fn_Alarm_Delete() {
-  delete_trigger = arr_tag_value[33];
-  var sqltable_Name = process.env.TABLE_ALARM_1;
-  // Ghi dữ liệu vào SQL
-  if (delete_trigger == true && delete_trigger != old_delete_trigger) {
-    var sql_write_str2 = "DELETE FROM " + sqltable_Name;
-    // Thực hiện ghi dữ liệu vào SQL
-    sqlcon.query(sql_write_str2, function (err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Alarm - Delete Data Successfully");
-      }
-    });
-  }
-  old_delete_trigger = delete_trigger;
-}
-
-function fn_Alarm_Delete_s2() {
-  delete_trigger_s2 = arr_tag_value_s2[33];
-  var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
-  // Ghi dữ liệu vào SQL
-  if (delete_trigger_s2 == true && delete_trigger_s2 != old_delete_trigger_s2) {
-    var sql_write_str2 = "DELETE FROM " + sqltable_Name_s2;
-    // Thực hiện ghi dữ liệu vào SQL
-    sqlcon_s2.query(sql_write_str2, function (err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Alarm - Delete Data Successfully");
-      }
-    });
-  }
-  old_delete_trigger_s2 = delete_trigger_s2;
 }
 // ////////////////////////ĐỌC DỮ LIỆU ALARM GHI VÔ BẢNG////////////////////////
 function fn_AlarmSearch() {
