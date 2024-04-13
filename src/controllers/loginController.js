@@ -136,6 +136,11 @@ let postLogout2 = (req, res) => {
   );
   res.redirect("/login");
 };
+
+let exit = (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+};
 // Check Login
 let checkLoggedIn1 = (req, res, next) => {
   let query = "SELECT * FROM " + process.env.TABLE_ACCOUNT;
@@ -178,6 +183,7 @@ module.exports = {
   postLogOut0: postLogout0,
   postLogout1: postLogout1,
   postLogout2: postLogout2,
+  exit: exit,
   checkLoggedIn1: checkLoggedIn1,
   checkLoggedIn2: checkLoggedIn2,
   checkLoggedIn0: checkLoggedIn0,

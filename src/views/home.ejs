@@ -130,9 +130,9 @@
             class="border-[outset] systembtn bg-[#129c35] active:bg-green-500 text-center inline-block absolute w-[76px] h-[40px] left-[15px] bottom-[20px] select-none"
             href="/logout0"><i class="fa-solid fa-right-to-bracket"></i></a>
         <!--Nút đăng xuất-->
-        <button id="btt_Logout"
+        <a id="btt_Logout"
             class="border-[outset] systembtn bg-[#c42c2c] active:bg-red-500 text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
-            onclick="window.close()"><i class="fa-solid fa-right-from-bracket"></i></button>
+            href="/exit"><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
     <!--////////////// ABOUT /////////////-->
     <div id="Scr_About"
@@ -967,16 +967,13 @@
         </label>
         <!--//Màn hình tram 1//-->
         <div id="dia-weight1" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph1();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph1();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="dia-weight2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph2();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph2();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="dia-weight3" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph3();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph3();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="pag" class="pagination">
             <a
@@ -988,16 +985,13 @@
         </div>
         <!--//Màn hình tram 2//-->
         <div id="dia-weight1_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph1_s2();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph1_s2();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="dia-weight2_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph2_s2();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph2_s2();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="dia-weight3_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph3_s2();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph3_s2();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="pag_2" class="pagination">
             <a
@@ -1030,14 +1024,14 @@
     <style>
         .footer {
             position: relative;
-            width:1437px;
-            top:780px;
-            left:5px;
+            width: 1437px;
+            top: 780px;
+            left: 5px;
             background: #030391;
             font-family: 'Times New Roman', Times, serif;
             padding: 10px 0px;
             text-align: center;
-            border-radius:10px;
+            border-radius: 10px;
         }
 
         .footer .row {
@@ -1061,7 +1055,7 @@
 
         .footer .row ul {
             width: 100%;
-            display:flex;
+            display: flex;
             justify-content: center;
         }
 
@@ -1097,7 +1091,7 @@
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
             <a href="#"><i class="fa-brands fa-github"></i></a>
             <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#"><<i class="fa-brands fa-twitter"></i></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
         </div>
 
         <div class="row">
@@ -1105,4 +1099,5 @@
         </div>
     </div>
 </footer>
+
 </html>

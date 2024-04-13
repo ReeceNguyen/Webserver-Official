@@ -114,9 +114,9 @@
             class="border-[outset] systembtn bg-[#129c35] active:bg-green-500 text-center inline-block absolute w-[76px] h-[40px] left-[15px] bottom-[20px] select-none"
             href="/logout1"><i class="fa-solid fa-right-to-bracket"></i></a>
         <!--Nút đăng xuất-->
-        <button id="btt_Logout"
+        <a id="btt_Logout"
             class="border-[outset] systembtn bg-[#c42c2c] active:bg-red-500 text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
-            onclick="window.close()"><i class="fa-solid fa-right-from-bracket"></i></button>
+            href="/exit"><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
     <!--////////////// ABOUT /////////////-->
     <div id="Scr_About"
@@ -576,24 +576,18 @@
         class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-['Times_New_Roman',_Times,_serif] font-bold cursor-pointer">
         <!--//Màn hình tram 1//-->
         <div id="dia-weight1" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph1();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph1();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="dia-weight2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph2();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph2();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="dia-weight3" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
-            <button class="download-img" onclick="DownloadGraph3();"><i
-                    class="fa-solid fa-download"></i></button>
+            <button class="download-img" onclick="DownloadGraph3();"><i class="fa-solid fa-download"></i></button>
         </div>
         <div id="pag" class="pagination">
-            <a
-                onclick="fn_ScreenChange3('dia-weight1','dia-weight2','dia-weight3')">1</a>
-            <a
-                onclick="fn_ScreenChange3('dia-weight2','dia-weight1','dia-weight3')">2</a>
-            <a
-                onclick="fn_ScreenChange3('dia-weight3','dia-weight2','dia-weight1')">3</a>
+            <a onclick="fn_ScreenChange3('dia-weight1','dia-weight2','dia-weight3')">1</a>
+            <a onclick="fn_ScreenChange3('dia-weight2','dia-weight1','dia-weight3')">2</a>
+            <a onclick="fn_ScreenChange3('dia-weight3','dia-weight2','dia-weight1')">3</a>
         </div>
     </div>
     <!--////////////// HOME /////////////-->
@@ -618,14 +612,14 @@
     <style>
         .footer {
             position: relative;
-            width:1437px;
-            top:780px;
-            left:5px;
+            width: 1437px;
+            top: 780px;
+            left: 5px;
             background: #030391;
             font-family: 'Times New Roman', Times, serif;
             padding: 10px 0px;
             text-align: center;
-            border-radius:10px;
+            border-radius: 10px;
         }
 
         .footer .row {
@@ -649,7 +643,7 @@
 
         .footer .row ul {
             width: 100%;
-            display:flex;
+            display: flex;
             justify-content: center;
         }
 
@@ -685,7 +679,7 @@
             <a href="#"><i class="fa-brands fa-facebook"></i></a>
             <a href="#"><i class="fa-brands fa-github"></i></a>
             <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#"><<i class="fa-brands fa-twitter"></i></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
         </div>
 
         <div class="row">
@@ -693,4 +687,5 @@
         </div>
     </div>
 </footer>
+
 </html>
