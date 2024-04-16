@@ -329,7 +329,7 @@ function fn_read_data_scan() {
   fn_Alarm_Manage_s2();
   fn_sql_insert_mass_s2();
 }
-// Time cập nhật mỗi s
+// Time cập nhật
 setInterval(() => fn_read_data_scan(), 500);
 // /////////////////////////++THIẾT LẬP KẾT NỐI WEB (WEB BORROW)++/////////////////////////
 var express = require("express");
@@ -1394,17 +1394,6 @@ function fn_excelExport() {
   });
   // Lấy tổng số hàng
   const totalNumberOfRows = worksheet.rowCount;
-  // Tính tổng
-  // worksheet.addRow([
-  //   "Total",
-  //   "",
-  //   "",
-  //   { formula: `=sum(D${rowpos + 1}:D${totalNumberOfRows})` },
-  //   { formula: `=sum(E${rowpos + 1}:E${totalNumberOfRows})` },
-  //   { formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})` },
-  //   { formula: `=sum(G${rowpos + 1}:G${totalNumberOfRows})` },
-  // ]);
-
   // =====================STYLE CHO CÁC HÀNG DỮ LIỆU =====================
   worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
     var datastartrow = rowpos;
@@ -1466,11 +1455,11 @@ function fn_excelExport() {
     "L",
   ];
   total_row.forEach((v) => {
-    (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).fill = {
+    worksheet.getCell(`${v}${totalNumberOfRows + 1}`).fill = {
       type: "pattern",
       pattern: "solid",
       fgColor: { argb: "062251" },
-    });
+    };
   });
 
   // ====================STYLE CÁC CỘT/ HÀNG ===============================
@@ -1849,11 +1838,11 @@ function fn_excelExport_s2() {
     "L",
   ];
   total_row.forEach((v) => {
-    (worksheet.getCell(`${v}${totalNumberOfRows + 1}`).fill = {
+    worksheet.getCell(`${v}${totalNumberOfRows + 1}`).fill = {
       type: "pattern",
       pattern: "solid",
       fgColor: { argb: "062251" },
-    });
+    };
   });
 
   // ====================STYLE CÁC CỘT/ HÀNG ===============================
