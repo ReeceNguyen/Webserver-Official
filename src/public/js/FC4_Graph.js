@@ -258,50 +258,448 @@ setInterval(updateGraph_3_s2, 1000);
 
 // tải hình ảnh về
 function DownloadGraph1() {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  var timestamp =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
   Plotly.downloadImage("dia-weight1", {
     format: "png",
     height: 800,
     width: 1300,
-    filename: "st1_weight_1",
+    filename: "st1_weight_1_" + timestamp,
   });
 }
 function DownloadGraph2() {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  var timestamp =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
   Plotly.downloadImage("dia-weight2", {
     format: "png",
     height: 800,
     width: 1300,
-    filename: "st1_weight_2",
+    filename: "st1_weight_2_" + timestamp,
   });
 }
 function DownloadGraph3() {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  var timestamp =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
   Plotly.downloadImage("dia-weight3", {
     format: "png",
     height: 800,
     width: 1300,
-    filename: "st1_weight_3",
+    filename: "st1_weight_3_" + timestamp,
   });
 }
 function DownloadGraph1_s2() {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  var timestamp =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
   Plotly.downloadImage("dia-weight1_s2", {
     format: "png",
     height: 800,
     width: 1300,
-    filename: "st2_weight_1",
+    filename: "st2_weight_1_" + timestamp,
   });
 }
 function DownloadGraph2_s2() {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  var timestamp =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
   Plotly.downloadImage("dia-weight2_s2", {
     format: "png",
     height: 800,
     width: 1300,
-    filename: "st2_weight_2",
+    filename: "st2_weight_2_" + timestamp,
   });
 }
 function DownloadGraph3_s2() {
+  let date_ob = new Date();
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  let year = date_ob.getFullYear();
+  let hours = date_ob.getHours();
+  let minutes = date_ob.getMinutes();
+  let seconds = date_ob.getSeconds();
+  var timestamp =
+    year +
+    "_" +
+    month +
+    "_" +
+    date +
+    "_" +
+    hours +
+    "h" +
+    minutes +
+    "m" +
+    seconds +
+    "s";
   Plotly.downloadImage("dia-weight3_s2", {
     format: "png",
     height: 800,
     width: 1300,
-    filename: "st2_weight_3",
+    filename: "st2_weight_3_" + timestamp,
   });
+}
+
+function DownloadGraph1_x() {
+  var graphDiv = document.getElementById("dia-weight1");
+
+  Plotly.toImage(graphDiv, {
+    format: "png",
+    height: 800,
+    width: 1300,
+  })
+    .then(function (url) {
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      var timestamp =
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "h" +
+        minutes +
+        "m" +
+        seconds +
+        "s";
+      var data = {
+        img: url,
+        filename: "st1_weight_1_" + timestamp,
+      };
+
+      fetch("/saveImage1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
+function DownloadGraph2_x() {
+  var graphDiv = document.getElementById("dia-weight2");
+
+  Plotly.toImage(graphDiv, {
+    format: "png",
+    height: 800,
+    width: 1300,
+  })
+    .then(function (url) {
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      var timestamp =
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "h" +
+        minutes +
+        "m" +
+        seconds +
+        "s";
+      var data = {
+        img: url,
+        filename: "st1_weight_2_" + timestamp,
+      };
+
+      fetch("/saveImage1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
+function DownloadGraph3_x() {
+  var graphDiv = document.getElementById("dia-weight3");
+
+  Plotly.toImage(graphDiv, {
+    format: "png",
+    height: 800,
+    width: 1300,
+  })
+    .then(function (url) {
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      var timestamp =
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "h" +
+        minutes +
+        "m" +
+        seconds +
+        "s";
+      var data = {
+        img: url,
+        filename: "st1_weight_3_" + timestamp,
+      };
+
+      fetch("/saveImage1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
+
+function DownloadGraph1_s2_x() {
+  var graphDiv = document.getElementById("dia-weight1_s2");
+
+  Plotly.toImage(graphDiv, {
+    format: "png",
+    height: 800,
+    width: 1300,
+  })
+    .then(function (url) {
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      var timestamp =
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "h" +
+        minutes +
+        "m" +
+        seconds +
+        "s";
+      var data = {
+        img: url,
+        filename: "st2_weight_1_" + timestamp,
+      };
+
+      fetch("/saveImage2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
+function DownloadGraph2_s2_x() {
+  var graphDiv = document.getElementById("dia-weight2_s2");
+
+  Plotly.toImage(graphDiv, {
+    format: "png",
+    height: 800,
+    width: 1300,
+  })
+    .then(function (url) {
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      var timestamp =
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "h" +
+        minutes +
+        "m" +
+        seconds +
+        "s";
+      var data = {
+        img: url,
+        filename: "st2_weight_2_" + timestamp,
+      };
+
+      fetch("/saveImage2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
+}
+function DownloadGraph3_s2_x() {
+  var graphDiv = document.getElementById("dia-weight3_s2");
+
+  Plotly.toImage(graphDiv, {
+    format: "png",
+    height: 800,
+    width: 1300,
+  })
+    .then(function (url) {
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      var timestamp =
+        year +
+        "_" +
+        month +
+        "_" +
+        date +
+        "_" +
+        hours +
+        "h" +
+        minutes +
+        "m" +
+        seconds +
+        "s";
+      var data = {
+        img: url,
+        filename: "st2_weight_3_" + timestamp,
+      };
+
+      fetch("/saveImage2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+    });
 }
