@@ -61,14 +61,14 @@ var trace2 = {
   x: [],
   y: [data_w2],
   mode: "lines+markers",
-  name: "Weight2",
+  name: "Weight 2",
   line: { color: "#0000ff" },
 };
 var trace3 = {
   x: [],
   y: [data_w3],
   mode: "lines+markers",
-  name: "Weight3",
+  name: "Weight 3",
   line: { color: "#00ff00" },
 };
 var trace1_s2 = {

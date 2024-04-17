@@ -23,14 +23,14 @@ var trace2_s2 = {
   x: [],
   y: [data_w2_s2],
   mode: "lines+markers",
-  name: "Weight2",
+  name: "Weight 2",
   line: { color: "#0000ff" },
 };
 var trace3_s2 = {
   x: [],
   y: [data_w3_s2],
   mode: "lines+markers",
-  name: "Weight3",
+  name: "Weight 3",
   line: { color: "#00ff00" },
 };
 // // Layout configure
