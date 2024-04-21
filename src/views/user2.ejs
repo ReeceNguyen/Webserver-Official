@@ -370,7 +370,7 @@
                     onclick="socket.emit('cmd_off_System_s2',true)">OFF</button>
             </div>
 
-            <div id="box-2-manu_s2" class="absolute w-48 h-[250px] left-[5px] top-[250px] bg-white box-mode-border">
+            <div id="box-2-manu_s2" class="absolute w-48 h-[300px] left-[5px] top-[250px] bg-white box-mode-border">
                 <div id="box-2-manu-name_s2"
                     class="absolute w-44 h-8 flex justify-center items-center left-1 top-3 bg-[#0000ff]">OPERATION
                     MANUAL</div>
@@ -382,6 +382,7 @@
                         <li>Valve 3:</li>
                         <li>Mix :</li>
                         <li>Export :</li>
+                        <li>Order ID:</li>
                     </ol>
                 </div>
                 <!-- Nút nhấn mở van 1 -->
@@ -424,9 +425,21 @@
                 <button id="bttManu_StopE_s2"
                     class="bg-[#808080] text-center inline-block absolute w-[50px] h-[30px] right-[5px] top-[195px] active:bg-[#ff0000] systembtn"
                     onclick="socket.emit('cmd_StopE_s2', true);">OFF</button>
+                <!-- Cài đặt ID Sản phẩm-->
+                <input id="set_orderID_Manu_s2"
+                    class="absolute right-[14px] top-[230px] w-20 h-5 border-solid border-2 border-black text-center text-black"
+                    disabled="disabled" type="text" />
+                <script>fn_scrManu_IOField_IO_s2("sql_OrderID_s2", "set_orderID_Manu_s2", 0);</script>
+                <!--Nút nhấn sửa/lưu - Lưu ý: Nút nhấn lưu phải nằm trước nút nhấn sửa-->
+                <button id="btt_scrManu_Save_s2"
+                    class="bg-black active:bg-gray-500 inline-block absolute w-20 h-8 left-12 top-64 systembtn"
+                    onclick="fn_scrManu_SaveBtt_s2()">Save</button>
+                <button id="btt_scrManu_Edit_s2"
+                    class="bg-[#0000ff] active:bg-blue-500 inline-block absolute w-20 h-8 left-12 top-64 systembtn"
+                    onclick="fn_scrManu_EditBtt_s2()">Modify</button>
             </div>
             <div id="box-3-manu_s2"
-                class="absolute w-48 h-[150px] left-[5px] top-[520px] bg-white text-center box-mode-border">
+                class="absolute w-48 h-[150px] left-[5px] bottom-[20px] bg-white text-center box-mode-border">
                 <div id="box-3-manu-name_s2"
                     class="absolute w-44 h-8 flex justify-center items-center left-[5px] top-3 bg-[#0000ff]">DATABASE
                 </div>

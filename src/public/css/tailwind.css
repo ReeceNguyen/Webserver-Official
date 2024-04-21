@@ -684,6 +684,10 @@ video {
   right: 2rem;
 }
 
+.right-\[14px\] {
+  right: 14px;
+}
+
 .right-\[15px\] {
   right: 15px;
 }
@@ -736,6 +740,10 @@ video {
   top: 13rem;
 }
 
+.top-64 {
+  top: 16rem;
+}
+
 .top-\[100px\] {
   top: 100px;
 }
@@ -782,6 +790,10 @@ video {
 
 .top-\[220px\] {
   top: 220px;
+}
+
+.top-\[230px\] {
+  top: 230px;
 }
 
 .top-\[250px\] {

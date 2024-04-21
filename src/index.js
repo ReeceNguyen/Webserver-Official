@@ -344,6 +344,9 @@ io.on("connection", function (socket) {
       valuesWritten
     );
   });
+  socket.on("cmd_Edit_Data_Manu", function (data) {
+    conn_plc.writeItems(["sql_OrderID"], [data[0]], valuesWritten);
+  });
 });
 
 // Station 2
@@ -435,6 +438,9 @@ io.on("connection", function (socket) {
       [data[0], data[1], data[2], data[3], data[4]],
       valuesWritten
     );
+  });
+  socket.on("cmd_Edit_Data_Manu_s2", function (data) {
+    conn_plc_s2.writeItems(["sql_OrderID_s2"], [data[0]], valuesWritten);
   });
 });
 // ///////////TẠO HÀM GHI DỮ LIỆU XUỐNG SQL/////////
