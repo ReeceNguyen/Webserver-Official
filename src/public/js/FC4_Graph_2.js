@@ -41,7 +41,7 @@ var layout_s2 = {
     title: "Time",
     tickangle: 90,
     type: "date",
-    range: [new Date(Date.now() - 100 * 1000), new Date(Date.now())],
+    range: [new Date(Date.now() - 20 * 1000), new Date(Date.now() + 20 * 1000)],
   },
   font: {
     family: "Montserrat",
@@ -53,9 +53,18 @@ var layout_s2 = {
 
 // // Draw Chart
 // STATION 2
-var timeRange1_s2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
-var timeRange2_s2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
-var timeRange3_s2 = [new Date(Date.now() - 100 * 1000), new Date(Date.now())];
+var timeRange1_s2 = [
+  new Date(Date.now() - 20 * 1000),
+  new Date(Date.now() + 20 * 1000),
+];
+var timeRange2_s2 = [
+  new Date(Date.now() - 20 * 1000),
+  new Date(Date.now() + 20 * 1000),
+];
+var timeRange3_s2 = [
+  new Date(Date.now() - 20 * 1000),
+  new Date(Date.now() + 20 * 1000),
+];
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   responsive: true,
   staticPlot: true,
