@@ -27,7 +27,8 @@
     <link rel="icon" href="/images/Logo/favicon.ico" type="image/x-icon">
 
     <!-- ////////////// GỌI CÁC CSS //////////////  -->
-    <link rel="stylesheet" href="/css/Montserrat.css">
+    <link rel="preload" href="Montserrat/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="Montserrat/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/screen_Login.css">
     <link rel="stylesheet" href="/css/tailwind.css">
@@ -58,7 +59,7 @@
     </div>
     <!-- ////////////// NAVIGATION ////////////// -->
     <div id="slidebar"
-        class="rounded-[10px] absolute left-[5px] top-[100px] w-[198px] h-[600px] bg-[#030391] text-white text-sm font-bold font-[Montserrat] cursor-pointer select-none">
+        class="rounded-[10px] absolute left-[5px] top-[100px] w-[198px] h-[600px] bg-[#030391] text-white text-sm font-bold font-['Montserrat'] cursor-pointer select-none">
         <figure id="container_al" class="absolute box-border left-5 top-[140px] text-center">
             <img id="Auto_LED" alt="auto mode" class="size-[50px]">
             <script>fn_SymbolStatus("Auto_LED", "Auto", "Q_Lamp_Auto")</script>
@@ -215,7 +216,7 @@
         class="rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
         <!-- //////////////Code cho màn hình Auto////////////// -->
         <div id="Screen_Auto_Panel"
-            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-[Montserrat] font-bold cursor-pointer select-none">
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-['Montserrat'] font-bold cursor-pointer select-none">
             <label class="ml-[60px]">STATION 1</label>
             <div id="box-1-auto"
                 class="absolute w-[192px] h-[140px] left-[5px] top-5 text-center text-white bg-white box-mode-border">
@@ -310,7 +311,7 @@
             </div>
         </div>
         <div id="Screen_Auto"
-            class="rounded-[10px] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] text-base font-[Montserrat] font-bold select-none">
+            class="rounded-[10px] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] text-base font-['Montserrat'] font-bold select-none">
             <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
             <img src="images/background_SCR.PNG" class="rounded-[10px]">
             <!-- Ảnh nền -->
@@ -359,7 +360,7 @@
         </div>
         <!-- //////////////Code cho màn hình Manu////////////// -->
         <div id="Screen_Manu_Panel"
-            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white font-base font-[Montserrat] font-bold cursor-pointer select-none">
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white font-base font-['Montserrat'] font-bold cursor-pointer select-none">
             <!-- //////////////NÚT NHẤN ĐIỀU KHIỂN ////////////// -->
             <label class="ml-[60px]">STATION 1</label>
             <div id="box-1-manu" class="absolute w-48 h-[100px] left-[5px] top-5 text-center bg-white box-mode-border">
@@ -472,7 +473,7 @@
             </div>
         </div>
         <div id="Screen_Manu"
-            class="rounded-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] font-base font-[Montserrat] font-bold select-none">
+            class="rounded-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] font-base font-['Montserrat'] font-bold select-none">
             <!-- Ảnh nền -->
             <img src="images/background_SCR.PNG" class="rounded-[10px]">
             <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
@@ -524,7 +525,7 @@
     <div id="Scr_Main_s2"
         class="rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
         <div id="Screen_Auto_Panel_s2"
-            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-[Montserrat] font-bold cursor-pointer select-none">
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-['Montserrat'] font-bold cursor-pointer select-none">
             <label class="ml-[60px]">STATION 2</label>
             <div id="box-1-auto_s2"
                 class="absolute w-[192px] h-[140px] left-[5px] top-5 text-center text-white bg-white box-mode-border">
@@ -619,7 +620,7 @@
             </div>
         </div>
         <div id="Screen_Auto_s2"
-            class="rounded-[10px] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] text-base font-[Montserrat] font-bold select-none">
+            class="rounded-[10px] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] text-base font-['Montserrat'] font-bold select-none">
             <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
             <img src="images/background_SCR.PNG" class="rounded-[10px]">
             <!-- Ảnh nền -->
@@ -668,7 +669,7 @@
         </div>
         <!-- //////////////Code cho màn hình Manu////////////// -->
         <div id="Screen_Manu_Panel_s2"
-            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white font-base font-[Montserrat] font-bold cursor-pointer select-none">
+            class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white font-base font-['Montserrat'] font-bold cursor-pointer select-none">
             <!-- //////////////NÚT NHẤN ĐIỀU KHIỂN ////////////// -->
             <label class="ml-[60px]">STATION 2</label>
             <div id="box-1-manu_s2"
@@ -782,7 +783,7 @@
             </div>
         </div>
         <div id="Screen_Manu_s2"
-            class="rounded-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] font-base font-[Montserrat] font-bold select-none">
+            class="rounded-[10px] absolute left-[212px] top-0 w-[1022px] h-[766px] bg-[#b6b6b6] border-solid border-[#4a4a4e] border-b-[10px] border-r-[10px] font-base font-['Montserrat'] font-bold select-none">
             <!-- Ảnh nền -->
             <img src="images/background_SCR.PNG" class="rounded-[10px]">
             <!-- //////////////HIỂN THỊ SYMBOL ////////////// -->
@@ -1121,10 +1122,10 @@
     </style>
     <div class="footer">
         <div class="row">
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-github"></i></a>
-            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://github.com/" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:admin@gmail.com"><i class="fa-solid fa-envelope"></i></a>
         </div>
 
         <div class="row">
