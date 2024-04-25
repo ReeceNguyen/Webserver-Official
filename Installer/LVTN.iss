@@ -9,7 +9,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{4283A852-3ED6-4AB9-B533-2B81654C6F97}
+AppId={{DECDF98C-3F63-4E64-86C3-FA227607F705}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -34,5 +34,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "C:\Users\minht\OneDrive\Documents\Subjects\LVTN\LVTN\Installer\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+[Run]
+Filename: "{app}\node-v20.9.0-x64.msi"; Description: "Installing Node.js"; Flags: postinstall shellexec waituntilterminated
+
 [Icons]
 Name: "{commondesktop}\\{#MyAppName}"; Filename: "{cmd}"; Parameters: "/C cd ""C:\Webserver Application\SCADA"" & start http://50.50.50.100:3000/ & npm run lvtn"; WorkingDir: "C:\Webserver Application\SCADA"; IconFilename: "{app}\src\public\images\Logo\favicon.ico"; Comment: "Start {#MyAppName}"
