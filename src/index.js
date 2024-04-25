@@ -1,17 +1,18 @@
-// /////////////////////////KẾT NỐI WEBSERVER VỚI PLC/////////////////////////
-// KHỞI TẠO KẾT NỐI PLC
 require("dotenv").config();
-// triger ghi dữ liệu vào SQL
+var { sqlcon, sqlcon_s2 } = require("./config/connectDB");
+const { conn_plc, conn_plc_s2 } = require("./config/plcConnection");
+
+// Các trigger giao tiếp vói MySQL
 var insert_trigger = false;
 var old_insert_trigger = false;
 var insert_trigger_s2 = false;
 var old_insert_trigger_s2 = false;
-// triger delete dữ liệu SQL
+
 var delete_trigger = false;
 var old_delete_trigger = false;
 var delete_trigger_s2 = false;
 var old_delete_trigger_s2 = false;
-//trigger ghi dữ liệu cảnh báo vào SQL
+
 var Alarm_ID1 = false;
 var Alarm_ID2 = false;
 var Alarm_ID3 = false;
@@ -35,8 +36,7 @@ var Alarm_ID2_old_s2 = false;
 var Alarm_ID3_old_s2 = false;
 var Alarm_ID4_old_s2 = false;
 var Alarm_ID5_old_s2 = false;
-// Khởi tạo SQL
-var { sqlcon, sqlcon_s2 } = require("./config/connectDB");
+
 // Mảng xuất dữ liệu Excel
 var SQL_Excel = [];
 var AL_Excel = [];
@@ -44,7 +44,7 @@ var Mass_Excel = [];
 var SQL_Excel_s2 = [];
 var AL_Excel_s2 = [];
 var Mass_Excel_s2 = [];
-const { conn_plc, conn_plc_s2 } = require("./config/plcConnection");
+
 // Đọc dữ liệu từ PLC và đưa vào array tags
 var arr_tag_value = []; // Tạo một mảng lưu giá trị tag đọc về
 var arr_tag_value_s2 = [];
@@ -54,7 +54,7 @@ function valuesReady(anythingBad, values) {
   } // Cảnh báo lỗi
   var lodash = require("lodash"); // Chuyển variable sang array
   arr_tag_value = lodash.map(values, (item) => item);
-  console.log(values); // Hiển thị giá trị để kiểm tra
+  console.log(values);
 }
 
 function valuesReady_s2(anythingBad, values) {
@@ -63,7 +63,7 @@ function valuesReady_s2(anythingBad, values) {
   } // Cảnh báo lỗi
   var lodash = require("lodash"); // Chuyển variable sang array
   arr_tag_value_s2 = lodash.map(values, (item) => item);
-  console.log(values); // Hiển thị giá trị để kiểm tra
+  console.log(values);
 }
 // Hàm chức năng scan giá trị
 function fn_read_data_scan() {
@@ -82,14 +82,15 @@ function fn_read_data_scan() {
 }
 // Time cập nhật
 setInterval(() => fn_read_data_scan(), 500);
-// /////////////////////////++THIẾT LẬP KẾT NỐI WEB (WEB BORROW)++/////////////////////////
-var express = require("express");
-var app = express();
+// ///////////////////////// THIẾT LẬP KẾT NỐI WEB /////////////////////////
+const express = require("express");
+const app = express();
 const initWebRoutes = require("./routes/web");
 const configViewEngine = require("./config/viewEngine");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const connectFlash = require("connect-flash");
+const Excel = require("exceljs");
 
 //use cookie parser
 app.use(cookieParser("secret"));
@@ -100,7 +101,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 60000 },
-  })
+  }),
 );
 // Enable body parser post data
 app.use(express.json());
@@ -231,18 +232,14 @@ io.on("connection", function (socket) {
   });
   fn_SQLSearch(); // Hàm tìm kiếm SQL
   fn_SQLSearch_ByTime(); // Hàm tìm kiếm theo thời gian
-  fn_Require_ExcelExport(); // Nhận yêu cầu xuất Excel
   fn_AlarmSearch();
   fn_Alarm_Search_ByTime();
-  fn_AL_Require_ExcelExport();
   fn_Mass_Search_ByTime();
 
   fn_SQLSearch_s2(); // Hàm tìm kiếm SQL
   fn_SQLSearch_ByTime_s2(); // Hàm tìm kiếm theo thời gian
-  fn_Require_ExcelExport_s2(); // Nhận yêu cầu xuất Excel
   fn_AlarmSearch_s2();
   fn_Alarm_Search_ByTime_s2();
-  fn_AL_Require_ExcelExport_s2();
   fn_Mass_Search_ByTime_s2();
 });
 // HÀM GHI DỮ LIỆU XUỐNG PLC
@@ -341,7 +338,7 @@ io.on("connection", function (socket) {
         "Setting_Time_Tron",
       ],
       [data[0], data[1], data[2], data[3], data[4]],
-      valuesWritten
+      valuesWritten,
     );
   });
   socket.on("cmd_Edit_Data_Manu", function (data) {
@@ -436,7 +433,7 @@ io.on("connection", function (socket) {
         "Setting_Time_Tron_s2",
       ],
       [data[0], data[1], data[2], data[3], data[4]],
-      valuesWritten
+      valuesWritten,
     );
   });
   socket.on("cmd_Edit_Data_Manu_s2", function (data) {
@@ -942,8 +939,7 @@ function fn_Mass_Search_ByTime_s2() {
   });
 }
 // /////////////////////////////// BÁO CÁO EXCEL ///////////////////////////////
-const Excel = require("exceljs");
-const { CONNREFUSED } = require("dns");
+
 function fn_excelExport() {
   // =====================CÁC THUỘC TÍNH CHUNG=====================
   // Lấy ngày tháng hiện tại
@@ -2466,42 +2462,14 @@ function fn_massExport_s2() {
   SaveAslink = saveasDirect; // Send to client
   var booknameLink = "src/public/" + saveasDirect;
 
-  var Bookname = "Mass_s2" + currentTime + ".xlsx";
+  var Bookname = "Mass_s2_" + currentTime + ".xlsx";
   // Write book name
   workbook.xlsx.writeFile(booknameLink);
 
   // Return
   return [SaveAslink, Bookname];
 }
-// =====================TRUYỀN NHẬN DỮ LIỆU VỚI TRÌNH DUYỆT=====================
-function fn_Require_ExcelExport() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Excel_Report", function (data) {
-      const [SaveAslink1, Bookname] = fn_excelExport();
-      var data = [SaveAslink1, Bookname];
-      socket.emit("send_Excel_Report", data);
-    });
-    socket.on("msg_Mass_Report", function (data) {
-      const [SaveAslink1, Bookname] = fn_massExport();
-      var data = [SaveAslink1, Bookname];
-      socket.emit("send_Mass_Report", data);
-    });
-  });
-}
-function fn_Require_ExcelExport_s2() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Excel_Report_s2", function (data) {
-      const [SaveAslink2, Bookname2] = fn_excelExport_s2();
-      var data = [SaveAslink2, Bookname2];
-      socket.emit("send_Excel_Report_s2", data);
-    });
-    socket.on("msg_Mass_Report_s2", function (data) {
-      const [SaveAslink1, Bookname] = fn_massExport_s2();
-      var data = [SaveAslink1, Bookname];
-      socket.emit("send_Mass_Report_s2", data);
-    });
-  });
-}
+
 // =====================TẠO HÀM GHI ALARM XUỐNG SQL============================
 function fn_sql_alarm_insert(ID, AlarmName) {
   var sqltable_Name = process.env.TABLE_ALARM_1;
@@ -2831,7 +2799,7 @@ function fn_Alarm_Search_ByTime_s2() {
     });
   });
 }
-// //////////////////////////XUẤT EXCEL ALARM//////////////////////
+// /////////////////////////////// BÁO CÁO EXCEL ///////////////////////////////
 function fn_AL_excelExport() {
   // =====================CÁC THUỘC TÍNH CHUNG=====================
   // Lấy ngày tháng hiện tại
@@ -3525,22 +3493,40 @@ function fn_AL_excelExport_s2() {
   // Return
   return [SaveAslinkAL, BooknameAL];
 }
-// =====================TRUYỀN NHẬN DỮ LIỆU VỚI TRÌNH DUYỆT=====================
-function fn_AL_Require_ExcelExport() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Excel_Report_al", function (data) {
-      const [SaveAslink1, Bookname] = fn_AL_excelExport();
-      var data = [SaveAslink1, Bookname];
-      socket.emit("send_Excel_Report_al", data);
-    });
+// ===================== XUẤT EXCEL =====================
+
+io.on("connection", (socket) => {
+  // Station 1 Report Export
+  socket.on("msg_Excel_Report", function (data) {
+    const [SaveAs, Bookname] = fn_excelExport();
+    var data = [SaveAs, Bookname];
+    socket.emit("send_Excel_Report", data);
   });
-}
-function fn_AL_Require_ExcelExport_s2() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Excel_Report_al_s2", function (data) {
-      const [SaveAslink2, Bookname] = fn_AL_excelExport_s2();
-      var data = [SaveAslink2, Bookname];
-      socket.emit("send_Excel_Report_al_s2", data);
-    });
+  socket.on("msg_Mass_Report", function (data) {
+    const [SaveAs, Bookname] = fn_massExport();
+    var data = [SaveAs, Bookname];
+    socket.emit("send_Mass_Report", data);
   });
-}
+  socket.on("msg_Excel_Report_al", function (data) {
+    const [SaveAs, Bookname] = fn_AL_excelExport();
+    var data = [SaveAs, Bookname];
+    socket.emit("send_Excel_Report_al", data);
+  });
+
+  // Station 2 Report Export
+  socket.on("msg_Excel_Report_s2", function (data) {
+    const [SaveAs, Bookname] = fn_excelExport_s2();
+    var data = [SaveAs, Bookname];
+    socket.emit("send_Excel_Report_s2", data);
+  });
+  socket.on("msg_Mass_Report_s2", function (data) {
+    const [SaveAs, Bookname] = fn_massExport_s2();
+    var data = [SaveAs, Bookname];
+    socket.emit("send_Mass_Report_s2", data);
+  });
+  socket.on("msg_Excel_Report_al_s2", function (data) {
+    const [SaveAs, Bookname] = fn_AL_excelExport_s2();
+    var data = [SaveAs, Bookname];
+    socket.emit("send_Excel_Report_al_s2", data);
+  });
+});
