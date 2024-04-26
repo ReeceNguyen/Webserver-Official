@@ -163,3 +163,11 @@ Download [![Static Badge](https://img.shields.io/badge/css-Tailwind-blue)](https
   ```console
   npm run lvtn
   ```
+## Compress to Application
+- [Nativefier](https://www.npmjs.com/package/nativefier) : a “desktop app” for any web site with minimal fuss.
+```console
+npm install nativefier -g  
+```
+```console
+nativefier --name 'Webserver Application' 'IpAddress'
+```
