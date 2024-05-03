@@ -137,7 +137,7 @@
     </div>
     <!--////////////// ABOUT /////////////-->
     <div id="Scr_About"
-        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-['Times_New_Roman',_Times,_serif] font-bold flex flex-wrap">
+        class="fix-cover rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none font-['Times_New_Roman',_Times,_serif] font-bold flex flex-wrap">
         <div
             class="w-[500px] h-[280px] rounded-b-lg border-solid border-2 border-black pl-0 ml-3 mt-3 text-left text-xl">
             <div class="w-[496px] h-[80px] bg-gray-300 pt-1 pl-1 border-b-4 border-blue-700">
@@ -213,7 +213,7 @@
     </div>
     <!--////////////// STATION CONTROL 1 /////////////-->
     <div id="Scr_Main"
-        class="rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
+        class="fix-cover rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
         <!-- //////////////Code cho màn hình Auto////////////// -->
         <div id="Screen_Auto_Panel"
             class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-['Montserrat'] font-bold cursor-pointer select-none">
@@ -523,7 +523,7 @@
     </div>
     <!--///////////// STATION CONTROL 2 /////////////-->
     <div id="Scr_Main_s2"
-        class="rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
+        class="fix-cover rounded-[10px] bg-none absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none">
         <div id="Screen_Auto_Panel_s2"
             class="absolute left-0 top-0 w-[202px] h-[766px] bg-[#1488D8] border-solid border-b-[10px] border-[#0000ff] rounded-[10px] text-white text-base font-['Montserrat'] font-bold cursor-pointer select-none">
             <label class="ml-[60px]">STATION 2</label>
@@ -833,7 +833,7 @@
     </div>
     <!--////////////// DATABASE /////////////-->
     <div id="Scr_SQL"
-        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none text-[#ffffff] font-['Times_New_Roman',_Times,_serif] font-bold">
+        class="fix-cover rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none text-[#ffffff] font-['Times_New_Roman',_Times,_serif] font-bold">
         <div id="date-picker" class="absolute left-[14px] top-[10px] w-[1000px] h-[30px]">
             <!--Date time piker-->
             <label id="lb_Search_Start">From:</label>
@@ -915,7 +915,7 @@
     </div>
     <!--////////////// ALARM /////////////-->
     <div id="Scr_Alarm"
-        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none text-[#ffffff] font-['Times_New_Roman',_Times,_serif] font-bold">
+        class="fix-cover rounded-[10px] border-[outset] border-[5px] border-[#0000ff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] bg-[#1488D8] select-none text-[#ffffff] font-['Times_New_Roman',_Times,_serif] font-bold">
         <div id="alarm_picker" class="absolute left-[14px] top-[10px] w-[1000px] h-[30px]">
             <!--Date time piker-->
             <label id="lb_AL_Search_Start">From:</label>
@@ -1007,11 +1007,11 @@
         </div>
         <div id="pag" class="pagination">
             <a
-                onclick="fn_ScreenChangeMain('dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">1</a>
+                onclick="fn_ScreenChange6('dia-weight1','dia-weight2','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">1</a>
             <a
-                onclick="fn_ScreenChangeMain('dia-weight2','dia-weight1','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">2</a>
+                onclick="fn_ScreenChange6('dia-weight2','dia-weight1','dia-weight3','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">2</a>
             <a
-                onclick="fn_ScreenChangeMain('dia-weight3','dia-weight2','dia-weight1','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">3</a>
+                onclick="fn_ScreenChange6('dia-weight3','dia-weight2','dia-weight1','dia-weight1_s2','dia-weight2_s2','dia-weight3_s2')">3</a>
         </div>
         <!--//Màn hình tram 2//-->
         <div id="dia-weight1_s2" class="absolute w-[1204px] h-[600px] left-[10px] top-[10px]">
@@ -1028,16 +1028,16 @@
         </div>
         <div id="pag_2" class="pagination">
             <a
-                onclick="fn_ScreenChangeMain('dia-weight1_s2','dia-weight2_s2','dia-weight3_s2','dia-weight1','dia-weight2','dia-weight3')">1</a>
+                onclick="fn_ScreenChange6('dia-weight1_s2','dia-weight2_s2','dia-weight3_s2','dia-weight1','dia-weight2','dia-weight3')">1</a>
             <a
-                onclick="fn_ScreenChangeMain('dia-weight2_s2','dia-weight1_s2','dia-weight3_s2','dia-weight1','dia-weight2','dia-weight3')">2</a>
+                onclick="fn_ScreenChange6('dia-weight2_s2','dia-weight1_s2','dia-weight3_s2','dia-weight1','dia-weight2','dia-weight3')">2</a>
             <a
-                onclick="fn_ScreenChangeMain('dia-weight3_s2','dia-weight2_s2','dia-weight1_s2','dia-weight1','dia-weight2','dia-weight3')">3</a>
+                onclick="fn_ScreenChange6('dia-weight3_s2','dia-weight2_s2','dia-weight1_s2','dia-weight1','dia-weight2','dia-weight3')">3</a>
         </div>
     </div>
     <!--////////////// HOME /////////////-->
     <div id="Scr_Start"
-        class="rounded-[10px] border-[outset] border-[5px] border-[#0000ff] bg-[#ffffff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none font-['Times_New_Roman',_Times,_serif] font-bold text-center text-xl">
+        class="fix-cover rounded-[10px] border-[outset] border-[5px] border-[#0000ff] bg-[#ffffff] absolute left-[208px] top-[100px] w-[1234px] h-[766px] select-none font-['Times_New_Roman',_Times,_serif] font-bold text-center text-xl">
         <h2>VIETNAM NATIONAL UNIVERSITY HO CHI MINH CITY</h2>
         <h3>HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY</h3></br>
         <p>Eletrical and Electronic Engineering Faculty<br />Department of Control Engineering and Automation</p>

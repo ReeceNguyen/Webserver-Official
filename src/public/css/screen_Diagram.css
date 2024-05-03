@@ -140,3 +140,6 @@
 .download-img:active{
   background-color: #00cc00;
 }
+.fix-cover{
+  z-index: 2;
+}

@@ -108,6 +108,8 @@ var layout = {
     weight: "bold",
   },
   showlegend: true,
+  xaxis: {fixedrange: true},
+  yaxis: {fixedrange: true},
 };
 var layout_s2 = {
   title: "Station 2: Weight and Time",
@@ -124,6 +126,8 @@ var layout_s2 = {
     weight: "bold",
   },
   showlegend: true,
+  xaxis: {fixedrange: true},
+  yaxis: {fixedrange: true},
 };
 
 // // Draw Chart
@@ -143,7 +147,8 @@ var timeRange3 = [
 // STATION 1
 Plotly.newPlot("dia-weight1", [trace1], layout, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_1() {
   const now = new Date();
@@ -163,7 +168,8 @@ setInterval(updateGraph_1, 1000);
 
 Plotly.newPlot("dia-weight2", [trace2], layout, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_2() {
   const now = new Date();
@@ -183,7 +189,8 @@ setInterval(updateGraph_2, 1000);
 
 Plotly.newPlot("dia-weight3", [trace3], layout, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_3() {
   const now = new Date();
@@ -216,7 +223,9 @@ var timeRange3_s2 = [
 ];
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   responsive: true,
-  staticPlot: true,
+  // staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_1_s2() {
   const now = new Date();
@@ -236,7 +245,8 @@ setInterval(updateGraph_1_s2, 1000);
 
 Plotly.newPlot("dia-weight2_s2", [trace2_s2], layout_s2, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_2_s2() {
   const now = new Date();
@@ -256,7 +266,8 @@ setInterval(updateGraph_2_s2, 1000);
 
 Plotly.newPlot("dia-weight3_s2", [trace3_s2], layout_s2, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_3_s2() {
   const now = new Date();

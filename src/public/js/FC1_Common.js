@@ -45,6 +45,23 @@ function fn_ScreenChange3(scr_1, scr_2, scr_3) {
   document.getElementById(scr_1).style.visibility = "visible"; // Hiển thị trang được chọn
   document.getElementById(scr_2).style.visibility = "hidden"; // Hiển thị trang được chọn
   document.getElementById(scr_3).style.visibility = "hidden"; // Ẩn trang 1
+  document.getElementById(scr_1).style.zIndex = "1"; // Đặt z-index cho trang được chọn
+  document.getElementById(scr_2).style.zIndex = "0"; // Đặt z-index cho trang 2
+  document.getElementById(scr_3).style.zIndex = "0"; // Đặt z-index cho trang 3
+}
+function fn_ScreenChange6(scr_1, scr_2, scr_3, scr_4, scr_5, scr_6) {
+  document.getElementById(scr_1).style.visibility = "visible"; // Hiển thị trang được chọn
+  document.getElementById(scr_2).style.visibility = "hidden"; // Hiển thị trang được chọn
+  document.getElementById(scr_3).style.visibility = "hidden";
+  document.getElementById(scr_4).style.visibility = "hidden";
+  document.getElementById(scr_5).style.visibility = "hidden";
+  document.getElementById(scr_6).style.visibility = "hidden";
+  document.getElementById(scr_1).style.zIndex = "1"; // Đặt z-index cho trang được chọn
+  document.getElementById(scr_2).style.zIndex = "0"; // Đặt z-index cho trang 2
+  document.getElementById(scr_3).style.zIndex = "0";
+  document.getElementById(scr_4).style.zIndex = "0";
+  document.getElementById(scr_5).style.zIndex = "0";
+  document.getElementById(scr_6).style.zIndex = "0";
 }
 function fn_ScreenHidden(scr_1, scr_2, scr_3, scr_4, scr_5, scr_6) {
   document.getElementById(scr_1).style.visibility = "hidden"; // Hiển thị trang được chọn

@@ -49,6 +49,8 @@ var layout_s2 = {
     weight: "bold",
   },
   showlegend: true,
+  xaxis: {fixedrange: true},
+  yaxis: {fixedrange: true},
 };
 
 // // Draw Chart
@@ -67,7 +69,8 @@ var timeRange3_s2 = [
 ];
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_1_s2() {
   const now = new Date();
@@ -87,7 +90,8 @@ setInterval(updateGraph_1_s2, 1000);
 
 Plotly.newPlot("dia-weight2_s2", [trace2_s2], layout_s2, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_2_s2() {
   const now = new Date();
@@ -107,7 +111,8 @@ setInterval(updateGraph_2_s2, 1000);
 
 Plotly.newPlot("dia-weight3_s2", [trace3_s2], layout_s2, {
   responsive: true,
-  staticPlot: true,
+  displayModeBar:false,
+  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
 });
 function updateGraph_3_s2() {
   const now = new Date();
