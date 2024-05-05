@@ -1,6 +1,6 @@
 // //////////// YÊU CẦU DỮ LIỆU TỪ SERVER- REQUEST DATA //////////////
-var myVar = setInterval(myTimer, 100);
-function myTimer() {
+setInterval(updateValue, 100);
+function updateValue() {
   socket.emit("Client-send-data", "Request data client");
 }
 // //////////// CÁC KHỐI CHƯƠNG TRÌNH CON ///////////////////////////
@@ -84,7 +84,7 @@ function fn_ScreenChangeMain(
   scr_10,
   scr_11,
   scr_12,
-  scr_13
+  scr_13,
 ) {
   document.getElementById(scr_1).style.visibility = "visible"; // Hiển thị trang được chọn
   document.getElementById(scr_2).style.visibility = "hidden"; // Ẩn trang 2
@@ -109,7 +109,7 @@ function fn_ScreenChangeSub(
   scr_6,
   scr_7,
   scr_8,
-  scr_9
+  scr_9,
 ) {
   document.getElementById(scr_1).style.visibility = "visible"; // Hiển thị trang được chọn
   document.getElementById(scr_2).style.visibility = "hidden"; // Ẩn trang 2
