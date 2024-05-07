@@ -230,17 +230,17 @@ io.on("connection", function (socket) {
   socket.on("Client-send-data", function (data) {
     fn_tag();
   });
-  fn_SQLSearch(); // Hàm tìm kiếm SQL
-  fn_SQLSearch_ByTime(); // Hàm tìm kiếm theo thời gian
-  fn_AlarmSearch();
-  fn_Alarm_Search_ByTime();
-  fn_Mass_Search_ByTime();
+  fn_SQLSearchGeneric("msg_SQL_Show", "TABLE_DATA_1", sqlcon, "SQL_Show");
+  fn_SQLSearch_ByTime("msg_SQL_ByTime","TABLE_DATA_1",sqlcon,SQL_Excel,"SQL_ByTime");
+  fn_AlarmSearchGeneric("msg_Alarm_Show","TABLE_ALARM_1",sqlcon,"Alarm_Show");
+  fn_SQLSearch_ByTime("msg_Alarm_ByTime","TABLE_ALARM_1",sqlcon,AL_Excel,"Alarm_ByTime");
+  fn_mass_search_ByTime("msg_SQL_Mass_ByTime","TABLE_MASS_1",sqlcon,Mass_Excel);
 
-  fn_SQLSearch_s2(); // Hàm tìm kiếm SQL
-  fn_SQLSearch_ByTime_s2(); // Hàm tìm kiếm theo thời gian
-  fn_AlarmSearch_s2();
-  fn_Alarm_Search_ByTime_s2();
-  fn_Mass_Search_ByTime_s2();
+  fn_SQLSearchGeneric("msg_SQL_Show_s2", "TABLE_DATA_2", sqlcon_s2, "SQL_Show_s2");
+  fn_SQLSearch_ByTime("msg_SQL_ByTime_s2","TABLE_DATA_2",sqlcon_s2,SQL_Excel_s2,"SQL_ByTime_s2");
+  fn_AlarmSearchGeneric("msg_Alarm_Show_s2","TABLE_ALARM_2",sqlcon_s2,"Alarm_Show_s2");
+  fn_SQLSearch_ByTime("msg_Alarm_ByTime_s2","TABLE_ALARM_2",sqlcon_s2,AL_Excel_s2,"Alarm_ByTime_s2");
+  fn_mass_search_ByTime("msg_SQL_Mass_ByTime_s2","TABLE_MASS_2",sqlcon_s2,Mass_Excel_s2);
 });
 // HÀM GHI DỮ LIỆU XUỐNG PLC
 function valuesWritten(anythingBad) {
@@ -707,37 +707,18 @@ function fn_sql_delete_s2() {
   old_delete_trigger_s2 = delete_trigger_s2;
 }
 // ////////////ĐỌC DỮ LIỆU TỪ SQL GHI VÔ BẢNG/////////////////
-function fn_SQLSearch() {
+function fn_SQLSearchGeneric(msg_communicate_SQL,TABLE_DATA,sqlConnection,msg_Show){
   io.on("connection", function (socket) {
-    socket.on("msg_SQL_Show", function (data) {
-      var sqltable_Name = process.env.TABLE_DATA_1;
-      var queryy1 = "SELECT * FROM " + sqltable_Name + ";";
-      sqlcon.query(queryy1, function (err, results, fields) {
+    socket.on(msg_communicate_SQL,function (data) {
+      var sqltable_Name = process.env[TABLE_DATA];
+      var query = "SELECT * FROM " + sqltable_Name + ";";
+      sqlConnection.query(query, function (err, results, fields) {
         if (err) {
           console.log(err);
         } else {
           const objectifyRawPacket = (row) => ({ ...row });
           const convertedResponse = results.map(objectifyRawPacket);
-          socket.emit("SQL_Show", convertedResponse);
-          console.log(convertedResponse);
-        }
-      });
-    });
-  });
-}
-
-function fn_SQLSearch_s2() {
-  io.on("connection", function (socket) {
-    socket.on("msg_SQL_Show_s2", function (data) {
-      var sqltable_Name_s2 = process.env.TABLE_DATA_2;
-      var queryy1 = "SELECT * FROM " + sqltable_Name_s2 + ";";
-      sqlcon_s2.query(queryy1, function (err, results, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          const objectifyRawPacket = (row) => ({ ...row });
-          const convertedResponse = results.map(objectifyRawPacket);
-          socket.emit("SQL_Show_s2", convertedResponse);
+          socket.emit(msg_Show, convertedResponse);
           console.log(convertedResponse);
         }
       });
@@ -745,9 +726,9 @@ function fn_SQLSearch_s2() {
   });
 }
 // ///////////ĐỌC DỮ LIỆU SQL THEO THỜI GIAN/////////////////
-function fn_SQLSearch_ByTime() {
+function fn_SQLSearch_ByTime(msg_communicate_SQL,TABLE_DATA,sqlConnection,insertArray,msg_timeRange) {
   io.on("connection", function (socket) {
-    socket.on("msg_SQL_ByTime", function (data) {
+    socket.on(msg_communicate_SQL, function (data) {
       var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
       // Lấy thời gian tìm kiếm từ date time piker
       var timeS = new Date(data[0]); // Thời gian bắt đầu
@@ -769,7 +750,7 @@ function fn_SQLSearch_ByTime() {
         "'";
       var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
 
-      var sqltable_Name = process.env.TABLE_DATA_1; // Tên bảng
+      var sqltable_Name = process.env[TABLE_DATA]; // Tên bảng
       var dt_col_Name = "Date"; // Tên cột thời gian
 
       var Query1 =
@@ -780,23 +761,24 @@ function fn_SQLSearch_ByTime() {
         " BETWEEN ";
       var Query = Query1 + timeR + ";";
 
-      sqlcon.query(Query, function (err, results, fields) {
+      sqlConnection.query(Query, function (err, results, fields) {
         if (err) {
           console.log(err);
         } else {
           const objectifyRawPacket = (row) => ({ ...row });
           const convertedResponse = results.map(objectifyRawPacket);
-          SQL_Excel = convertedResponse; // Xuất báo cáo Excel
-          socket.emit("SQL_ByTime", convertedResponse);
+          insertArray.length = 0; // clear the array
+          insertArray.push(...convertedResponse); // Xuất báo cáo Excel
+          socket.emit(msg_timeRange, convertedResponse);
         }
       });
     });
   });
 }
 
-function fn_SQLSearch_ByTime_s2() {
+function fn_mass_search_ByTime(msg_communicate_SQL,TABLE_DATA,sqlConnection,insertArray) {
   io.on("connection", function (socket) {
-    socket.on("msg_SQL_ByTime_s2", function (data) {
+    socket.on(msg_communicate_SQL, function (data) {
       var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
       // Lấy thời gian tìm kiếm từ date time piker
       var timeS = new Date(data[0]); // Thời gian bắt đầu
@@ -818,56 +800,7 @@ function fn_SQLSearch_ByTime_s2() {
         "'";
       var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
 
-      var sqltable_Name_s2 = process.env.TABLE_DATA_2; // Tên bảng
-      var dt_col_Name_s2 = "Date"; // Tên cột thời gian
-
-      var Query1 =
-        "SELECT * FROM " +
-        sqltable_Name_s2 +
-        " WHERE " +
-        dt_col_Name_s2 +
-        " BETWEEN ";
-      var Query = Query1 + timeR + ";";
-
-      sqlcon_s2.query(Query, function (err, results, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          const objectifyRawPacket = (row) => ({ ...row });
-          const convertedResponse = results.map(objectifyRawPacket);
-          SQL_Excel_s2 = convertedResponse; // Xuất báo cáo Excel
-          socket.emit("SQL_ByTime_s2", convertedResponse);
-        }
-      });
-    });
-  });
-}
-
-function fn_Mass_Search_ByTime() {
-  io.on("connection", function (socket) {
-    socket.on("msg_SQL_Mass_ByTime", function (data) {
-      var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
-      // Lấy thời gian tìm kiếm từ date time piker
-      var timeS = new Date(data[0]); // Thời gian bắt đầu
-      var timeE = new Date(data[1]); // Thời gian kết thúc
-      // Quy đổi thời gian ra định dạng cua MySQL
-      var timeS1 =
-        "'" +
-        new Date(timeS - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeE1 =
-        "'" +
-        new Date(timeE - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
-
-      var sqltable_Name = process.env.TABLE_MASS_1; // Tên bảng
+      var sqltable_Name = process.env[TABLE_DATA]; // Tên bảng
       var dt_col_Name = "Date"; // Tên cột thời gian
 
       var Query1 =
@@ -878,61 +811,14 @@ function fn_Mass_Search_ByTime() {
         " BETWEEN ";
       var Query = Query1 + timeR + ";";
 
-      sqlcon.query(Query, function (err, results, fields) {
+      sqlConnection.query(Query, function (err, results, fields) {
         if (err) {
           console.log(err);
         } else {
           const objectifyRawPacket = (row) => ({ ...row });
           const convertedResponse = results.map(objectifyRawPacket);
-          Mass_Excel = convertedResponse; // Xuất báo cáo Excel
-        }
-      });
-    });
-  });
-}
-
-function fn_Mass_Search_ByTime_s2() {
-  io.on("connection", function (socket) {
-    socket.on("msg_SQL_Mass_ByTime_s2", function (data) {
-      var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
-      // Lấy thời gian tìm kiếm từ date time piker
-      var timeS = new Date(data[0]); // Thời gian bắt đầu
-      var timeE = new Date(data[1]); // Thời gian kết thúc
-      // Quy đổi thời gian ra định dạng cua MySQL
-      var timeS1 =
-        "'" +
-        new Date(timeS - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeE1 =
-        "'" +
-        new Date(timeE - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
-
-      var sqltable_Name = process.env.TABLE_MASS_2; // Tên bảng
-      var dt_col_Name = "Date"; // Tên cột thời gian
-
-      var Query1 =
-        "SELECT * FROM " +
-        sqltable_Name +
-        " WHERE " +
-        dt_col_Name +
-        " BETWEEN ";
-      var Query = Query1 + timeR + ";";
-
-      sqlcon_s2.query(Query, function (err, results, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          const objectifyRawPacket = (row) => ({ ...row });
-          const convertedResponse = results.map(objectifyRawPacket);
-          Mass_Excel_s2 = convertedResponse; // Xuất báo cáo Excel
+          insertArray.length = 0; // clear the array
+          insertArray.push(...convertedResponse); // Xuất báo cáo Excel
         }
       });
     });
@@ -2667,133 +2553,18 @@ function fn_Alarm_Manage_s2() {
   Alarm_ID5_old_s2 = Alarm_ID5_s2;
 }
 // ////////////////////////ĐỌC DỮ LIỆU ALARM GHI VÔ BẢNG////////////////////////
-function fn_AlarmSearch() {
+function fn_AlarmSearchGeneric(msg_communicate_SQL,TABLE_ALARM,sqlConnection,msg_Show){
   io.on("connection", function (socket) {
-    socket.on("msg_Alarm_Show", function (data) {
-      var sqltable_Name = process.env.TABLE_ALARM_1;
-      var query = "SELECT * FROM " + sqltable_Name + " WHERE Status = 'I';";
-      sqlcon.query(query, function (err, results, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          const objectifyRawPacket = (row) => ({ ...row });
-          const convertedResponse = results.map(objectifyRawPacket);
-          socket.emit("Alarm_Show", convertedResponse);
-        }
-      });
-    });
-  });
-}
-function fn_AlarmSearch_s2() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Alarm_Show_s2", function (data) {
-      var sqltable_Name_s2 = process.env.TABLE_ALARM_2;
+    socket.on(msg_communicate_SQL, function (data) {
+      var sqltable_Name_s2 = process.env[TABLE_ALARM];
       var query = "SELECT * FROM " + sqltable_Name_s2 + " WHERE Status = 'I';";
-      sqlcon_s2.query(query, function (err, results, fields) {
+      sqlConnection.query(query, function (err, results, fields) {
         if (err) {
           console.log(err);
         } else {
           const objectifyRawPacket = (row) => ({ ...row });
           const convertedResponse = results.map(objectifyRawPacket);
-          socket.emit("Alarm_Show_s2", convertedResponse);
-        }
-      });
-    });
-  });
-}
-
-// //////////////////////TÌM KIẾM DỮ LIỆU THEO THỜI GIAN///////////////////////
-function fn_Alarm_Search_ByTime() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Alarm_ByTime", function (data) {
-      var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
-      // Lấy thời gian tìm kiếm từ date time piker
-      var timeS = new Date(data[0]); // Thời gian bắt đầu
-      var timeE = new Date(data[1]); // Thời gian kết thúc
-      // Quy đổi thời gian ra định dạng cua MySQL
-      var timeS1 =
-        "'" +
-        new Date(timeS - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeE1 =
-        "'" +
-        new Date(timeE - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
-
-      var sqltable_Name = process.env.TABLE_ALARM_1; // Tên bảng
-      var dt_col_Name = "Date"; // Tên cột thời gian
-
-      var Query1 =
-        "SELECT * FROM " +
-        sqltable_Name +
-        " WHERE " +
-        dt_col_Name +
-        " BETWEEN ";
-      var Query = Query1 + timeR + ";";
-
-      sqlcon.query(Query, function (err, results, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          const objectifyRawPacket = (row) => ({ ...row });
-          const convertedResponse = results.map(objectifyRawPacket);
-          AL_Excel = convertedResponse;
-          socket.emit("Alarm_ByTime", convertedResponse);
-        }
-      });
-    });
-  });
-}
-function fn_Alarm_Search_ByTime_s2() {
-  io.on("connection", function (socket) {
-    socket.on("msg_Alarm_ByTime_s2", function (data) {
-      var tzoffset = new Date().getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
-      // Lấy thời gian tìm kiếm từ date time piker
-      var timeS = new Date(data[0]); // Thời gian bắt đầu
-      var timeE = new Date(data[1]); // Thời gian kết thúc
-      // Quy đổi thời gian ra định dạng cua MySQL
-      var timeS1 =
-        "'" +
-        new Date(timeS - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeE1 =
-        "'" +
-        new Date(timeE - tzoffset)
-          .toISOString()
-          .slice(0, -1)
-          .replace("T", " ") +
-        "'";
-      var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
-
-      var sqltable_Name_s2 = process.env.TABLE_ALARM_2; // Tên bảng
-      var dt_col_Name = "Date"; // Tên cột thời gian
-
-      var Query1 =
-        "SELECT * FROM " +
-        sqltable_Name_s2 +
-        " WHERE " +
-        dt_col_Name +
-        " BETWEEN ";
-      var Query = Query1 + timeR + ";";
-
-      sqlcon_s2.query(Query, function (err, results, fields) {
-        if (err) {
-          console.log(err);
-        } else {
-          const objectifyRawPacket = (row) => ({ ...row });
-          const convertedResponse = results.map(objectifyRawPacket);
-          AL_Excel_s2 = convertedResponse;
-          socket.emit("Alarm_ByTime_s2", convertedResponse);
+          socket.emit(msg_Show, convertedResponse);
         }
       });
     });

@@ -1,5 +1,5 @@
 // //////////// YÊU CẦU DỮ LIỆU TỪ SERVER- REQUEST DATA //////////////
-setInterval(updateValue, 100);
+setInterval(updateValue, 1000);
 function updateValue() {
   socket.emit("Client-send-data", "Request data client");
 }

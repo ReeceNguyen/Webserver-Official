@@ -4,12 +4,21 @@ var data_w2_s2 = 0;
 var data_w3_s2 = 0;
 socket.on("Act_Weight_1_s2", function (data) {
   data_w1_s2 = data;
+  const now = new Date();
+  // Add new data point
+  Plotly.extendTraces("dia-weight1_s2", { x: [[now]], y: [[data_w1_s2]] }, [0]);
 });
 socket.on("Act_Weight_2_s2", function (data) {
   data_w2_s2 = data;
+  const now = new Date();
+  // Add new data point
+  Plotly.extendTraces("dia-weight2_s2", { x: [[now]], y: [[data_w2_s2]] }, [0]);
 });
 socket.on("Act_Weight_3_s2", function (data) {
   data_w3_s2 = data;
+  const now = new Date();
+  // Add new data point
+  Plotly.extendTraces("dia-weight3_s2", { x: [[now]], y: [[data_w3_s2]] }, [0]);
 });
 // // Data trace
 var trace1_s2 = {
@@ -49,8 +58,8 @@ var layout_s2 = {
     weight: "bold",
   },
   showlegend: true,
-  xaxis: {fixedrange: true},
-  yaxis: {fixedrange: true},
+  xaxis: { fixedrange: true },
+  yaxis: { fixedrange: true },
 };
 
 // // Draw Chart
@@ -69,11 +78,19 @@ var timeRange3_s2 = [
 ];
 Plotly.newPlot("dia-weight1_s2", [trace1_s2], layout_s2, {
   responsive: true,
-  displayModeBar:false,
-  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
+  displayModeBar: false,
+  modeBarButtonsToRemove: [
+    "toImage",
+    "pan2d",
+    "autoScale2d",
+    "select2d",
+    "lasso2d",
+    "zoom2d",
+    "zoomIn2d",
+    "zoomOut2d",
+  ],
 });
 function updateGraph_1_s2() {
-  const now = new Date();
   // Update time range
   timeRange1_s2[0] = new Date(timeRange1_s2[0].getTime() + 1000);
   timeRange1_s2[1] = new Date(timeRange1_s2[1].getTime() + 1000);
@@ -82,19 +99,24 @@ function updateGraph_1_s2() {
   Plotly.relayout("dia-weight1_s2", {
     "xaxis.range": timeRange1_s2,
   });
-
-  // Add new data point
-  Plotly.extendTraces("dia-weight1_s2", { x: [[now]], y: [[data_w1_s2]] }, [0]);
 }
 setInterval(updateGraph_1_s2, 1000);
 
 Plotly.newPlot("dia-weight2_s2", [trace2_s2], layout_s2, {
   responsive: true,
-  displayModeBar:false,
-  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
+  displayModeBar: false,
+  modeBarButtonsToRemove: [
+    "toImage",
+    "pan2d",
+    "autoScale2d",
+    "select2d",
+    "lasso2d",
+    "zoom2d",
+    "zoomIn2d",
+    "zoomOut2d",
+  ],
 });
 function updateGraph_2_s2() {
-  const now = new Date();
   // Update time range
   timeRange2_s2[0] = new Date(timeRange2_s2[0].getTime() + 1000);
   timeRange2_s2[1] = new Date(timeRange2_s2[1].getTime() + 1000);
@@ -103,19 +125,24 @@ function updateGraph_2_s2() {
   Plotly.relayout("dia-weight2_s2", {
     "xaxis.range": timeRange2_s2,
   });
-
-  // Add new data point
-  Plotly.extendTraces("dia-weight2_s2", { x: [[now]], y: [[data_w2_s2]] }, [0]);
 }
 setInterval(updateGraph_2_s2, 1000);
 
 Plotly.newPlot("dia-weight3_s2", [trace3_s2], layout_s2, {
   responsive: true,
-  displayModeBar:false,
-  modeBarButtonsToRemove: ['toImage','pan2d','autoScale2d','select2d','lasso2d','zoom2d','zoomIn2d','zoomOut2d']
+  displayModeBar: false,
+  modeBarButtonsToRemove: [
+    "toImage",
+    "pan2d",
+    "autoScale2d",
+    "select2d",
+    "lasso2d",
+    "zoom2d",
+    "zoomIn2d",
+    "zoomOut2d",
+  ],
 });
 function updateGraph_3_s2() {
-  const now = new Date();
   // Update time range
   timeRange3_s2[0] = new Date(timeRange3_s2[0].getTime() + 1000);
   timeRange3_s2[1] = new Date(timeRange3_s2[1].getTime() + 1000);
@@ -124,9 +151,6 @@ function updateGraph_3_s2() {
   Plotly.relayout("dia-weight3_s2", {
     "xaxis.range": timeRange3_s2,
   });
-
-  // Add new data point
-  Plotly.extendTraces("dia-weight3_s2", { x: [[now]], y: [[data_w3_s2]] }, [0]);
 }
 setInterval(updateGraph_3_s2, 1000);
 
