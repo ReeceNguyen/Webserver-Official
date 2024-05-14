@@ -1,6 +1,8 @@
 var nodes7 = require("nodes7");
 var conn_plc = new nodes7(); //PLC1
 var conn_plc_s2 = new nodes7(); //PLC2
+let plc_conn = false;
+let plc_conn_s2 = false;
 
 // nodes7 tags Format:
 var tags_list = {
@@ -111,6 +113,10 @@ var tags_list_s2 = {
 function PLC_connected(err) {
   if (typeof err !== "undefined") {
     console.log(err); // Hiển thị lỗi nếu không kết nối đƯỢc với PLC
+    plc_conn = false;
+  }
+  else{
+    plc_conn = true;
   }
   conn_plc.setTranslationCB(function (tag) {
     return tags_list[tag];
@@ -172,6 +178,10 @@ function PLC_connected(err) {
 function PLC_connected_s2(err) {
   if (typeof err !== "undefined") {
     console.log(err); // Hiển thị lỗi nếu không kết nối đƯỢc với PLC
+    plc_conn_s2 = false;
+  }
+  else{
+    plc_conn_s2 = true;
   }
   conn_plc_s2.setTranslationCB(function (tag) {
     return tags_list_s2[tag];
@@ -249,8 +259,16 @@ conn_plc_s2.initiateConnection(
   },
   PLC_connected_s2
 );
+const isPLCConnected = () => {
+  return plc_conn;
+}
 
+const isPLCConnected_s2 =() => {
+  return plc_conn_s2;
+}
 module.exports = {
   conn_plc,
   conn_plc_s2,
+  isPLCConnected,
+  isPLCConnected_s2
 };
