@@ -12,7 +12,7 @@ rem Backup path
 set backup_path=C:\Webserver Application\SCADA Master\BackupDB\DB
 
 rem Backup file name with timestamp
-set backup_name=my-databases
+set backup_name=lvtn-DB
 
 rem Backup command
 mysqldump --user=%mysql_user% --password=%mysql_password% --all-databases --routines --events --result-file="%backup_path%\%backup_name%_%datetime%.sql"
