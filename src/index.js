@@ -1,6 +1,6 @@
 require("dotenv").config();
-var { sqlcon, sqlcon_s2 } = require("./config/connectDB");
-const { conn_plc, conn_plc_s2, isPLCConnected, isPLCConnected_s2 } = require("./config/plcConnection");
+var { sqlaccount, sqlcon, sqlcon_s2 } = require("./config/connectDB");
+const { conn_plc, conn_plc_s2 } = require("./config/plcConnection");
 
 // Các trigger giao tiếp vói MySQL
 var insert_trigger = false;
@@ -248,6 +248,8 @@ io.on("connection", function (socket) {
   fn_AlarmSearchGeneric("msg_Alarm_Show_s2","TABLE_ALARM_2",sqlcon_s2,"Alarm_Show_s2");
   fn_SQLSearch_ByTime("msg_Alarm_ByTime_s2","TABLE_ALARM_2",sqlcon_s2,AL_Excel_s2,"Alarm_ByTime_s2");
   fn_mass_search_ByTime("msg_SQL_Mass_ByTime_s2","TABLE_MASS_2",sqlcon_s2,Mass_Excel_s2);
+
+  fn_UserSearchGeneric("msg_user_Show","TABLE_ACCOUNT",sqlaccount,"user_Show");
 });
 // HÀM GHI DỮ LIỆU XUỐNG PLC
 function valuesWritten(anythingBad) {
@@ -552,7 +554,7 @@ function fn_sql_insert_s2() {
 }
 
 function fn_sql_insert_mass() {
-  insert_trigger = arr_tag_value[30]; // Read trigger from PLC
+  insert_trigger = arr_tag_value[2]; // Read trigger from PLC
   var sqltable_Name = process.env.TABLE_MASS_1;
   // Lấy thời gian hiện tại
   var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
@@ -595,7 +597,7 @@ function fn_sql_insert_mass() {
   old_insert_trigger = insert_trigger;
 }
 function fn_sql_insert_mass_s2() {
-  insert_trigger_s2 = arr_tag_value_s2[30]; // Read trigger from PLC
+  insert_trigger_s2 = arr_tag_value_s2[2]; // Read trigger from PLC
   var sqltable_Name_s2 = process.env.TABLE_MASS_2;
   // Lấy thời gian hiện tại
   var tzoffset = new Date().getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
@@ -2504,7 +2506,7 @@ function fn_Alarm_Manage() {
   Alarm_ID4 = arr_tag_value[48];
   Alarm_ID5 = arr_tag_value[49];
   // Cảnh báo van 1
-  if (isPLCConnected() && Alarm_ID1 && !Alarm_ID1_old) {
+  if ((Alarm_ID1 == true) & (Alarm_ID1 != Alarm_ID1_old)) {
     fn_sql_alarm_insert(1, "Valve 1 Error");
     sendEmailNotification(1, "Valve 1 Error");
   }
@@ -2513,7 +2515,7 @@ function fn_Alarm_Manage() {
   }
   Alarm_ID1_old = Alarm_ID1;
   // Cảnh báo van 2
-  if (isPLCConnected() && Alarm_ID2 && !Alarm_ID2_old) {
+  if ((Alarm_ID2 == true) & (Alarm_ID2 != Alarm_ID2_old)) {
     fn_sql_alarm_insert(2, "Valve 2 Error");
     sendEmailNotification(2, "Valve 2 Error");
   }
@@ -2522,7 +2524,7 @@ function fn_Alarm_Manage() {
   }
   Alarm_ID2_old = Alarm_ID2;
   // Cảnh báo van 3
-  if (isPLCConnected() && Alarm_ID3 && !Alarm_ID3_old) {
+  if ((Alarm_ID3 == true) & (Alarm_ID3 != Alarm_ID3_old)) {
     fn_sql_alarm_insert(3, "Valve 3 Error");
     sendEmailNotification(3, "Valve 3 Error");
   }
@@ -2531,7 +2533,7 @@ function fn_Alarm_Manage() {
   }
   Alarm_ID3_old = Alarm_ID3;
   // Cảnh báo Động cơ trộn
-  if (isPLCConnected() && Alarm_ID4 && !Alarm_ID4_old) {
+  if ((Alarm_ID4 == true) & (Alarm_ID4 != Alarm_ID4_old)) {
     fn_sql_alarm_insert(4, "Mix DC Error");
     sendEmailNotification(4, "Mix DC Error");
   }
@@ -2540,7 +2542,7 @@ function fn_Alarm_Manage() {
   }
   Alarm_ID4_old = Alarm_ID4;
   // Cảnh báo máy xuất hàng
-  if (isPLCConnected() && Alarm_ID5 && !Alarm_ID5_old) {
+  if ((Alarm_ID5 == true) & (Alarm_ID5 != Alarm_ID5_old)) {
     fn_sql_alarm_insert(5, "Export Error");
     sendEmailNotification(5, "Export Error");
   }
@@ -2557,7 +2559,7 @@ function fn_Alarm_Manage_s2() {
   Alarm_ID4_s2 = arr_tag_value_s2[48];
   Alarm_ID5_s2 = arr_tag_value_s2[49];
   // Cảnh báo van 1
-  if (isPLCConnected_s2() && Alarm_ID1_s2 && !Alarm_ID1_old_s2) {
+  if ((Alarm_ID1_s2 == true) & (Alarm_ID1_s2 != Alarm_ID1_old_s2)) {
     fn_sql_alarm_insert_s2(1, "Valve 1 Error");
     sendEmailNotification_s2(1, "Valve 1 Error");
   }
@@ -2566,7 +2568,7 @@ function fn_Alarm_Manage_s2() {
   }
   Alarm_ID1_old_s2 = Alarm_ID1_s2;
   // Cảnh báo van 2
-  if (isPLCConnected_s2()  && Alarm_ID2_s2 && !Alarm_ID2_old_s2) {
+  if ((Alarm_ID2_s2 == true) & (Alarm_ID2_s2 != Alarm_ID2_old_s2)) {
     fn_sql_alarm_insert_s2(2, "Valve 2 Error");
     sendEmailNotification_s2(2, "Valve 2 Error");
   }
@@ -2575,7 +2577,7 @@ function fn_Alarm_Manage_s2() {
   }
   Alarm_ID2_old_s2 = Alarm_ID2_s2;
   // Cảnh báo van 3
-  if (isPLCConnected_s2()  && Alarm_ID3_s2 && !Alarm_ID3_old_s2) {
+  if ((Alarm_ID3_s2 == true) & (Alarm_ID3_s2 != Alarm_ID3_old_s2)) {
     fn_sql_alarm_insert_s2(3, "Valve 3 Error");
     sendEmailNotification_s2(3, "Valve 3 Error");
   }
@@ -2584,7 +2586,7 @@ function fn_Alarm_Manage_s2() {
   }
   Alarm_ID3_old_s2 = Alarm_ID3_s2;
   // Cảnh báo Động cơ trộn
-  if (isPLCConnected_s2()  && Alarm_ID4_s2 && !Alarm_ID4_old_s2) {
+  if ((Alarm_ID4_s2 == true) & (Alarm_ID4_s2 != Alarm_ID4_old_s2)) {
     fn_sql_alarm_insert_s2(4, "Mix DC Error");
     sendEmailNotification_s2(4, "Mix DC Error");
   }
@@ -2593,7 +2595,7 @@ function fn_Alarm_Manage_s2() {
   }
   Alarm_ID4_old_s2 = Alarm_ID4_s2;
   // Cảnh báo máy xuất hàng
-  if (isPLCConnected_s2()  && Alarm_ID5_s2 && !Alarm_ID5_old_s2) {
+  if ((Alarm_ID5_s2 == true) & (Alarm_ID5_s2 != Alarm_ID5_old_s2)) {
     fn_sql_alarm_insert_s2(5, "Export Error");
     sendEmailNotification_s2(5, "Export Error");
   }
@@ -3351,3 +3353,21 @@ io.on("connection", (socket) => {
     socket.emit("send_Excel_Report_al_s2", data);
   });
 });
+
+function fn_UserSearchGeneric(msg_communicate_SQL,TABLE_ACCOUNT,sqlConnection,msg_Show){
+  io.on("connection", function (socket) {
+    socket.on(msg_communicate_SQL, function (data) {
+      var sqltable_Name = process.env[TABLE_ACCOUNT];
+      var query = "SELECT * FROM " + sqltable_Name + ";";
+      sqlConnection.query(query, function (err, results, fields) {
+        if (err) {
+          console.log(err);
+        } else {
+          const objectifyRawPacket = (row) => ({ ...row });
+          const convertedResponse = results.map(objectifyRawPacket);
+          socket.emit(msg_Show, convertedResponse);
+        }
+      });
+    });
+  });
+}

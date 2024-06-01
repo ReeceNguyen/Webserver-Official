@@ -14,6 +14,7 @@
     <script src="/js/FC2_SQL.js"></script>
     <script src="/js/FC3_Excel.js"></script>
     <script src="/js/FC5_Alarm.js"></script>
+    <script src="/js/FC6_Conflict.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script>
         var socket = io("<%= ipAddress %>") // IP server
@@ -117,7 +118,7 @@
         <!--Nút đăng xuất-->
         <a id="btt_Logout"
             class="border-[outset] systembtn bg-[#c42c2c] active:bg-red-500 text-center inline-block absolute w-[76px] h-[40px] right-[15px] bottom-[20px] select-none"
-            href="/exit"><i class="fa-solid fa-right-from-bracket"></i></a>
+            href="/exit1"><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
     <!--////////////// ABOUT /////////////-->
     <div id="Scr_About"
@@ -620,6 +621,21 @@
         <img src="/images/Logo/OIP.jpg" class="max-w-[80px] max-h-[80px] absolute ml-1 top-1">
         <p class="mt-72">Ho Chi Minh City, 2023</p>
     </div>
+
+    <!--// CONFLICT USER//-->
+    <div id="user_Table"
+        class="absolute left-[1452px] top-[100px] w-[400px] h-[100px] text-center text-[#ffffff] text-[12px] font-bold font-['Times_New_Roman',_Times,_serif] cursor-pointer select-none text-xl">
+        <table id="table_user" class="absolute w-full bg-[#0000ff] overflow-auto border-separate">
+            <thead>
+                <tr>
+                    <th class="bg-[#030391]">User</th>
+                    <th class="bg-[#030391]">Login</th>
+                    <th class="bg-[#030391]">Logout</th>
+                </tr>
+            </thead>
+        </table>
+    </div> 
+
     <script src="/js/FC4_Graph.js"></script>
 </body>
 

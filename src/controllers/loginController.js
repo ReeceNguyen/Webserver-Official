@@ -137,8 +137,63 @@ let postLogout2 = (req, res) => {
   res.redirect("/login");
 };
 
-let exit = (req, res) => {
+let exit0 = (req, res) => {
   req.session.destroy();
+  sqlaccount.query(
+    "SELECT * FROM " + process.env.TABLE_ACCOUNT,
+    (error, results) => {
+      if (error) throw error;
+      sqlaccount.query(
+        "UPDATE " +
+          process.env.TABLE_ACCOUNT +
+          " SET LogoutTime = NOW() WHERE ID = ?",
+        [results[0].ID],
+        (error, results) => {
+          if (error) throw error;
+        }
+      );
+    }
+  );
+  res.redirect("/");
+};
+
+let exit1 = (req, res) => {
+  req.session.destroy();
+  sqlaccount.query(
+    "SELECT * FROM " + process.env.TABLE_ACCOUNT,
+    (error, results) => {
+      if (error) throw error;
+      sqlaccount.query(
+        "UPDATE " +
+          process.env.TABLE_ACCOUNT +
+          " SET LogoutTime = NOW() WHERE ID = ?",
+        [results[1].ID],
+        (error, results) => {
+          if (error) throw error;
+        }
+      );
+    }
+  );
+  res.redirect("/");
+};
+
+let exit2 = (req, res) => {
+  req.session.destroy();
+  sqlaccount.query(
+    "SELECT * FROM " + process.env.TABLE_ACCOUNT,
+    (error, results) => {
+      if (error) throw error;
+      sqlaccount.query(
+        "UPDATE " +
+          process.env.TABLE_ACCOUNT +
+          " SET LogoutTime = NOW() WHERE ID = ?",
+        [results[2].ID],
+        (error, results) => {
+          if (error) throw error;
+        }
+      );
+    }
+  );
   res.redirect("/");
 };
 // Check Login
@@ -183,7 +238,9 @@ module.exports = {
   postLogOut0: postLogout0,
   postLogout1: postLogout1,
   postLogout2: postLogout2,
-  exit: exit,
+  exit0: exit0,
+  exit1: exit1,
+  exit2: exit2,
   checkLoggedIn1: checkLoggedIn1,
   checkLoggedIn2: checkLoggedIn2,
   checkLoggedIn0: checkLoggedIn0,

@@ -28,7 +28,9 @@ let initWebRoutes = (app) => {
   router.get("/logout0", loginController.postLogOut0);
   router.get("/logout1", loginController.postLogout1);
   router.get("/logout2", loginController.postLogout2);
-  router.get("/exit", loginController.exit);
+  router.get("/exit0", loginController.exit0);
+  router.get("/exit1", loginController.exit1);
+  router.get("/exit2", loginController.exit2);
   router.post("/login", loginController.handleLogin);
   router.post("/saveImage1", (req, res) => {
     var img = req.body.img.replace(/^data:image\/png;base64,/, "");

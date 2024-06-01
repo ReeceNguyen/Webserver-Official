@@ -2,6 +2,7 @@
 setInterval(updateValue, 1000);
 function updateValue() {
   socket.emit("Client-send-data", "Request data client");
+  fn_User_Show();
 }
 // //////////// CÁC KHỐI CHƯƠNG TRÌNH CON ///////////////////////////
 // Chương trình con đọc dữ liệu lên IO Field
