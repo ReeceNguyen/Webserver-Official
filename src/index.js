@@ -1,7 +1,8 @@
 require("dotenv").config();
 var { sqlaccount, sqlcon, sqlcon_s2 } = require("./config/connectDB");
 const { conn_plc, conn_plc_s2 } = require("./config/plcConnection");
-
+var isPLCConnected = false;
+var isPLCConnected_s2 = false;
 // Các trigger giao tiếp vói MySQL
 var insert_trigger = false;
 var old_insert_trigger = false;
@@ -51,7 +52,11 @@ var arr_tag_value_s2 = [];
 function valuesReady(anythingBad, values) {
   if (anythingBad) {
     console.log("Read Tags Error - STATION 1");
+    isPLCConnected = false;
   } // Cảnh báo lỗi
+  else{
+    isPLCConnected = true;
+  }
   var lodash = require("lodash"); // Chuyển variable sang array
   arr_tag_value = lodash.map(values, (item) => item);
   console.log(values);
@@ -60,7 +65,11 @@ function valuesReady(anythingBad, values) {
 function valuesReady_s2(anythingBad, values) {
   if (anythingBad) {
     console.log("Read Tags Error - STATION 2");
+    isPLCConnected_s2 = false;
   } // Cảnh báo lỗi
+  else{
+    isPLCConnected_s2 = true;
+  }
   var lodash = require("lodash"); // Chuyển variable sang array
   arr_tag_value_s2 = lodash.map(values, (item) => item);
   console.log(values);
@@ -179,7 +188,8 @@ function fn_tag() {
   io.emit("Alarm_M3", arr_tag_value[47]);
   io.emit("Alarm_Mix", arr_tag_value[48]);
   io.emit("Alarm_Export", arr_tag_value[49]);
-
+  io.emit("Status", isPLCConnected);
+  
   //Station 2
   io.emit("btt_Auto_s2", arr_tag_value_s2[0]);
   io.emit("btt_Manu_s2", arr_tag_value_s2[1]);
@@ -231,6 +241,7 @@ function fn_tag() {
   io.emit("Alarm_M3_s2", arr_tag_value_s2[47]);
   io.emit("Alarm_Mix_s2", arr_tag_value_s2[48]);
   io.emit("Alarm_Export_s2", arr_tag_value_s2[49]);
+  io.emit("Status_s2", isPLCConnected_s2);
 }
 // ///////////GỬI DỮ LIỆU BẢNG TAG ĐẾN CLIENT (TRÌNH DUYỆT)///////////
 io.on("connection", function (socket) {

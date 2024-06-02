@@ -23,7 +23,7 @@ DefaultGroupName={#MyAppName}
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\minht\OneDrive\Documents\Subjects\LVTN\LVTN\Installer
-OutputBaseFilename=setupMaster2
+OutputBaseFilename=setupMaster3
 SetupIconFile=C:\Users\minht\OneDrive\Documents\Subjects\LVTN\LVTN\Server Application\resources\app\icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -36,7 +36,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Source: "C:\Users\minht\OneDrive\Documents\Subjects\LVTN\LVTN\Server Application\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Run]
-Filename: "{app}\Server\node-v20.9.0-x64.msi"; Description: "Installing Node.js"; Flags: postinstall shellexec waituntilterminated
+Filename: "{app}\Server\node-v20.9.0-x64.msi"; Description: "Install Node.js"; Flags: postinstall shellexec waituntilterminated
+[Run]
+Filename: "{app}\BackupDB\backupSchedule.bat"; Description: "Install Schedule Backup"; Flags: postinstall shellexec waituntilterminated
 [Icons]
 Name: "{commondesktop}\\{#MyAppName}"; Filename: "C:\Webserver Application\SCADA Master\server.bat"; WorkingDir: "C:\Webserver Application\SCADA Master"; IconFilename: "{app}\resources\app\server.ico"; Comment: "Start {#MyAppName}"
 [Icons]
