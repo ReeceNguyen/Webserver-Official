@@ -1,5 +1,3 @@
-<img src="https://github.com/ReeceNguyen/Webserver-Official/blob/main/src/public/images/Logo/bk_name_en.png" alt="Webserver Application" />
-
 # Environment Settings
 
 ## Installation
